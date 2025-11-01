@@ -1,0 +1,43 @@
+{
+  "name": "plusmeet",
+  "version": "1.0.0",
+  "description": "PlusMeet: Smart Event Sharing & Collaboration Platform - Better Together",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "check-admin": "node scripts/check-admin.js",
+    "create-admin": "node scripts/create-admin.js",
+    "check-user": "node scripts/check-user-roles.js",
+    "seed-rbac": "node scripts/seed-rbac.mjs",
+    "sync-apis": "node scripts/sync-api-endpoints.mjs"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^17.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "next": "^14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "event-sharing",
+    "collaboration",
+    "social-platform",
+    "nextjs",
+    "react"
+  ],
+  "author": "PlusMeet Team",
+  "license": "UNLICENSED"
+}

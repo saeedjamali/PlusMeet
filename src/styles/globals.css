@@ -1,0 +1,473 @@
+/**
+ * Global Styles for PlusMeet
+ * استایل‌های سراسری با پشتیبانی از تم روشن و تیره
+ */
+
+/* ========================================
+   CSS Custom Properties (Variables)
+   ======================================== */
+
+:root {
+    /* Colors - Light Theme (Cozy Harmony) */
+    --color-primary: #F4A325;
+    --color-primary-light: #FFC15E;
+    --color-primary-dark: #E2981E;
+    --color-primary-contrast: #ffffff;
+
+    --color-secondary: #267D88;
+    --color-secondary-light: #3A9AA6;
+    --color-secondary-dark: #1C5F67;
+    --color-secondary-contrast: #ffffff;
+
+    --color-complement: #0D4C57;
+    --color-accent: #FFC15E;
+
+    --color-bg-default: #F5E6C8;
+    --color-bg-secondary: #FFFFFF;
+    --color-bg-paper: #FFFFFF;
+    --color-bg-elevated: #FFFFFF;
+    --color-bg-overlay: rgba(13, 76, 87, 0.5);
+
+    /* Background utilities for UI */
+    --color-primary-bg: rgba(244, 163, 37, 0.1);
+    --color-accent-bg: rgba(255, 193, 94, 0.1);
+
+    --color-text-primary: #18333C;
+    --color-text-secondary: #A39B8F;
+    --color-text-tertiary: #C5BDB3;
+    --color-text-disabled: #C5BDB3;
+    --color-text-hint: #D4CFC7;
+
+    --color-border: #E8DCC5;
+    --color-border-light: #E8DCC5;
+    --color-border-main: #7B4F2A;
+    --color-border-dark: #5E3D24;
+
+    --color-success: #2D8B57;
+    --color-error: #C44536;
+    --color-warning: #F4A325;
+    --color-info: #267D88;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(123, 79, 42, 0.08);
+    --shadow-md: 0 4px 6px -1px rgba(123, 79, 42, 0.12);
+    --shadow-lg: 0 10px 15px -3px rgba(123, 79, 42, 0.15);
+    --shadow-xl: 0 20px 25px -5px rgba(123, 79, 42, 0.18);
+
+    /* Gradients */
+    --gradient-sunset: linear-gradient(90deg, #F4A325, #FFC15E);
+    --gradient-ocean: linear-gradient(90deg, #267D88, #0D4C57);
+    --gradient-warmth: linear-gradient(180deg, #F5E6C8, #F4A325);
+
+    /* Typography - فونت‌ها */
+    /* فارسی */
+    --font-primary-fa: 'Vazirmatn', Tahoma, Arial, sans-serif;
+    --font-secondary-fa: 'Vazirmatn', 'Yekan', Tahoma, sans-serif;
+    --font-tertiary-fa: 'Shabnam', 'Vazirmatn', sans-serif;
+    --font-mono-fa: 'Vazirmatn', 'IRANYekan New', monospace;
+
+    /* انگلیسی */
+    --font-primary-en: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-secondary-en: var(--font-poppins), -apple-system, sans-serif;
+    --font-tertiary-en: 'Source Sans Pro', system-ui, sans-serif;
+    --font-mono-en: 'Fira Code', 'Consolas', 'Monaco', monospace;
+
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition-fast: 150ms;
+    --transition-base: 200ms;
+    --transition-slow: 300ms;
+}
+
+/* Dark Theme Variables (Cozy Harmony Dark) */
+[data-theme='dark'] {
+    --color-primary: #E2981E;
+    --color-primary-light: #F4A325;
+    --color-primary-dark: #CC7A15;
+    --color-primary-contrast: #18333C;
+
+    --color-secondary: #1C5F67;
+    --color-secondary-light: #267D88;
+    --color-secondary-dark: #154850;
+    --color-secondary-contrast: #F5E6C8;
+
+    --color-complement: #092E35;
+    --color-accent: #CC993C;
+
+    --color-bg-default: #0D4C57;
+    --color-bg-secondary: #1E4049;
+    --color-bg-paper: #1E4049;
+    --color-bg-elevated: #2A5560;
+    --color-bg-overlay: rgba(9, 46, 53, 0.85);
+
+    /* Background utilities for UI */
+    --color-primary-bg: rgba(226, 152, 30, 0.15);
+    --color-accent-bg: rgba(204, 153, 60, 0.15);
+
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #C8C0B5;
+    --color-text-tertiary: #8C8578;
+    --color-text-disabled: #8C8578;
+    --color-text-hint: #7A7267;
+
+    --color-border: rgba(123, 79, 42, 0.3);
+    --color-border-light: rgba(123, 79, 42, 0.15);
+    --color-border-main: rgba(123, 79, 42, 0.3);
+    --color-border-dark: #5E3D24;
+
+    --color-emphasis: #F5E6C8;
+    --color-highlight: #1E5A62;
+
+    --color-success: #3DA672;
+    --color-success-bg: rgba(61, 166, 114, 0.1);
+    --color-error: #E5644F;
+    --color-error-bg: rgba(229, 100, 79, 0.1);
+    --color-warning: #E2981E;
+    --color-warning-bg: rgba(226, 152, 30, 0.1);
+    --color-info: #1C5F67;
+    --color-info-bg: rgba(28, 95, 103, 0.1);
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+
+    /* Gradients */
+    --gradient-sunset: linear-gradient(90deg, #F4A325, #7B4F2A);
+    --gradient-ocean: linear-gradient(90deg, #0D4C57, #267D88);
+    --gradient-warmth: linear-gradient(180deg, #1E4049, #18333C);
+}
+
+/* ========================================
+   Reset & Base Styles
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary-fa);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-default);
+    direction: rtl;
+    transition: background-color var(--transition-base) ease,
+        color var(--transition-base) ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* تنظیمات برای زبان انگلیسی */
+[lang='en'] body {
+    font-family: var(--font-primary-en);
+    direction: ltr;
+}
+
+/* Font Feature Settings برای بهبود خوانایی */
+body {
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-rendering: optimizeLegibility;
+}
+
+/* ========================================
+   Typography
+   ======================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-secondary-fa);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+}
+
+[lang='en'] h1,
+[lang='en'] h2,
+[lang='en'] h3,
+[lang='en'] h4,
+[lang='en'] h5,
+[lang='en'] h6 {
+    font-family: var(--font-secondary-en);
+}
+
+h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: 800;
+}
+
+h2 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+}
+
+h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+}
+
+h4 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+}
+
+h5 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+}
+
+h6 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-base) ease;
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* ========================================
+   Form Elements
+   ======================================== */
+
+input,
+textarea,
+select,
+button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+.inline {
+    display: inline;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+/* ========================================
+   Scrollbar Styling
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-paper);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-border-dark);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-disabled);
+}
+
+/* ========================================
+   Selection
+   ======================================== */
+
+::selection {
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+}
+
+::-moz-selection {
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn var(--transition-base) ease;
+}
+
+.animate-slide-up {
+    animation: slideUp var(--transition-slow) ease;
+}
+
+/* ========================================
+   Accessibility
+   ======================================== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus visible styles */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    .no-print {
+        display: none;
+    }
+}

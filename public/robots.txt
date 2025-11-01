@@ -1,0 +1,10 @@
+# Robots.txt for PlusMeet
+
+User-agent: *
+Allow: /
+
+Sitemap: https://plusmeet.ir/sitemap.xml
+
+
+
+

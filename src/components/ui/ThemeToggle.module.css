@@ -1,0 +1,127 @@
+/**
+ * Theme Toggle Styles
+ * استایل‌های دکمه تغییر تم
+ */
+
+.toggle {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-secondary);
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--color-text-primary);
+}
+
+.toggle:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+    transform: rotate(20deg) scale(1.1);
+}
+
+.toggle:active {
+    transform: rotate(20deg) scale(0.95);
+}
+
+.icon {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2;
+    transition: transform 0.3s ease;
+}
+
+.toggle:hover .icon {
+    transform: rotate(20deg);
+}
+
+/* Variant: Floating (for fixed position) */
+.floating {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+    width: 56px;
+    height: 56px;
+}
+
+.floating .icon {
+    width: 26px;
+    height: 26px;
+}
+
+/* Variant: Small */
+.small {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+}
+
+.small .icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Variant: Large */
+.large {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+}
+
+.large .icon {
+    width: 26px;
+    height: 26px;
+}
+
+/* Variant: Inline (no background) */
+.inline {
+    background: transparent;
+    border: none;
+    width: auto;
+    height: auto;
+    padding: 0.5rem;
+}
+
+.inline:hover {
+    background: transparent;
+    border: none;
+    transform: rotate(20deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .floating {
+        bottom: 1rem;
+        left: 1rem;
+        width: 48px;
+        height: 48px;
+    }
+
+    .floating .icon {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* Animation */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.toggle:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+

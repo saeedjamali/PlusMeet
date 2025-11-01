@@ -1,0 +1,30 @@
+{
+  "name": "PlusMeet - Better Together",
+  "short_name": "PlusMeet",
+  "description": "Smart Event Sharing & Collaboration Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5E6C8",
+  "theme_color": "#F4A325",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/light-mode/icon/icon-10-01.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/light-mode/icon/icon-10-01.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/light-mode/icon/icon-10-01.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+/**
+ * Error Page Styles
+ * استایل صفحه خطا
+ */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing-xl);
+    background: var(--color-bg-default);
+}
+
+.content {
+    text-align: center;
+    max-width: 600px;
+    padding: var(--spacing-2xl);
+    background: var(--color-bg-paper);
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--color-border-main);
+    box-shadow: var(--shadow-lg);
+}
+
+.icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.title {
+    font-size: var(--font-size-3xl);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.message {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+.details {
+    text-align: right;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md);
+    background: var(--color-bg-default);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-main);
+}
+
+.details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.errorText {
+    font-family: monospace;
+    font-size: var(--font-size-sm);
+    color: var(--color-error);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.retryButton,
+.homeButton {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.retryButton {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    border: none;
+}
+
+.retryButton:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.homeButton {
+    background: var(--color-bg-paper);
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-border-main);
+}
+
+.homeButton:hover {
+    border-color: var(--color-primary);
+    background: var(--color-bg-elevated);
+}
+
+@media (max-width: 640px) {
+    .content {
+        padding: var(--spacing-xl);
+    }
+
+    .title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .retryButton,
+    .homeButton {
+        width: 100%;
+    }
+}
+
+
+

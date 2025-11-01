@@ -1,0 +1,421 @@
+/* API Permission Grid Styles */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Search */
+.search {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    background: var(--color-bg-primary);
+    border: 1.5px solid var(--color-border);
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.search:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-bg);
+}
+
+.search svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-text-tertiary);
+    flex-shrink: 0;
+}
+
+.searchInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-text-primary);
+    font-size: 0.938rem;
+}
+
+.searchInput::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+/* Legend */
+.legend {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.methodBadge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+}
+
+.methodBadge.blue {
+    background: rgba(59, 130, 246, 0.15);
+    color: rgb(59, 130, 246);
+}
+
+.methodBadge.green {
+    background: rgba(34, 197, 94, 0.15);
+    color: rgb(34, 197, 94);
+}
+
+.methodBadge.orange {
+    background: rgba(251, 146, 60, 0.15);
+    color: rgb(251, 146, 60);
+}
+
+.methodBadge.red {
+    background: rgba(239, 68, 68, 0.15);
+    color: rgb(239, 68, 68);
+}
+
+/* Grid */
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Module */
+.module {
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: var(--color-bg-primary);
+}
+
+.moduleHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: var(--color-bg-secondary);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.moduleHeader:hover {
+    background: var(--color-bg-tertiary);
+}
+
+.moduleInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.moduleIcon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-bg);
+    color: var(--color-primary);
+    border-radius: 0.5rem;
+}
+
+.moduleIcon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.moduleName {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    text-transform: capitalize;
+}
+
+.moduleCount {
+    font-size: 0.813rem;
+    color: var(--color-text-tertiary);
+    font-family: var(--font-mono);
+}
+
+.expandIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-text-secondary);
+    transition: transform 0.2s;
+    transform: rotate(-90deg);
+}
+
+.expandIcon.expanded {
+    transform: rotate(0deg);
+}
+
+/* API List */
+.apiList {
+    display: flex;
+    flex-direction: column;
+}
+
+.apiItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--color-border);
+    transition: background 0.2s;
+}
+
+.apiItem:hover {
+    background: var(--color-bg-secondary);
+}
+
+/* API Info */
+.apiInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.apiHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.apiPath {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    background: var(--color-bg-secondary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.apiTitle {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.apiDescription {
+    font-size: 0.813rem;
+    color: var(--color-text-tertiary);
+    line-height: 1.5;
+}
+
+/* API Methods */
+.apiMethods {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.selectAllBtn {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-secondary);
+    border: 1.5px solid var(--color-border);
+    border-radius: 0.375rem;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.selectAllBtn svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.selectAllBtn:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-bg);
+    color: var(--color-primary);
+}
+
+.selectAllBtn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(244, 163, 37, 0.3);
+}
+
+.methodBtn {
+    padding: 0.375rem 0.75rem;
+    background: var(--color-bg-secondary);
+    border: 1.5px solid var(--color-border);
+    border-radius: 0.375rem;
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.methodBtn:hover {
+    transform: scale(1.05);
+}
+
+.methodBtn.blue:hover {
+    border-color: rgb(59, 130, 246);
+    background: rgba(59, 130, 246, 0.1);
+    color: rgb(59, 130, 246);
+}
+
+.methodBtn.green:hover {
+    border-color: rgb(34, 197, 94);
+    background: rgba(34, 197, 94, 0.1);
+    color: rgb(34, 197, 94);
+}
+
+.methodBtn.orange:hover {
+    border-color: rgb(251, 146, 60);
+    background: rgba(251, 146, 60, 0.1);
+    color: rgb(251, 146, 60);
+}
+
+.methodBtn.red:hover {
+    border-color: rgb(239, 68, 68);
+    background: rgba(239, 68, 68, 0.1);
+    color: rgb(239, 68, 68);
+}
+
+.methodBtn.active.blue {
+    background: rgb(59, 130, 246);
+    border-color: rgb(59, 130, 246);
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.methodBtn.active.green {
+    background: rgb(34, 197, 94);
+    border-color: rgb(34, 197, 94);
+    color: white;
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
+
+.methodBtn.active.orange {
+    background: rgb(251, 146, 60);
+    border-color: rgb(251, 146, 60);
+    color: white;
+    box-shadow: 0 2px 8px rgba(251, 146, 60, 0.3);
+}
+
+.methodBtn.active.red {
+    background: rgb(239, 68, 68);
+    border-color: rgb(239, 68, 68);
+    color: white;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.statLabel {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.statValue {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+}
+
+/* Empty State */
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    gap: 1rem;
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+
+.empty svg {
+    width: 3rem;
+    height: 3rem;
+}
+
+.empty p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .legend {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .apiItem {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .apiMethods {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .moduleHeader {
+        padding: 0.875rem 1rem;
+    }
+
+    .apiItem {
+        padding: 0.875rem 1rem;
+    }
+}
+

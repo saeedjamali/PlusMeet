@@ -1,0 +1,111 @@
+/**
+ * Not Found (404) Page Styles
+ * استایل صفحه 404
+ */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing-xl);
+    background: var(--color-bg-default);
+}
+
+.content {
+    text-align: center;
+    max-width: 600px;
+    animation: fadeIn 0.6s ease;
+}
+
+.title {
+    margin-bottom: var(--spacing-lg);
+}
+
+.number {
+    font-size: 8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    display: block;
+}
+
+.subtitle {
+    font-size: var(--font-size-3xl);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.message {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-2xl);
+    line-height: 1.6;
+}
+
+.illustration {
+    font-size: 6rem;
+    margin-bottom: var(--spacing-2xl);
+    opacity: 0.5;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.homeButton {
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    display: inline-block;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+}
+
+.homeButton:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 640px) {
+    .number {
+        font-size: 5rem;
+    }
+
+    .subtitle {
+        font-size: var(--font-size-2xl);
+    }
+
+    .message {
+        font-size: var(--font-size-base);
+    }
+
+    .illustration {
+        font-size: 4rem;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
