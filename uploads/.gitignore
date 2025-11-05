@@ -1,0 +1,13 @@
+# Ignore all uploaded files
+*
+
+# But keep directory structure
+!.gitignore
+!README.md
+!avatars/
+!avatars/.gitkeep
+!logos/
+!logos/.gitkeep
+!temp/
+!temp/.gitkeep
+

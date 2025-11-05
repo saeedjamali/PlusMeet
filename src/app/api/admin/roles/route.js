@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import Role from "@/lib/models/Role.model";
 import { authenticate } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 
 /**
  * GET /api/admin/roles
@@ -14,6 +15,15 @@ import { authenticate } from "@/lib/middleware/auth";
  */
 export async function GET(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     const authResult = await authenticate(request);
     if (!authResult.success) {
       return NextResponse.json({ error: authResult.error }, { status: 401 });
@@ -30,11 +40,11 @@ export async function GET(request) {
       .sort({ priority: -1 })
       .lean();
 
-    // تبدیل به فرمت قدیمی برای سازگاری
+    // فرمت جدید با slug و name صحیح
     const formattedRoles = roles.map((role) => ({
       _id: role._id,
-      name: role.slug, // برای سازگاری با کد قدیمی
-      label: role.name, // نام فارسی
+      slug: role.slug, // کد انگلیسی نقش (admin, user, ...)
+      name: role.name, // نام فارسی (مدیر سیستم, کاربر, ...)
       description: role.description,
       isSystem: role.isSystem,
       color: role.color,
@@ -44,7 +54,9 @@ export async function GET(request) {
 
     return NextResponse.json({
       success: true,
-      data: formattedRoles,
+      data: {
+        roles: formattedRoles,
+      },
     });
   } catch (error) {
     console.error("GET /api/admin/roles error:", error);

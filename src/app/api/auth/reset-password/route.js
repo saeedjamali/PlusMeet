@@ -6,11 +6,21 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import User from "@/lib/models/User.model";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 import { logActivity } from "@/lib/models/ActivityLog.model";
 import bcrypt from "bcryptjs";
 
 export async function POST(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request, { publicEndpoint: true });
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     const { phoneNumber, code, password } = await request.json();
 
     // Validation

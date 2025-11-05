@@ -163,7 +163,7 @@ export default function ProfilePage() {
           method: "POST",
           body: JSON.stringify({
             image: base64,
-            type: formData.userType === "individual" ? "avatar" : "logo",
+            type: "avatar", // همیشه avatar برای تصویر پروفایل
           }),
         });
 
@@ -171,8 +171,11 @@ export default function ProfilePage() {
 
         if (data.success) {
           setSuccess("تصویر با موفقیت آپلود شد");
-          // به‌روزرسانی پروفایل
-          await fetchProfile();
+          // به‌روزرسانی پروفایل و AuthContext
+          await Promise.all([
+            fetchProfile(),
+            refreshUser(), // بروزرسانی user در context برای نمایش در هدر
+          ]);
           setTimeout(() => setSuccess(""), 3000);
         } else {
           setError(data.message || "خطا در آپلود تصویر");
@@ -336,6 +339,11 @@ export default function ProfilePage() {
                 <div className={styles.roles}>
                   {profile.roles?.map((role) => (
                     <span key={role} className={styles.roleBadge}>
+                      {role === "guest" && "مهمان"}
+                      {role === "finance_manager" && "مدیر مالی"}
+                      {role === "support" && "پشتیبان"}
+                      {role === "moderator" && "ناظر"}
+                      {role === "admin" && "مدیر"}
                       {role === "user" && "کاربر"}
                       {role === "event_owner" && "مالک رویداد"}
                       {role === "moderator" && "ناظر"}

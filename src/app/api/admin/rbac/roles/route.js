@@ -109,6 +109,7 @@ export async function POST(request) {
       color,
       icon,
       priority,
+      isStaff, // 👈 اضافه شد
       menuPermissions,
       apiPermissions,
     } = body;
@@ -141,6 +142,7 @@ export async function POST(request) {
       icon: icon || "👤",
       priority: priority || 0,
       isSystem: false, // نقش‌های custom همیشه false
+      isStaff: isStaff || false, // 👈 اضافه شد: آیا کارشناس است؟
       menuPermissions: menuPermissions || [],
       apiPermissions: apiPermissions || [],
       createdBy: user._id,

@@ -139,25 +139,25 @@ export async function storeOTP(phoneNumber, code, expiresIn = 2) {
  */
 export async function verifyOTP(phoneNumber, code) {
   if (!global.otpStore) {
-    return { success: false, error: "کد منقضی شده است" };
+    return { success: false, error: "هیچ کد تاییدی برای این شماره ارسال نشده است" };
   }
 
   const otpData = global.otpStore.get(phoneNumber);
 
   if (!otpData) {
-    return { success: false, error: "کد منقضی شده است" };
+    return { success: false, error: "کد وارد شده منقضی شده یا وجود ندارد" };
   }
 
   // چک انقضا
   if (new Date() > otpData.expiresAt) {
     global.otpStore.delete(phoneNumber);
-    return { success: false, error: "کد منقضی شده است" };
+    return { success: false, error: "کد تایید منقضی شده است. لطفاً کد جدید دریافت کنید" };
   }
 
   // چک تعداد تلاش‌ها
   if (otpData.attempts >= 3) {
     global.otpStore.delete(phoneNumber);
-    return { success: false, error: "تعداد تلاش‌های مجاز تمام شده است" };
+    return { success: false, error: "تعداد تلاش‌های مجاز تمام شده است. لطفاً کد جدید دریافت کنید" };
   }
 
   // تایید کد
@@ -166,7 +166,20 @@ export async function verifyOTP(phoneNumber, code) {
     return { success: true };
   } else {
     otpData.attempts += 1;
-    return { success: false, error: "کد وارد شده اشتباه است" };
+    const remainingAttempts = 3 - otpData.attempts;
+    
+    if (remainingAttempts > 0) {
+      return { 
+        success: false, 
+        error: `کد وارد شده اشتباه است. ${remainingAttempts} تلاش دیگر باقی مانده` 
+      };
+    } else {
+      global.otpStore.delete(phoneNumber);
+      return { 
+        success: false, 
+        error: "کد وارد شده اشتباه است. تعداد تلاش‌های مجاز تمام شده است" 
+      };
+    }
   }
 }
 
@@ -200,6 +213,7 @@ export function checkRateLimit(phoneNumber) {
 
   return { allowed: true };
 }
+
 
 
 

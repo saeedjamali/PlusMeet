@@ -573,3 +573,4 @@ export default function UserManagementPage() {
 **آخرین به‌روزرسانی:** 28 اکتبر 2025  
 **نسخه:** 2.0.0 (Cookie-based)
 
+

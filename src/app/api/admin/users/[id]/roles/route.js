@@ -170,7 +170,7 @@ export async function PUT(request, { params }) {
       success: true,
       message: "نقش‌های کاربر با موفقیت به‌روزرسانی شد",
       data: {
-        user: user.toPublicJSON(),
+        user: await user.toPublicJSON(), // 👈 async method
       },
     });
   } catch (error) {

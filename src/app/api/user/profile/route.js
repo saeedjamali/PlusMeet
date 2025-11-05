@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import User from "@/lib/models/User.model";
 import { authenticate } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 import { logActivity } from "@/lib/models/ActivityLog.model";
 
 /**
@@ -15,6 +16,15 @@ import { logActivity } from "@/lib/models/ActivityLog.model";
  */
 export async function GET(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     // Authentication
     const authResult = await authenticate(request);
     if (!authResult.success) {
@@ -31,9 +41,22 @@ export async function GET(request) {
       return NextResponse.json({ error: "کاربر یافت نشد" }, { status: 404 });
     }
 
+    // محاسبه isStaff از role های دیتابیس
+    const Role = (await import("@/lib/models/Role.model")).default;
+    let isStaff = false;
+    if (user.roles && user.roles.length > 0) {
+      const staffRolesCount = await Role.countDocuments({
+        slug: { $in: user.roles },
+        isStaff: true,
+      });
+      isStaff = staffRolesCount > 0;
+    }
+
     return NextResponse.json({
       success: true,
       data: {
+        id: user._id.toString(), // ✅ اضافه کردن id
+        _id: user._id.toString(), // ✅ هم _id و هم id برای سازگاری
         phoneNumber: user.phoneNumber,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -42,6 +65,7 @@ export async function GET(request) {
         avatar: user.avatar,
         email: user.email,
         roles: user.roles,
+        isStaff, // 👈 محاسبه شده از دیتابیس
         state: user.state,
         userType: user.userType,
         organizationName: user.organizationName,
@@ -66,6 +90,15 @@ export async function GET(request) {
  */
 export async function PUT(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     // Authentication
     const authResult = await authenticate(request);
     if (!authResult.success) {
@@ -178,5 +211,3 @@ export async function PUT(request) {
     return NextResponse.json({ error: "خطای سرور" }, { status: 500 });
   }
 }
-
-

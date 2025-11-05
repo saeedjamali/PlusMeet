@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import { UserPermission } from "@/lib/models/Permission.model";
 import { authenticate, requireRole } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 import { logActivity } from "@/lib/models/ActivityLog.model";
 
 /**
@@ -15,6 +16,15 @@ import { logActivity } from "@/lib/models/ActivityLog.model";
  */
 export async function GET(request, { params }) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     const authResult = await authenticate(request);
     if (!authResult.success) {
       return NextResponse.json({ error: authResult.error }, { status: 401 });
@@ -55,6 +65,15 @@ export async function GET(request, { params }) {
  */
 export async function POST(request, { params }) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     const authResult = await authenticate(request);
     if (!authResult.success) {
       return NextResponse.json({ error: authResult.error }, { status: 401 });
@@ -108,5 +127,6 @@ export async function POST(request, { params }) {
     return NextResponse.json({ error: "خطا در تخصیص مجوز" }, { status: 500 });
   }
 }
+
 
 

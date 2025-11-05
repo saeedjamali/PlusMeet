@@ -74,6 +74,15 @@ const RoleSchema = new mongoose.Schema(
       // false برای نقش‌های custom
     },
 
+    // نقش‌های Staff (کارشناس/مدیر)
+    isStaff: {
+      type: Boolean,
+      default: false,
+      // true برای: admin, moderator, support, finance_manager, etc.
+      // false برای: user, guest, event_owner
+      // این فیلد مشخص می‌کند که آیا این نقش دسترسی‌های مدیریتی دارد
+    },
+
     // دسترسی به منوها
     menuPermissions: {
       type: [MenuPermissionSchema],
@@ -157,15 +166,48 @@ RoleSchema.methods.hasMenuAccess = function (menuId) {
  * بررسی دسترسی به یک API endpoint با متد خاص
  */
 RoleSchema.methods.hasApiAccess = function (endpoint, method) {
+  console.log(`      🔍 [hasApiAccess] Checking: ${method} ${endpoint}`);
+  console.log(`      📋 [hasApiAccess] Role: ${this.slug}, API Permissions: ${this.apiPermissions?.length || 0}`);
+  
+  if (!this.apiPermissions || this.apiPermissions.length === 0) {
+    console.log(`      ⚠️ [hasApiAccess] No API permissions defined for role: ${this.slug}`);
+    return false;
+  }
+
   const permission = this.apiPermissions.find((p) => {
-    // Support برای dynamic routes مثل /api/users/:id
-    const regexPattern = p.path.replace(/:[^/]+/g, "[^/]+");
+    // Support برای dynamic routes مثل /api/users/:id و wildcard مثل /api/uploads/*
+    let regexPattern = p.path
+      .replace(/\*/g, ".*")         // * را به .* تبدیل کن (wildcard - هر چیزی)
+      .replace(/:[^/]+/g, "[^/]+"); // :id را به [^/]+ تبدیل کن (یک segment)
+    
     const regex = new RegExp(`^${regexPattern}$`);
-    return regex.test(endpoint);
+    const isMatch = regex.test(endpoint);
+    
+    console.log(`      🔍 [hasApiAccess] Testing: ${p.path} (regex: ^${regexPattern}$) against ${endpoint} = ${isMatch ? '✅ MATCH' : '❌ NO MATCH'}`);
+    
+    if (isMatch) {
+      console.log(`      ✅ [hasApiAccess] Path matched: ${p.path} -> ${endpoint}`);
+      console.log(`      🔍 [hasApiAccess] Available methods: [${p.methods.join(", ")}]`);
+      console.log(`      🔍 [hasApiAccess] Requested method: ${method.toUpperCase()}`);
+    }
+    
+    return isMatch;
   });
 
-  if (!permission) return false;
-  return permission.methods.includes(method.toUpperCase());
+  if (!permission) {
+    console.log(`      ❌ [hasApiAccess] No matching path found for: ${endpoint}`);
+    return false;
+  }
+  
+  const hasMethod = permission.methods.includes(method.toUpperCase());
+  
+  if (hasMethod) {
+    console.log(`      ✅✅ [hasApiAccess] GRANTED: ${method} ${endpoint}`);
+  } else {
+    console.log(`      ❌ [hasApiAccess] Method not allowed: ${method} (available: [${permission.methods.join(", ")}])`);
+  }
+  
+  return hasMethod;
 };
 
 /**

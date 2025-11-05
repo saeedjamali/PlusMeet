@@ -6,10 +6,13 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 import { useAuth } from "@/contexts/NewAuthContext";
 import { useEffect, useState } from "react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import Logo from "@/components/ui/Logo";
+import ProfileDropdown from "@/components/dashboard/ProfileDropdown";
+import NotificationBell from "@/components/dashboard/NotificationBell";
 import styles from "./admin.module.css";
 
 export default function AdminLayout({ children }) {
@@ -330,30 +333,34 @@ export default function AdminLayout({ children }) {
 
   return (
     <div className={styles.adminLayout}>
+      {/* Desktop Header - فقط در دسکتاپ */}
+      <div className={styles.desktopHeader}>
+        <div className={styles.desktopHeaderContent}>
+          <div className={styles.headerLeft}>
+            <ThemeToggle />
+          </div>
+          <div className={styles.headerRight}>
+            <NotificationBell />
+            <ProfileDropdown />
+          </div>
+        </div>
+      </div>
+
       {/* Mobile Header - فقط در موبایل */}
       <div className={styles.mobileHeader}>
         <div className={styles.mobileHeaderContent}>
-          <div className={styles.mobileHeaderLogo}>
+          <Link href="/" className={styles.mobileHeaderLogo}>
             <Logo
               type="icon"
               width={36}
               height={36}
               priority={true}
             />
-          </div>
+          </Link>
           
           <div className={styles.mobileHeaderTitle}>داشبورد</div>
           
           <div className={styles.mobileHeaderActions}>
-            <button
-              className={styles.mobileLogoutBtn}
-              onClick={logout}
-              title="خروج"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-            </button>
             <button
               className={styles.mobileToggleBtn}
               onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -363,9 +370,22 @@ export default function AdminLayout({ children }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
+            <div className={styles.mobileHeaderActions}>
+              <NotificationBell />
+              <ProfileDropdown />
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Overlay برای موبایل - وقتی sidebar باز است */}
+      {sidebarOpen && (
+        <div 
+          className={styles.overlay}
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Sidebar */}
       <aside
@@ -377,14 +397,14 @@ export default function AdminLayout({ children }) {
         }}
       >
         <div className={styles.sidebarHeader}>
-          <div className={styles.logo}>
+          <Link href="/" className={styles.logo}>
             <Logo 
               type={sidebarOpen ? "horizontal" : "icon"}
               width={sidebarOpen ? 100 : 32}
               height={sidebarOpen ? 30 : 32}
               className={styles.logoImage}
             />
-          </div>
+          </Link>
           <button
             className={styles.toggleBtn}
             onClick={() => setSidebarOpen(!sidebarOpen)}

@@ -423,3 +423,4 @@ export async function GET(request) {
 **تاریخ به‌روزرسانی:** 29 اکتبر 2025  
 **نسخه:** 1.0.0
 
+

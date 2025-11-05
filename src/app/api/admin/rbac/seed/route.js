@@ -9,9 +9,20 @@ import Role from "@/lib/models/Role.model";
 import Menu from "@/lib/models/Menu.model";
 import ApiEndpoint from "@/lib/models/ApiEndpoint.model";
 import { authenticate } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
+import { logActivity } from "@/lib/models/ActivityLog.model";
 
 export async function POST(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     console.log("🔍 [SEED] Starting seed request...");
     console.log("🔍 [SEED] Headers:", Object.fromEntries(request.headers));
 
@@ -109,6 +120,55 @@ export async function POST(request) {
         parentId: "events",
         order: 2,
       },
+      
+      // Level 1: Categories
+      {
+        menuId: "categories",
+        title: "دسته‌بندی‌ها",
+        titleEn: "Categories",
+        path: null,
+        icon: "📂",
+        order: 4,
+      },
+      {
+        menuId: "categories.topic",
+        title: "دسته‌بندی موضوعات",
+        titleEn: "Topic Categories",
+        path: "/dashboard/cat_topic",
+        parentId: "categories",
+        order: 1,
+      },
+      {
+        menuId: "categories.format_mode",
+        title: "نوع برگزاری",
+        titleEn: "Format/Mode",
+        path: "/dashboard/format_mode",
+        parentId: "categories",
+        order: 2,
+      },
+      
+      // کیف پول (برای همه کاربران غیر مهمان)
+      {
+        menuId: "wallet",
+        title: "کیف پول",
+        titleEn: "Wallet",
+        path: "/dashboard/wallet",
+        icon: "💰",
+        order: 5,
+        defaultRoles: ["user", "event_owner", "moderator", "admin"],
+      },
+      
+      // مدیریت مالی (فقط admin)
+      {
+        menuId: "finance",
+        title: "مدیریت مالی",
+        titleEn: "Finance Management",
+        path: "/dashboard/financeReport",
+        icon: "💵",
+        order: 6,
+        defaultRoles: ["admin"],
+      },
+      
       {
         menuId: "rbac",
         title: "مدیریت دسترسی",
@@ -215,6 +275,23 @@ export async function POST(request) {
         tags: ["user", "profile"],
       },
       {
+        path: "/api/user/upload-avatar",
+        availableMethods: ["POST"],
+        module: "user",
+        title: "آپلود تصویر پروفایل",
+        defaultRoles: ["user", "event_owner", "moderator", "admin"],
+        tags: ["user", "profile", "upload"],
+      },
+      {
+        path: "/api/uploads/*",
+        availableMethods: ["GET"],
+        module: "public",
+        title: "دریافت فایل‌های آپلود شده",
+        isPublic: true,
+        defaultRoles: [], // public endpoint
+        tags: ["public", "files"],
+      },
+      {
         path: "/api/admin/users",
         availableMethods: ["GET", "POST"],
         module: "admin",
@@ -232,6 +309,153 @@ export async function POST(request) {
         defaultRoles: ["admin"],
         tags: ["admin", "users", "crud"],
       },
+      
+      // Topic Categories
+      {
+        path: "/api/dashboard/cat_topic",
+        availableMethods: ["GET", "POST"],
+        module: "categories",
+        category: "topic-categories",
+        title: "مدیریت دسته‌بندی موضوعات",
+        description: "دریافت لیست و ایجاد دسته‌بندی موضوعات",
+        defaultRoles: ["admin", "moderator"],
+        tags: ["categories", "topic", "crud"],
+      },
+      {
+        path: "/api/dashboard/cat_topic/:id",
+        availableMethods: ["GET", "PUT", "DELETE"],
+        module: "categories",
+        category: "topic-categories",
+        title: "عملیات روی دسته‌بندی موضوع",
+        description: "دریافت، ویرایش و حذف دسته‌بندی موضوع",
+        pathParams: ["id"],
+        defaultRoles: ["admin", "moderator"],
+        tags: ["categories", "topic", "crud"],
+      },
+      {
+        path: "/api/dashboard/format_mode",
+        availableMethods: ["GET", "POST"],
+        module: "categories",
+        category: "format-mode-categories",
+        title: "مدیریت نوع برگزاری",
+        description: "دریافت لیست و ایجاد نوع برگزاری",
+        defaultRoles: ["admin", "moderator"],
+        tags: ["categories", "format", "mode", "crud"],
+      },
+      {
+        path: "/api/dashboard/format_mode/:id",
+        availableMethods: ["GET", "PUT", "DELETE"],
+        module: "categories",
+        category: "format-mode-categories",
+        title: "عملیات روی نوع برگزاری",
+        description: "دریافت، ویرایش و حذف نوع برگزاری",
+        pathParams: ["id"],
+        defaultRoles: ["admin", "moderator"],
+        tags: ["categories", "format", "mode", "crud"],
+      },
+      
+      // Wallet & Payment APIs
+      {
+        path: "/api/wallet",
+        availableMethods: ["GET"],
+        module: "wallet",
+        category: "wallet",
+        title: "دریافت اطلاعات کیف پول",
+        description: "مشاهده موجودی و اطلاعات کیف پول کاربر",
+        defaultRoles: ["user", "event_owner", "moderator", "admin"],
+        tags: ["wallet", "balance"],
+      },
+      {
+        path: "/api/wallet/transactions",
+        availableMethods: ["GET"],
+        module: "wallet",
+        category: "transactions",
+        title: "لیست تراکنش‌های کیف پول",
+        description: "دریافت تراکنش‌ها با فیلتر و صفحه‌بندی",
+        defaultRoles: ["user", "event_owner", "moderator", "admin"],
+        tags: ["wallet", "transactions", "history"],
+      },
+      {
+        path: "/api/payment/request",
+        availableMethods: ["POST"],
+        module: "payment",
+        category: "payment",
+        title: "درخواست پرداخت",
+        description: "ایجاد درخواست شارژ کیف پول",
+        defaultRoles: ["user", "event_owner", "moderator", "admin"],
+        tags: ["payment", "zarinpal", "charge"],
+      },
+      {
+        path: "/api/payment/verify",
+        availableMethods: ["GET"],
+        module: "payment",
+        category: "payment",
+        title: "تایید پرداخت",
+        description: "Callback تایید پرداخت از درگاه زرین‌پال",
+        isPublic: true,
+        tags: ["payment", "zarinpal", "verify", "callback"],
+      },
+      {
+        path: "/api/wallet/withdraw",
+        availableMethods: ["POST"],
+        module: "wallet",
+        category: "withdrawal",
+        title: "درخواست برداشت",
+        description: "ثبت درخواست برداشت از کیف پول",
+        defaultRoles: ["user", "event_owner", "moderator", "admin"],
+        tags: ["wallet", "withdraw", "request"],
+      },
+      {
+        path: "/api/admin/finance/stats",
+        availableMethods: ["GET"],
+        module: "finance",
+        category: "admin",
+        title: "آمار مالی سیستم",
+        description: "دریافت آمار کلی مالی",
+        defaultRoles: ["admin"],
+        tags: ["finance", "stats", "admin"],
+      },
+      {
+        path: "/api/admin/finance/withdrawals",
+        availableMethods: ["GET"],
+        module: "finance",
+        category: "admin",
+        title: "لیست درخواست‌های برداشت",
+        description: "مشاهده درخواست‌های برداشت کاربران",
+        defaultRoles: ["admin"],
+        tags: ["finance", "withdrawals", "admin"],
+      },
+      {
+        path: "/api/admin/finance/withdrawals/:id",
+        availableMethods: ["PUT"],
+        module: "finance",
+        category: "admin",
+        title: "تایید/رد درخواست برداشت",
+        description: "پردازش درخواست برداشت کاربر",
+        defaultRoles: ["admin"],
+        tags: ["finance", "withdrawals", "approve", "reject", "admin"],
+      },
+      {
+        path: "/api/admin/finance/transactions",
+        availableMethods: ["GET"],
+        module: "finance",
+        category: "admin",
+        title: "تمام تراکنش‌های سیستم",
+        description: "مشاهده تمام تراکنش‌ها با فیلتر",
+        defaultRoles: ["admin"],
+        tags: ["finance", "transactions", "admin"],
+      },
+      {
+        path: "/api/admin/finance/wallets/:userId",
+        availableMethods: ["GET", "PUT"],
+        module: "finance",
+        category: "admin",
+        title: "مدیریت کیف پول کاربر",
+        description: "مشاهده و مدیریت کیف پول (freeze/unfreeze/suspend)",
+        defaultRoles: ["admin"],
+        tags: ["finance", "wallets", "freeze", "admin"],
+      },
+      
       {
         path: "/api/admin/rbac/roles",
         availableMethods: ["GET", "POST"],
@@ -298,6 +522,11 @@ export async function POST(request) {
           { menuId: "events", access: "full" },
           { menuId: "events.list", access: "full" },
           { menuId: "events.create", access: "full" },
+          { menuId: "categories", access: "full" },
+          { menuId: "categories.topic", access: "full" },
+          { menuId: "categories.format_mode", access: "full" },
+          { menuId: "wallet", access: "full" },
+          { menuId: "finance", access: "full" },
           { menuId: "rbac", access: "full" },
           { menuId: "rbac.roles", access: "full" },
           { menuId: "rbac.menus", access: "full" },
@@ -324,11 +553,17 @@ export async function POST(request) {
           { menuId: "events", access: "full" },
           { menuId: "events.list", access: "full" },
           { menuId: "events.create", access: "full" },
+          { menuId: "wallet", access: "full" },
         ],
         apiPermissions: [
           { path: "/api/user/profile", methods: ["GET", "PUT"] },
+          { path: "/api/user/upload-avatar", methods: ["POST"] },
           { path: "/api/events", methods: ["GET", "POST"] },
           { path: "/api/events/:id", methods: ["GET", "PUT", "DELETE"] },
+          { path: "/api/wallet", methods: ["GET"] },
+          { path: "/api/wallet/transactions", methods: ["GET"] },
+          { path: "/api/wallet/withdraw", methods: ["POST"] },
+          { path: "/api/payment/request", methods: ["POST"] },
         ],
       },
 
@@ -348,15 +583,21 @@ export async function POST(request) {
           { menuId: "events", access: "full" },
           { menuId: "events.list", access: "full" },
           { menuId: "events.create", access: "full" },
+          { menuId: "wallet", access: "full" },
         ],
         apiPermissions: [
           { path: "/api/user/profile", methods: ["GET", "PUT"] },
+          { path: "/api/user/upload-avatar", methods: ["POST"] },
           { path: "/api/admin/users", methods: ["GET"] },
           { path: "/api/admin/users/:id", methods: ["GET", "PUT"] },
           { path: "/api/admin/users/:id/roles", methods: ["PUT"] },
           { path: "/api/admin/rbac/roles", methods: ["GET"] },
           { path: "/api/events", methods: ["GET", "POST"] },
           { path: "/api/events/:id", methods: ["GET", "PUT", "DELETE"] },
+          { path: "/api/wallet", methods: ["GET"] },
+          { path: "/api/wallet/transactions", methods: ["GET"] },
+          { path: "/api/wallet/withdraw", methods: ["POST"] },
+          { path: "/api/payment/request", methods: ["POST"] },
         ],
       },
 
@@ -373,11 +614,17 @@ export async function POST(request) {
           { menuId: "dashboard", access: "view" },
           { menuId: "events", access: "view" },
           { menuId: "events.list", access: "view" },
+          { menuId: "wallet", access: "full" },
         ],
         apiPermissions: [
           { path: "/api/user/profile", methods: ["GET", "PUT"] },
+          { path: "/api/user/upload-avatar", methods: ["POST"] },
           { path: "/api/events", methods: ["GET"] },
           { path: "/api/events/:id", methods: ["GET"] },
+          { path: "/api/wallet", methods: ["GET"] },
+          { path: "/api/wallet/transactions", methods: ["GET"] },
+          { path: "/api/wallet/withdraw", methods: ["POST"] },
+          { path: "/api/payment/request", methods: ["POST"] },
         ],
       },
 

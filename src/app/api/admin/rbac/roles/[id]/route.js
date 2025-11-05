@@ -8,6 +8,7 @@ import connectDB from "@/lib/db/mongodb";
 import Role from "@/lib/models/Role.model";
 import User from "@/lib/models/User.model";
 import { authenticate } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 import { logActivity } from "@/lib/models/ActivityLog.model";
 
 /**
@@ -15,6 +16,15 @@ import { logActivity } from "@/lib/models/ActivityLog.model";
  */
 export async function GET(request, { params }) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     // Authentication
     const authResult = await authenticate(request);
     if (!authResult.success) {
@@ -94,6 +104,7 @@ export async function PUT(request, { params }) {
       color,
       icon,
       priority,
+      isStaff, // 👈 اضافه شد
       menuPermissions,
       apiPermissions,
       isActive,
@@ -110,7 +121,7 @@ export async function PUT(request, { params }) {
       );
     }
 
-    // نقش‌های سیستمی فقط permissions، priority و isActive شون قابل تغییره
+    // نقش‌های سیستمی فقط permissions، priority، isStaff و isActive شون قابل تغییره
     if (role.isSystem) {
       // فقط این فیلدها رو می‌شه تغییر داد
       if (menuPermissions !== undefined) {
@@ -122,6 +133,9 @@ export async function PUT(request, { params }) {
       if (priority !== undefined) {
         role.priority = priority;
       }
+      if (isStaff !== undefined) {
+        role.isStaff = isStaff; // 👈 اضافه شد
+      }
       if (isActive !== undefined) {
         role.isActive = isActive;
       }
@@ -132,6 +146,7 @@ export async function PUT(request, { params }) {
       if (color) role.color = color;
       if (icon) role.icon = icon;
       if (priority !== undefined) role.priority = priority;
+      if (isStaff !== undefined) role.isStaff = isStaff; // 👈 اضافه شد
       if (menuPermissions !== undefined) {
         role.menuPermissions = menuPermissions;
       }

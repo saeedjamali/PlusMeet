@@ -5,6 +5,7 @@
 
 import jwt from "jsonwebtoken";
 import User from "@/lib/models/User.model";
+import Role from "@/lib/models/Role.model";
 import { logActivity } from "@/lib/models/ActivityLog.model";
 import { getCookieFromRequest, validateCSRFToken } from "@/lib/utils/cookies";
 
@@ -19,42 +20,65 @@ const JWT_SECRET =
 export async function authenticate(request, options = {}) {
   const { requireCSRF = true } = options;
 
+  console.log("🔐 [AUTHENTICATE] Starting authentication...");
+
   try {
     // CSRF Token Validation (برای state-changing requests)
     const method = request.method;
     const isStateChanging = ["POST", "PUT", "PATCH", "DELETE"].includes(method);
 
+    console.log(`   Method: ${method} | State-changing: ${isStateChanging}`);
+
     if (requireCSRF && isStateChanging) {
+      console.log("   🔍 Checking CSRF token...");
       if (!validateCSRFToken(request)) {
+        console.error("   ❌ CSRF token validation failed");
         return {
           success: false,
           error: "CSRF token نامعتبر است",
         };
       }
+      console.log("   ✅ CSRF token validated");
     }
 
     // دریافت توکن از httpOnly Cookie
+    console.log("   🍪 Checking for accessToken cookie...");
     const token = getCookieFromRequest(request, "accessToken");
 
     if (!token) {
+      console.error("   ❌ No accessToken cookie found");
+      console.log("   💡 All cookies:", request.cookies?.toString());
       return {
         success: false,
         error: "لطفاً وارد سیستم شوید",
       };
     }
 
+    console.log("   ✅ Access token found:", token.substring(0, 20) + "...");
+
     // تایید توکن
+    console.log("   🔍 Verifying JWT token...");
     let decoded;
     try {
       decoded = jwt.verify(token, JWT_SECRET);
+      console.log("   ✅ JWT token verified");
+      console.log("   📋 Decoded token:", {
+        phoneNumber: decoded.phoneNumber,
+        exp: new Date(decoded.exp * 1000).toISOString(),
+      });
     } catch (err) {
       if (err.name === "TokenExpiredError") {
+        console.error(
+          "   ❌ Token expired:",
+          new Date(err.expiredAt).toISOString()
+        );
         return {
           success: false,
           error: "توکن منقضی شده است",
           code: "TOKEN_EXPIRED",
         };
       }
+      console.error("   ❌ Invalid token:", err.message);
       return {
         success: false,
         error: "توکن نامعتبر است",
@@ -62,17 +86,36 @@ export async function authenticate(request, options = {}) {
     }
 
     // پیدا کردن کاربر
+    console.log(`   🔍 Finding user: ${decoded.phoneNumber}...`);
     const user = await User.findByPhone(decoded.phoneNumber);
 
     if (!user) {
+      console.error("   ❌ User not found in database");
       return {
         success: false,
         error: "کاربر یافت نشد",
       };
     }
 
+    console.log(`   ✅ User found: ${user.phoneNumber}`);
+    console.log(`   📋 User roles: [${user.roles?.join(", ") || "No roles"}]`);
+    console.log(`   📋 User state: ${user.state}`);
+
+    // چک کردن آیا کاربر staff است (بر اساس role های دیتابیس)
+    let isStaff = false;
+    if (user.roles && user.roles.length > 0) {
+      // بررسی اینکه آیا حداقل یکی از role های کاربر isStaff: true دارد
+      const staffRolesCount = await Role.countDocuments({
+        slug: { $in: user.roles },
+        isStaff: true,
+      });
+      isStaff = staffRolesCount > 0;
+      console.log(`   📋 Is Staff: ${isStaff ? "✅ YES" : "❌ NO"}`);
+    }
+
     // چک کردن وضعیت کاربر
     if (user.state === "deleted") {
+      console.error("   ❌ User account deleted");
       return {
         success: false,
         error: "حساب کاربری حذف شده است",
@@ -80,6 +123,7 @@ export async function authenticate(request, options = {}) {
     }
 
     if (user.state === "suspended") {
+      console.error("   ❌ User account suspended");
       return {
         success: false,
         error: "حساب کاربری مسدود شده است",
@@ -99,8 +143,10 @@ export async function authenticate(request, options = {}) {
     return {
       success: true,
       user: {
+        id: user._id.toString(),
         phoneNumber: user.phoneNumber,
         roles: user.roles,
+        isStaff, // 👈 اضافه شد: بر اساس role های دیتابیس
         state: user.state,
         userType: user.userType,
         displayName: user.displayName,

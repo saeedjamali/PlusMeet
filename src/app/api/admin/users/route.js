@@ -74,16 +74,16 @@ export async function GET(request) {
         query.userType = { $in: ["individual", "individual_freelancer"] };
       } else if (userType === "organization") {
         // Organization includes all organization_* subtypes
-        query.userType = { 
+        query.userType = {
           $in: [
-            "organization", 
-            "organization_team", 
-            "organization_private", 
-            "organization_public", 
-            "organization_ngo", 
-            "organization_edu", 
-            "organization_media"
-          ] 
+            "organization",
+            "organization_team",
+            "organization_private",
+            "organization_public",
+            "organization_ngo",
+            "organization_edu",
+            "organization_media",
+          ],
         };
       } else if (userType === "government") {
         // Government remains as is
@@ -297,7 +297,7 @@ export async function POST(request) {
     return NextResponse.json({
       success: true,
       message: "کاربر با موفقیت ایجاد شد",
-      data: { user: newUser.toPublicJSON() },
+      data: { user: await newUser.toPublicJSON() }, // 👈 async method
     });
   } catch (error) {
     console.error("POST /api/admin/users error:", error);

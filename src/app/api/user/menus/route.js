@@ -6,11 +6,21 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import { authenticate } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 import { getAllowedMenus } from "@/lib/middleware/dynamicRbac";
 import Menu from "@/lib/models/Menu.model";
 
 export async function GET(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     // Authentication
     const authResult = await authenticate(request);
 

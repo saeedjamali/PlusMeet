@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken";
 import connectDB from "@/lib/db/mongodb";
 import User from "@/lib/models/User.model";
 import { generateToken } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
+import { logActivity } from "@/lib/models/ActivityLog.model";
 import {
   getCookieFromRequest,
   setHttpOnlyCookie,
@@ -22,6 +24,15 @@ const JWT_REFRESH_SECRET =
 
 export async function POST(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request, { publicEndpoint: true });
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     // دریافت refresh token از cookie
     const refreshToken = getCookieFromRequest(request, "refreshToken");
 
@@ -92,12 +103,20 @@ export async function POST(request) {
     // تولید access token جدید
     const newAccessToken = generateToken(user);
 
+    // ثبت لاگ
+    await logActivity(user.phoneNumber, "token_refresh", {
+      ipAddress:
+        request.headers.get("x-forwarded-for") ||
+        request.headers.get("x-real-ip"),
+      userAgent: request.headers.get("user-agent"),
+    });
+
     // ایجاد response
     const response = NextResponse.json({
       success: true,
       message: "توکن با موفقیت تمدید شد",
       data: {
-        user: user.toPublicJSON(),
+        user: await user.toPublicJSON(), // 👈 async method
       },
     });
 

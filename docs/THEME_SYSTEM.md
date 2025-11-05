@@ -468,3 +468,4 @@ console.log(document.documentElement.getAttribute('data-theme'));
 **تاریخ آخرین به‌روزرسانی:** 27 اکتبر 2025
 
 
+

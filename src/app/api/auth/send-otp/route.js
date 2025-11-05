@@ -12,10 +12,20 @@ import {
   storeOTP,
   checkRateLimit,
 } from "@/lib/services/sms.service";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 import { logActivity } from "@/lib/models/ActivityLog.model";
 
 export async function POST(request) {
   try {
+    // // API Protection
+    // const protection = await protectAPI(request, { publicEndpoint: true });
+    // if (!protection.success) {
+    //   return NextResponse.json(
+    //     { error: protection.error },
+    //     { status: protection.status }
+    //   );
+    // }
+
     const { phoneNumber } = await request.json();
 
     // اعتبارسنجی

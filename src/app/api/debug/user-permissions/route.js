@@ -6,9 +6,19 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import Role from "@/lib/models/Role.model";
 import { authenticate } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 
 export async function GET(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     const authResult = await authenticate(request);
     if (!authResult.success) {
       return NextResponse.json(
@@ -57,4 +67,5 @@ export async function GET(request) {
     );
   }
 }
+
 

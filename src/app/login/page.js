@@ -23,6 +23,7 @@ export default function UserLoginPage() {
   const [countdown, setCountdown] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState("user"); // 'user' or 'event_owner'
+  const [autoSubmitBlocked, setAutoSubmitBlocked] = useState(false); // جلوگیری از لوپ auto-submit
 
   const router = useRouter();
   const { isAuthenticated, user, sendOTP, loginWithOTP, loginWithPassword } =
@@ -50,7 +51,7 @@ export default function UserLoginPage() {
 
   // Auto-submit when OTP is complete (5 digits)
   useEffect(() => {
-    if (otp.length === 5 && !loading && otpSent) {
+    if (otp.length === 5 && !loading && otpSent && !autoSubmitBlocked) {
       // تاخیر کوچک برای UX بهتر (کاربر ببینه که آخرین رقم وارد شده)
       const timer = setTimeout(() => {
         handleVerifyOTP({ preventDefault: () => {} });
@@ -58,7 +59,7 @@ export default function UserLoginPage() {
       return () => clearTimeout(timer);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [otp, loading, otpSent]);
+  }, [otp, loading, otpSent, autoSubmitBlocked]);
 
   // Send OTP
   const handleSendOTP = async (e) => {
@@ -105,10 +106,13 @@ export default function UserLoginPage() {
         console.log("🎯 Redirecting to dashboard");
         router.push("/dashboard");
       } else {
+        // خطا رخ داده، auto-submit رو مسدود کن
+        setAutoSubmitBlocked(true);
         setError(result.error);
       }
     } catch (err) {
       console.error("❌ Login error:", err);
+      setAutoSubmitBlocked(true);
       setError("خطا در ورود");
     } finally {
       setLoading(false);
@@ -319,7 +323,13 @@ export default function UserLoginPage() {
                       value={otp}
                       onChange={(e) => {
                         const value = e.target.value.replace(/\D/g, "");
-                        if (value.length <= 5) setOtp(value);
+                        if (value.length <= 5) {
+                          setOtp(value);
+                          // Reset auto-submit block وقتی کاربر کد رو عوض کرد
+                          if (autoSubmitBlocked) {
+                            setAutoSubmitBlocked(false);
+                          }
+                        }
                       }}
                       placeholder="• • • • •"
                       maxLength={5}
@@ -352,6 +362,8 @@ export default function UserLoginPage() {
                         setOtpSent(false);
                         setOtp("");
                         setCountdown(0);
+                        setAutoSubmitBlocked(false); // Reset auto-submit block
+                        setError(""); // پاک کردن خطا
                       }}
                     >
                       ویرایش شماره

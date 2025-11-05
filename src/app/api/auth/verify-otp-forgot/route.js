@@ -6,9 +6,20 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import User from "@/lib/models/User.model";
+import { protectAPI } from "@/lib/middleware/apiProtection";
+import { logActivity } from "@/lib/models/ActivityLog.model";
 
 export async function POST(request) {
   try {
+    // // API Protection
+    // const protection = await protectAPI(request, { publicEndpoint: true });
+    // if (!protection.success) {
+    //   return NextResponse.json(
+    //     { error: protection.error },
+    //     { status: protection.status }
+    //   );
+    // }
+
     const { phoneNumber, code } = await request.json();
 
     // Validation
@@ -90,6 +101,22 @@ export async function POST(request) {
     }
 
     // OTP is valid - keep it for password reset (don't delete yet)
+
+    // ثبت لاگ
+    try {
+      await logActivity(cleanPhone, "otp_verify_forgot", {
+        targetType: "User",
+        targetId: user._id.toString(),
+        metadata: {
+          ipAddress:
+            request.headers.get("x-forwarded-for") ||
+            request.headers.get("x-real-ip"),
+        },
+      });
+    } catch (logError) {
+      console.error("Error logging OTP verification:", logError);
+    }
+
     return NextResponse.json({
       success: true,
       message: "کد تایید معتبر است",

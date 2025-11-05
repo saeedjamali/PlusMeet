@@ -37,6 +37,48 @@
     background: var(--color-bg-default);
 }
 
+/* Desktop Header - فقط در دسکتاپ */
+.desktopHeader {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    z-index: 99;
+    padding: 0 2rem;
+}
+
+.desktopHeaderContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mobileHeaderActions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 /* Mobile Header - فقط در موبایل */
 .mobileHeader {
     display: none;
@@ -61,6 +103,18 @@
 }
 
 .mobileHeaderLogo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mobileHeaderLogo:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+.mobileProfileWrapper {
     display: flex;
     align-items: center;
 }
@@ -130,7 +184,8 @@
     flex-direction: column;
     transition: none; /* حذف transition برای resize روان */
     position: relative;
-    height: 100vh;
+    height: calc(100vh - 70px); /* کم کردن ارتفاع header */
+    margin-top: 70px; /* فاصله از بالا برای header */
     overflow-y: auto;
     flex-shrink: 0; /* جلوگیری از shrink شدن */
 }
@@ -151,6 +206,15 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0.25rem;
+    border-radius: 8px;
+}
+
+.logo:hover {
+    background: var(--color-bg-default);
+    transform: scale(1.05);
 }
 
 .logoIcon {
@@ -444,6 +508,8 @@
 .mainContent {
     flex: 1;
     overflow-x: hidden;
+    margin-top: 70px; /* فاصله از بالا برای header */
+    min-height: calc(100vh - 70px);
 }
 
 .contentWrapper {
@@ -545,7 +611,17 @@
 }
 
 /* Responsive */
+/* Overlay for mobile sidebar */
+.overlay {
+    display: none;
+}
+
 @media (max-width: 1024px) {
+    /* Hide Desktop Header */
+    .desktopHeader {
+        display: none;
+    }
+
     /* Show Mobile Header */
     .mobileHeader {
         display: block;
@@ -556,14 +632,40 @@
         display: none;
     }
 
+    /* Overlay */
+    .overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
     /* Sidebar as Overlay */
     .sidebar {
         position: fixed;
         top: 60px;
+        right: 0;
+        margin-top: 0;
         z-index: 1001;
-        box-shadow: var(--shadow-lg);
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
         height: calc(100vh - 60px);
-        width: 280px !important; /* عرض ثابت در موبایل */
+        width: 280px !important;
+        transition: transform 0.3s ease;
+        transform: translateX(0);
     }
 
     .sidebarClosed {
@@ -574,6 +676,7 @@
     /* Main Content */
     .mainContent {
         margin-right: 0;
+        margin-top: 0;
         padding-top: 60px;
     }
 

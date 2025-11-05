@@ -29,6 +29,7 @@ export default function RoleEditPage() {
     slug: "",
     description: "",
     isSystem: false,
+    isStaff: false, // 👈 آیا کارشناس تیکت است؟
     isActive: true, // Default active
     priority: 50, // Default priority
     menuPermissions: [], // [{ menuId, access: 'full'|'view' }]
@@ -68,6 +69,7 @@ export default function RoleEditPage() {
           slug: role.slug || "",
           description: role.description || "",
           isSystem: role.isSystem || false,
+          isStaff: role.isStaff || false, // 👈 اضافه شد
           isActive: role.isActive !== undefined ? role.isActive : true,
           priority: role.priority || 50,
           menuPermissions: Array.isArray(role.menuPermissions)
@@ -463,6 +465,53 @@ export default function RoleEditPage() {
                 </div>
                 <span className={styles.hint}>
                   نقش‌های غیرفعال قابل استفاده نیستند و نمایش داده نمی‌شوند.
+                </span>
+              </div>
+            </div>
+
+            {/* 👈 isStaff Toggle */}
+            <div className={styles.formRow}>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>
+                  کارشناس تیکت
+                  <span className={styles.hint} style={{ marginRight: "8px" }}>
+                    (دسترسی‌های مدیریتی در سیستم تیکت)
+                  </span>
+                </label>
+                <div className={styles.toggleContainer}>
+                  <label className={styles.toggleSwitch}>
+                    <input
+                      type="checkbox"
+                      checked={roleData.isStaff}
+                      onChange={(e) =>
+                        setRoleData((prev) => ({
+                          ...prev,
+                          isStaff: e.target.checked,
+                        }))
+                      }
+                    />
+                    <span className={styles.toggleSlider}></span>
+                  </label>
+                  <span className={styles.toggleLabel}>
+                    {roleData.isStaff ? (
+                      <>
+                        <span
+                          style={{ color: "var(--status-success, #10b981)" }}
+                        >
+                          ✅ کارشناس
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span style={{ color: "var(--text-muted, #6b7280)" }}>
+                          کاربر عادی
+                        </span>
+                      </>
+                    )}
+                  </span>
+                </div>
+                <span className={styles.hint}>
+                  نقش‌های کارشناس می‌توانند تیکت‌های assign شده به خود را مدیریت کنند و به ویژگی‌های مدیریتی دسترسی داشته باشند.
                 </span>
               </div>
             </div>

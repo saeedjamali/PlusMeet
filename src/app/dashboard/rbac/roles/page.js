@@ -113,7 +113,7 @@ export default function RolesPage() {
         </div>
         <button
           className={styles.createBtn}
-          onClick={() => router.push("/rbac/roles/new")}
+          onClick={() => router.push("/dashboard/rbac/roles/new")}
         >
           <span>➕</span>
           ایجاد نقش جدید
@@ -255,6 +255,17 @@ export default function RolesPage() {
                 >
                   {role.isActive ? "✅ فعال" : "❌ غیرفعال"}
                 </span>
+                {role.isStaff && (
+                  <span
+                    className={styles.statusBadge}
+                    style={{
+                      backgroundColor: "var(--status-info, #3b82f6)",
+                      color: "white",
+                    }}
+                  >
+                    🎧 کارشناس
+                  </span>
+                )}
                 <span className={styles.priority}>اولویت: {role.priority}</span>
               </div>
 
@@ -262,7 +273,9 @@ export default function RolesPage() {
               <div className={styles.roleActions}>
                 <button
                   className={styles.editBtn}
-                  onClick={() => router.push(`/dashboard/rbac/roles/${role.id}`)}
+                  onClick={() =>
+                    router.push(`/dashboard/rbac/roles/${role.id}`)
+                  }
                 >
                   ✏️ ویرایش
                 </button>

@@ -335,6 +335,7 @@ async function seedRBAC() {
         slug: "admin",
         description: "دسترسی کامل به تمام بخش‌ها",
         isSystem: true,
+        isStaff: true, // 👈 نقش Staff
         color: "#EF4444", // red
         icon: "👑",
         priority: 100,
@@ -385,6 +386,7 @@ async function seedRBAC() {
         slug: "moderator",
         description: "مدیریت محتوا و نظارت بر رویدادها",
         isSystem: true,
+        isStaff: true, // 👈 نقش Staff
         color: "#8B5CF6", // purple
         icon: "🛡️",
         priority: 60,
@@ -404,6 +406,64 @@ async function seedRBAC() {
           { path: "/api/admin/rbac/roles", methods: ["GET"] },
           { path: "/api/events", methods: ["GET", "POST"] },
           { path: "/api/events/:id", methods: ["GET", "PUT", "DELETE"] },
+        ],
+      },
+
+      // Support (System Role)
+      {
+        name: "پشتیبانی",
+        slug: "support",
+        description: "مدیریت تیکت‌ها و پشتیبانی کاربران",
+        isSystem: true,
+        isStaff: true, // 👈 نقش Staff
+        color: "#10B981", // green
+        icon: "🎧",
+        priority: 55,
+        menuPermissions: [
+          { menuId: "dashboard", access: "view" },
+          { menuId: "support", access: "full" },
+          { menuId: "support.ticketList", access: "full" },
+          { menuId: "support.ticketSetting", access: "full" },
+        ],
+        apiPermissions: [
+          { path: "/api/user/profile", methods: ["GET", "PUT"] },
+          { path: "/api/tickets", methods: ["GET", "POST"] },
+          { path: "/api/tickets/:id", methods: ["GET", "PUT"] },
+          { path: "/api/tickets/:id/reply", methods: ["POST"] },
+          { path: "/api/tickets/:id/replies", methods: ["GET"] },
+          { path: "/api/tickets/:id/reassign", methods: ["POST"] },
+          { path: "/api/tickets/:id/view", methods: ["POST"] },
+          { path: "/api/tickets/categories", methods: ["GET", "POST"] },
+          { path: "/api/tickets/categories/:id", methods: ["GET", "PUT", "DELETE"] },
+        ],
+      },
+
+      // Finance Manager (System Role)
+      {
+        name: "مدیر مالی",
+        slug: "finance_manager",
+        description: "مدیریت امور مالی، تراکنش‌ها و کیف پول‌ها",
+        isSystem: true,
+        isStaff: true, // 👈 نقش Staff
+        color: "#F59E0B", // orange
+        icon: "💰",
+        priority: 70,
+        menuPermissions: [
+          { menuId: "dashboard", access: "view" },
+          { menuId: "finance", access: "full" },
+          { menuId: "support", access: "view" },
+          { menuId: "support.ticketList", access: "view" },
+        ],
+        apiPermissions: [
+          { path: "/api/user/profile", methods: ["GET", "PUT"] },
+          { path: "/api/wallet", methods: ["GET"] },
+          { path: "/api/wallet/deposit", methods: ["POST"] },
+          { path: "/api/wallet/withdraw", methods: ["POST"] },
+          { path: "/api/wallet/transactions", methods: ["GET"] },
+          { path: "/api/tickets", methods: ["GET", "POST"] },
+          { path: "/api/tickets/:id", methods: ["GET"] },
+          { path: "/api/tickets/:id/reply", methods: ["POST"] },
+          { path: "/api/tickets/:id/replies", methods: ["GET"] },
         ],
       },
 

@@ -35,6 +35,7 @@ export function AuthProvider({ children }) {
 
       if (response.ok) {
         const data = await response.json();
+        console.log("data----------------->", data);
         if (data.success) {
           setUser(data.data);
         } else {
@@ -72,9 +73,12 @@ export function AuthProvider({ children }) {
         return { success: true, data: data.data };
       }
 
-      return { success: false, error: data.message };
+      // خطا: پیام از data.message یا data.error یا پیش‌فرض
+      const errorMessage = data.message || data.error || "خطا در تایید کد";
+      return { success: false, error: errorMessage };
     } catch (error) {
-      return { success: false, error: error.message };
+      console.error("OTP Login Error:", error);
+      return { success: false, error: "خطا در اتصال به سرور" };
     }
   };
 
@@ -249,4 +253,3 @@ export function useAuth() {
   }
   return context;
 }
-

@@ -8,11 +8,21 @@ import connectDB from "@/lib/db/mongodb";
 import User from "@/lib/models/User.model";
 import { verifyOTP } from "@/lib/services/sms.service";
 import { generateToken, generateRefreshToken } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 import { logActivity } from "@/lib/models/ActivityLog.model";
 import { setHttpOnlyCookie } from "@/lib/utils/cookies";
 
 export async function POST(request) {
   try {
+    // // API Protection
+    // const protection = await protectAPI(request, { publicEndpoint: true });
+    // if (!protection.success) {
+    //   return NextResponse.json(
+    //     { error: protection.error },
+    //     { status: protection.status }
+    //   );
+    // }
+
     const { phoneNumber, code, role } = await request.json();
 
     // اعتبارسنجی
@@ -162,14 +172,14 @@ export async function POST(request) {
       success: true,
       message: isNewUser ? "ثبت‌نام و ورود موفقیت‌آمیز" : "ورود موفقیت‌آمیز",
       data: {
-        user: user.toPublicJSON(),
+        user: await user.toPublicJSON(), // 👈 async method
         isNewUser, // برای نمایش پیام خوش‌آمدگویی یا هدایت به تکمیل پروفایل
       },
     });
 
     // Set کردن توکن‌ها در httpOnly cookies
     setHttpOnlyCookie(response, "accessToken", accessToken, {
-      maxAge: 60 * 15, // 15 minutes
+      maxAge: 60 * 60, // 15 minutes
     });
 
     setHttpOnlyCookie(response, "refreshToken", refreshToken, {

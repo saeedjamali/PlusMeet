@@ -328,7 +328,7 @@ UserSchema.virtual("isActive").get(function () {
 // آیا سازمان است؟
 UserSchema.virtual("isOrganization").get(function () {
   return (
-    this.userType.startsWith("organization") || this.userType === "government"
+    this.userType?.startsWith("organization") || this.userType === "government"
   );
 });
 
@@ -406,7 +406,18 @@ UserSchema.methods.softDelete = function () {
 /**
  * فیلد‌های عمومی (برای نمایش به دیگران)
  */
-UserSchema.methods.toPublicJSON = function () {
+UserSchema.methods.toPublicJSON = async function () {
+  // محاسبه isStaff از role های دیتابیس
+  let isStaff = false;
+  if (this.roles && this.roles.length > 0) {
+    const Role = mongoose.model("Role");
+    const staffRolesCount = await Role.countDocuments({
+      slug: { $in: this.roles },
+      isStaff: true,
+    });
+    isStaff = staffRolesCount > 0;
+  }
+
   return {
     phoneNumber: this.phoneNumber,
     firstName: this.firstName,
@@ -415,17 +426,20 @@ UserSchema.methods.toPublicJSON = function () {
     avatar: this.avatar,
     bio: this.bio,
     roles: this.roles, // ✅ اضافه کردن roles
+    isStaff, // 👈 اضافه شد: بر اساس role های دیتابیس
     userType: this.userType,
     state: this.state,
     isVerified: this.isVerified,
     organizationName: this.organizationName,
     organizationLogo: this.organizationLogo,
     socialLinks: this.socialLinks,
-    stats: {
-      trustScore: this.stats.trustScore,
-      reviewsCount: this.stats.reviewsCount,
-      averageRating: this.stats.averageRating,
-    },
+    stats: this.stats
+      ? {
+          trustScore: this.stats.trustScore,
+          reviewsCount: this.stats.reviewsCount,
+          averageRating: this.stats.averageRating,
+        }
+      : undefined,
     createdAt: this.createdAt,
   };
 };

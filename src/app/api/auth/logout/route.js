@@ -6,10 +6,20 @@
 import { NextResponse } from "next/server";
 import { clearCookie } from "@/lib/utils/cookies";
 import { authenticate } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 import { logActivity } from "@/lib/models/ActivityLog.model";
 
 export async function POST(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request, { publicEndpoint: true });
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     // Authentication (optional - برای logging)
     const authResult = await authenticate(request, { requireCSRF: false });
 
@@ -54,4 +64,5 @@ export async function POST(request) {
     return response;
   }
 }
+
 

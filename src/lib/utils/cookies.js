@@ -14,7 +14,7 @@
  */
 export function setHttpOnlyCookie(response, name, value, options = {}) {
   const {
-    maxAge = 60 * 15, // 15 minutes default
+    maxAge = 60 * 60, // 60 minutes default
     httpOnly = true,
     secure = process.env.NODE_ENV === "production",
     sameSite = "lax",
@@ -198,4 +198,5 @@ export function validateCSRFToken(request) {
  *   },
  * });
  */
+
 

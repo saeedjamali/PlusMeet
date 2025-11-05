@@ -3,6 +3,10 @@
 /.pnp
 .pnp.js
 
+# Scripts
+/scripts
+/scripts/grant-admin-full-access.js
+
 # Testing
 /coverage
 

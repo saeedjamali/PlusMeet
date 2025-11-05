@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/NewAuthContext";
 import { useState } from "react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import Logo from "@/components/ui/Logo";
+import PublicNotifications from "@/components/home/PublicNotifications";
 import styles from "./home.module.css";
 
 export default function HomePage() {
@@ -55,7 +56,7 @@ export default function HomePage() {
                 </svg>
               </button>
             )}
-            <button
+            {/* <button
               className={styles.mobileHeaderMenuBtn}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="منو"
@@ -69,7 +70,7 @@ export default function HomePage() {
                 <span></span>
                 <span></span>
               </div>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -217,6 +218,9 @@ export default function HomePage() {
 
       {/* Theme Toggle */}
       <ThemeToggle variant="floating" />
+
+      {/* Public Notifications - اعلانات عمومی */}
+      <PublicNotifications />
 
       {/* Hero Section */}
       <section className={styles.hero}>

@@ -402,7 +402,7 @@ export const CSRF_CONFIG = {
 export const COOKIE_CONFIG = {
   accessToken: {
     name: "access_token",
-    maxAge: 15 * 60, // 15 minutes
+    maxAge: 60 * 60, // 60 minutes
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",

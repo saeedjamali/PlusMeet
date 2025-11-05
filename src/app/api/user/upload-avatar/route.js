@@ -7,7 +7,14 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import User from "@/lib/models/User.model";
 import { authenticate } from "@/lib/middleware/auth";
+import { protectAPI } from "@/lib/middleware/apiProtection";
 import { logActivity } from "@/lib/models/ActivityLog.model";
+import {
+  saveBase64Image,
+  deleteOldFile,
+  validateImageFile,
+  ensureUploadDirectories,
+} from "@/lib/utils/fileUpload";
 
 /**
  * POST /api/user/upload-avatar
@@ -15,6 +22,15 @@ import { logActivity } from "@/lib/models/ActivityLog.model";
  */
 export async function POST(request) {
   try {
+    // API Protection
+    const protection = await protectAPI(request);
+    if (!protection.success) {
+      return NextResponse.json(
+        { error: protection.error },
+        { status: protection.status }
+      );
+    }
+
     // Authentication
     const authResult = await authenticate(request);
     if (!authResult.success) {
@@ -22,6 +38,9 @@ export async function POST(request) {
     }
 
     const { image, type } = await request.json(); // type: 'avatar' | 'logo'
+
+    // تضمین وجود پوشه‌های uploads
+    await ensureUploadDirectories();
 
     // Validation
     if (!image) {
@@ -46,26 +65,15 @@ export async function POST(request) {
       );
     }
 
-    // بررسی فرمت base64
-    if (!image.startsWith("data:image/")) {
+    // اعتبارسنجی تصویر
+    try {
+      validateImageFile(image, 2); // max 2MB
+    } catch (validationError) {
       return NextResponse.json(
         {
           success: false,
           error: "ValidationError",
-          message: "فرمت تصویر نامعتبر است",
-        },
-        { status: 400 }
-      );
-    }
-
-    // بررسی حجم (max 2MB)
-    const base64Size = image.length * (3 / 4) - 2; // تقریبی
-    if (base64Size > 2 * 1024 * 1024) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "ValidationError",
-          message: "حجم تصویر نباید بیشتر از 2 مگابایت باشد",
+          message: validationError.message,
         },
         { status: 400 }
       );
@@ -88,14 +96,8 @@ export async function POST(request) {
       );
     }
 
-    // ذخیره تصویر
-    // در production: آپلود به S3/Cloudinary و ذخیره URL
-    // در development: ذخیره base64 (برای سادگی)
-
-    if (type === "avatar") {
-      user.avatar = image;
-    } else if (type === "logo") {
-      // بررسی اینکه کاربر سازمانی باشه
+    // بررسی دسترسی برای لوگو
+    if (type === "logo") {
       if (user.userType !== "organization" && user.userType !== "government") {
         return NextResponse.json(
           {
@@ -106,12 +108,43 @@ export async function POST(request) {
           { status: 403 }
         );
       }
-      user.organizationLogo = image;
+    }
+
+    // ذخیره تصویر در پوشه uploads
+    const folder = type === "avatar" ? "avatars" : "logos";
+    let imageUrl;
+
+    try {
+      imageUrl = await saveBase64Image(image, folder);
+    } catch (saveError) {
+      console.error("Error saving image:", saveError);
+      return NextResponse.json(
+        {
+          success: false,
+          error: "ServerError",
+          message: "خطا در ذخیره تصویر",
+        },
+        { status: 500 }
+      );
+    }
+
+    // حذف فایل قدیمی
+    const oldImageUrl = type === "avatar" ? user.avatar : user.organizationLogo;
+    if (oldImageUrl) {
+      await deleteOldFile(oldImageUrl);
+    }
+
+    // به‌روزرسانی URL در دیتابیس
+    if (type === "avatar") {
+      user.avatar = imageUrl;
+    } else {
+      user.organizationLogo = imageUrl;
     }
 
     await user.save();
 
     console.log(`✅ ${type} uploaded successfully for:`, user.phoneNumber);
+    console.log(`   URL: ${imageUrl}`);
 
     // Log activity
     try {
@@ -120,7 +153,7 @@ export async function POST(request) {
         targetId: user._id.toString(),
         metadata: {
           action: `${type}_upload`,
-          imageSize: base64Size,
+          imageUrl,
         },
       });
     } catch (logError) {
@@ -134,7 +167,7 @@ export async function POST(request) {
           ? "آواتار با موفقیت آپلود شد"
           : "لوگو با موفقیت آپلود شد",
       data: {
-        [type]: type === "avatar" ? user.avatar : user.organizationLogo,
+        [type]: imageUrl,
       },
     });
   } catch (error) {
@@ -149,5 +182,6 @@ export async function POST(request) {
     );
   }
 }
+
 
 

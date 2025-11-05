@@ -228,7 +228,7 @@
 
 ### 2. صفحه ویرایش/ایجاد نقش
 
-**مسیر:** `/admin/rbac/roles/new` یا `/admin/rbac/roles/:id`
+**مسیر:** `/dashboard/rbac/roles/new` یا `/dashboard/rbac/roles/:id`
 
 **تب‌ها:**
 
@@ -524,4 +524,5 @@ await logActivity({
 **آخرین به‌روزرسانی:** اکتبر 2025  
 **نسخه:** 1.0.0  
 **مستندات بیشتر:** [RBAC_GUIDE.md](./RBAC_GUIDE.md)
+
 

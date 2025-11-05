@@ -98,6 +98,14 @@ const ActivityLogSchema = new Schema(
         "menu.create",
         "menu.update",
         "menu.delete",
+
+        // مدیریت اعلانات (Notifications)
+        "notification.create",
+        "notification.update",
+        "notification.delete",
+        "notification.read",
+        "notification.click",
+        "notification.mark_all_read",
       ],
       index: true,
     },
