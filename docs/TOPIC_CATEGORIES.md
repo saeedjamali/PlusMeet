@@ -562,3 +562,6 @@ const path = await category.getFullPath();
 **آخرین به‌روزرسانی:** 2025-01-11  
 **نسخه:** 1.0.0
 
+
+
+

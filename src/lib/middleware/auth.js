@@ -333,6 +333,28 @@ export async function refreshAccessToken(refreshToken) {
 }
 
 /**
+ * protectAPI - Helper برای احراز هویت سریع در API Routes
+ * خروجی ساده: { authenticated, user, message }
+ */
+export async function protectAPI(request, options = {}) {
+  const result = await authenticate(request, options);
+  
+  if (!result.success) {
+    return {
+      authenticated: false,
+      user: null,
+      message: result.error || "Authentication failed",
+    };
+  }
+  
+  return {
+    authenticated: true,
+    user: result.user,
+    message: "Authenticated successfully",
+  };
+}
+
+/**
  * Helper: Hash کردن رمز عبور
  */
 export async function hashPassword(password) {

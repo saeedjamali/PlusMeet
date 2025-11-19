@@ -1,0 +1,78 @@
+/* ═══════════════════════════════════════════════════════════
+   Review Modal - تم تاریک
+   ═══════════════════════════════════════════════════════════ */
+
+/* اطلاعات رویداد */
+[data-theme="dark"] .eventInfo {
+  background: #2d5a66;
+}
+
+[data-theme="dark"] .eventTitle {
+  color: #f9fafb;
+}
+
+/* بخش‌ها */
+[data-theme="dark"] .sectionLabel {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .required {
+  color: #ef4444;
+}
+
+[data-theme="dark"] .sectionDesc {
+  color: #9ca3af;
+}
+
+/* ستاره‌ها */
+[data-theme="dark"] .ratingText {
+  color: #60a5fa;
+}
+
+/* Textarea */
+[data-theme="dark"] .textarea {
+  background: #2d5a66;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .textarea:focus {
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .charCount {
+  color: #6b7280;
+}
+
+/* امتیازات جزئی */
+[data-theme="dark"] .questionRow {
+  background: #2d5a66;
+}
+
+[data-theme="dark"] .questionRow:hover {
+  background: #345d6a;
+}
+
+[data-theme="dark"] .questionLabel {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .questionDesc {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .starBtn {
+  color: #4b5563;
+}
+
+[data-theme="dark"] .starBtn.active {
+  color: #fbbf24;
+}
+
+/* خطا */
+[data-theme="dark"] .error {
+  background: #7f1d1d;
+  border-color: #dc2626;
+  color: #fecaca;
+}
+

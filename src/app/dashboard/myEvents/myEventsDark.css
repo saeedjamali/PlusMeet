@@ -1,0 +1,371 @@
+/* ═══════════════════════════════════════════════════════════
+ * My Events Dark Mode Styles
+ * رنگ‌بندی مطابق با صفحه Create
+ * ══════════════════════════════════════════════════════════════ */
+
+/* Container & Background */
+.dark-mode .myEventsPage,
+[data-theme='dark'] .myEventsPage {
+  background: var(--color-bg-default) !important;
+  min-height: 100vh;
+}
+
+.dark-mode .myEventsPage [class*="container"],
+[data-theme='dark'] .myEventsPage [class*="container"] {
+  background: transparent !important;
+}
+
+/* Header */
+.dark-mode .myEventsPage [class*="header"],
+[data-theme='dark'] .myEventsPage [class*="header"] {
+  border-bottom: 2px solid var(--color-border) !important;
+  background: var(--color-bg-secondary) !important;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.dark-mode .myEventsPage [class*="title"],
+[data-theme='dark'] .myEventsPage [class*="title"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 700;
+}
+
+.dark-mode .myEventsPage [class*="subtitle"],
+[data-theme='dark'] .myEventsPage [class*="subtitle"] {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Theme Toggle */
+.dark-mode .myEventsPage [class*="themeToggle"],
+[data-theme='dark'] .myEventsPage [class*="themeToggle"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .myEventsPage [class*="themeToggle"]:hover,
+[data-theme='dark'] .myEventsPage [class*="themeToggle"]:hover {
+  background: var(--color-primary-light) !important;
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+/* Tabs */
+.dark-mode .myEventsPage [class*="tabs"],
+[data-theme='dark'] .myEventsPage [class*="tabs"] {
+  background: var(--color-bg-secondary) !important;
+  border-radius: 12px;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.dark-mode .myEventsPage [class*="tab"],
+[data-theme='dark'] .myEventsPage [class*="tab"] {
+  color: var(--color-text-secondary) !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.dark-mode .myEventsPage [class*="tab"]:hover,
+[data-theme='dark'] .myEventsPage [class*="tab"]:hover {
+  color: var(--color-text-primary) !important;
+  background: var(--color-bg-elevated) !important;
+}
+
+.dark-mode .myEventsPage [class*="tab"][class*="active"],
+[data-theme='dark'] .myEventsPage [class*="tab"][class*="active"] {
+  color: var(--color-primary-contrast) !important;
+  background: var(--color-primary) !important;
+}
+
+/* Event Cards */
+.dark-mode .myEventsPage [class*="eventCard"],
+[data-theme='dark'] .myEventsPage [class*="eventCard"] {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .myEventsPage [class*="eventCard"]:hover,
+[data-theme='dark'] .myEventsPage [class*="eventCard"]:hover {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 8px 24px rgba(226, 152, 30, 0.2) !important;
+  transform: translateY(-4px);
+}
+
+.dark-mode .myEventsPage [class*="eventImage"],
+[data-theme='dark'] .myEventsPage [class*="eventImage"] {
+  background: var(--color-bg-elevated) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.dark-mode .myEventsPage [class*="eventTitle"],
+[data-theme='dark'] .myEventsPage [class*="eventTitle"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 700 !important;
+}
+
+.dark-mode .myEventsPage [class*="infoLabel"],
+[data-theme='dark'] .myEventsPage [class*="infoLabel"] {
+  color: var(--color-text-tertiary) !important;
+  font-weight: 500 !important;
+}
+
+.dark-mode .myEventsPage [class*="infoValue"],
+[data-theme='dark'] .myEventsPage [class*="infoValue"] {
+  color: var(--color-text-secondary) !important;
+  font-weight: 600 !important;
+}
+
+.dark-mode .myEventsPage [class*="eventStats"],
+[data-theme='dark'] .myEventsPage [class*="eventStats"] {
+  border-top: 1px solid var(--color-border) !important;
+  background: var(--color-bg-elevated) !important;
+}
+
+.dark-mode .myEventsPage [class*="participationInfo"],
+[data-theme='dark'] .myEventsPage [class*="participationInfo"] {
+  border-top: 1px solid var(--color-border) !important;
+  background: var(--color-bg-elevated) !important;
+}
+
+/* Buttons */
+.dark-mode .myEventsPage [class*="manageBtn"],
+[data-theme='dark'] .myEventsPage [class*="manageBtn"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .myEventsPage [class*="manageBtn"]:hover,
+[data-theme='dark'] .myEventsPage [class*="manageBtn"]:hover {
+  background: var(--color-primary-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.4) !important;
+}
+
+.dark-mode .myEventsPage [class*="viewBtn"],
+.dark-mode .myEventsPage [class*="editBtn"],
+[data-theme='dark'] .myEventsPage [class*="viewBtn"],
+[data-theme='dark'] .myEventsPage [class*="editBtn"] {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.dark-mode .myEventsPage [class*="viewBtn"]:hover,
+.dark-mode .myEventsPage [class*="editBtn"]:hover,
+[data-theme='dark'] .myEventsPage [class*="viewBtn"]:hover,
+[data-theme='dark'] .myEventsPage [class*="editBtn"]:hover {
+  border-color: var(--color-primary) !important;
+  background: var(--color-primary-bg) !important;
+  transform: translateY(-2px);
+}
+
+.dark-mode .myEventsPage [class*="resubmitBtn"],
+[data-theme='dark'] .myEventsPage [class*="resubmitBtn"] {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: var(--color-primary-contrast) !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3) !important;
+  border: 1px solid rgba(245, 158, 11, 0.2) !important;
+}
+
+.dark-mode .myEventsPage [class*="resubmitBtn"]:hover:not(:disabled),
+[data-theme='dark'] .myEventsPage [class*="resubmitBtn"]:hover:not(:disabled) {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.dark-mode .myEventsPage [class*="deleteBtn"],
+[data-theme='dark'] .myEventsPage [class*="deleteBtn"] {
+  background: var(--color-error) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.dark-mode .myEventsPage [class*="deleteBtn"]:hover,
+[data-theme='dark'] .myEventsPage [class*="deleteBtn"]:hover {
+  background: var(--color-error-dark) !important;
+  transform: translateY(-2px);
+}
+
+/* Status Badges */
+.dark-mode .myEventsPage [class*="statusBadge"],
+[data-theme='dark'] .myEventsPage [class*="statusBadge"] {
+  font-weight: 600 !important;
+  border-radius: 20px;
+}
+
+/* Loading & Empty */
+.dark-mode .myEventsPage [class*="loading"],
+.dark-mode .myEventsPage [class*="empty"],
+[data-theme='dark'] .myEventsPage [class*="loading"],
+[data-theme='dark'] .myEventsPage [class*="empty"] {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px;
+  color: var(--color-text-secondary) !important;
+  padding: 3rem 2rem;
+}
+
+.dark-mode .myEventsPage [class*="empty"] h3,
+[data-theme='dark'] .myEventsPage [class*="empty"] h3 {
+  color: var(--color-text-primary) !important;
+}
+
+.dark-mode .myEventsPage [class*="empty"] p,
+[data-theme='dark'] .myEventsPage [class*="empty"] p {
+  color: var(--color-text-secondary) !important;
+}
+
+.dark-mode .myEventsPage [class*="spinner"],
+[data-theme='dark'] .myEventsPage [class*="spinner"] {
+  border: 4px solid var(--color-bg-elevated) !important;
+  border-top: 4px solid var(--color-primary) !important;
+}
+
+.dark-mode .myEventsPage [class*="createBtn"],
+[data-theme='dark'] .myEventsPage [class*="createBtn"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .myEventsPage [class*="createBtn"]:hover,
+[data-theme='dark'] .myEventsPage [class*="createBtn"]:hover {
+  background: var(--color-primary-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(226, 152, 30, 0.4) !important;
+}
+
+/* Pagination */
+.dark-mode .myEventsPage [class*="pageBtn"],
+[data-theme='dark'] .myEventsPage [class*="pageBtn"] {
+  background: var(--color-bg-secondary) !important;
+  border: 2px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  border-radius: 8px;
+}
+
+.dark-mode .myEventsPage [class*="pageBtn"]:hover:not(:disabled),
+[data-theme='dark'] .myEventsPage [class*="pageBtn"]:hover:not(:disabled) {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .myEventsPage [class*="pageBtn"]:disabled,
+[data-theme='dark'] .myEventsPage [class*="pageBtn"]:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dark-mode .myEventsPage [class*="pageInfo"],
+[data-theme='dark'] .myEventsPage [class*="pageInfo"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 600;
+}
+
+/* Rejection Reason */
+.dark-mode .myEventsPage [class*="rejectionReason"],
+[data-theme='dark'] .myEventsPage [class*="rejectionReason"] {
+  background: rgba(220, 38, 38, 0.1) !important;
+  border: 2px solid rgba(220, 38, 38, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 1rem !important;
+  margin: 0.5rem 0.25rem !important;
+}
+
+.dark-mode .myEventsPage [class*="rejectionReason"] strong,
+[data-theme='dark'] .myEventsPage [class*="rejectionReason"] strong {
+  color: #fca5a5 !important;
+  display: block !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.dark-mode .myEventsPage [class*="rejectionReason"] p,
+[data-theme='dark'] .myEventsPage [class*="rejectionReason"] p {
+  color: #fecaca !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Modal Styles */
+.dark-mode .myEventsPage [class*="modalDescription"],
+[data-theme='dark'] .myEventsPage [class*="modalDescription"] {
+  color: var(--color-text-secondary) !important;
+}
+
+.dark-mode .myEventsPage [class*="exampleList"],
+[data-theme='dark'] .myEventsPage [class*="exampleList"] {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.dark-mode .myEventsPage [class*="exampleList"] li,
+[data-theme='dark'] .myEventsPage [class*="exampleList"] li {
+  color: var(--color-text-secondary) !important;
+  border-bottom-color: var(--color-border) !important;
+}
+
+.dark-mode .myEventsPage [class*="exampleList"] strong,
+[data-theme='dark'] .myEventsPage [class*="exampleList"] strong {
+  color: var(--color-text-primary) !important;
+}
+
+.dark-mode .myEventsPage [class*="exampleList"] code,
+[data-theme='dark'] .myEventsPage [class*="exampleList"] code {
+  background: var(--color-bg-default) !important;
+  color: var(--color-primary) !important;
+  border-color: var(--color-border) !important;
+}
+
+.dark-mode .myEventsPage [class*="inputLabel"],
+[data-theme='dark'] .myEventsPage [class*="inputLabel"] {
+  color: var(--color-text-primary) !important;
+}
+
+.dark-mode .myEventsPage [class*="input"],
+[data-theme='dark'] .myEventsPage [class*="input"] {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border) !important;
+}
+
+.dark-mode .myEventsPage [class*="input"]:focus,
+[data-theme='dark'] .myEventsPage [class*="input"]:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(226, 152, 30, 0.2) !important;
+}
+
+.dark-mode .myEventsPage [class*="input"]::placeholder,
+[data-theme='dark'] .myEventsPage [class*="input"]::placeholder {
+  color: var(--color-text-tertiary) !important;
+}
+
+.dark-mode .myEventsPage [class*="inputError"],
+[data-theme='dark'] .myEventsPage [class*="inputError"] {
+  color: var(--color-error) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .dark-mode .myEventsPage [class*="header"],
+  [data-theme='dark'] .myEventsPage [class*="header"] {
+    padding: 1rem;
+  }
+
+  .dark-mode .myEventsPage [class*="eventCard"],
+  [data-theme='dark'] .myEventsPage [class*="eventCard"] {
+    margin-bottom: 1rem;
+  }
+}

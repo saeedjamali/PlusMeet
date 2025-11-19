@@ -129,3 +129,6 @@ convert icon.svg -resize 512x512 icon-512x512.png
 
 
 
+
+
+

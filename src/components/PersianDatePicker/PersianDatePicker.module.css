@@ -1,0 +1,72 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+}
+
+.required {
+  color: var(--color-danger, #ef4444);
+}
+
+.datePickerContainer {
+  width: 100%;
+}
+
+.dateInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: var(--text-primary, #111827);
+  background-color: var(--bg-tertiary, #ffffff);
+  transition: all 0.2s ease;
+  font-family: inherit;
+  direction: rtl;
+}
+
+.dateInput:hover {
+  border-color: var(--color-primary, #f4a325);
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: var(--color-primary, #f4a325);
+  box-shadow: 0 0 0 3px rgba(244, 163, 37, 0.1);
+}
+
+.dateInput:disabled {
+  background-color: var(--bg-secondary, #f3f4f6);
+  color: var(--text-muted, #9ca3af);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.placeholder {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: var(--text-primary, #111827);
+  background-color: var(--bg-secondary, #f3f4f6);
+  font-family: inherit;
+}
+
+@media (max-width: 768px) {
+  .dateInput {
+    font-size: 0.8125rem;
+  }
+}
+

@@ -1,0 +1,262 @@
+/* ═══════════════════════════════════════════════════════════
+ * Event Management Dark Mode Styles
+ * رنگ‌بندی مطابق با صفحه Create
+ * ══════════════════════════════════════════════════════════════ */
+
+/* Container & Background */
+.dark-mode .eventManagePage,
+[data-theme='dark'] .eventManagePage {
+  background: var(--color-bg-default) !important;
+  min-height: 100vh;
+}
+
+.dark-mode .eventManagePage [class*="container"],
+[data-theme='dark'] .eventManagePage [class*="container"] {
+  background: transparent !important;
+}
+
+/* Header */
+.dark-mode .eventManagePage [class*="header"],
+[data-theme='dark'] .eventManagePage [class*="header"] {
+  border-bottom: 2px solid var(--color-border) !important;
+  background: var(--color-bg-secondary) !important;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.dark-mode .eventManagePage [class*="title"],
+[data-theme='dark'] .eventManagePage [class*="title"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 700;
+}
+
+.dark-mode .eventManagePage [class*="subtitle"],
+[data-theme='dark'] .eventManagePage [class*="subtitle"] {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Theme Toggle */
+.dark-mode .eventManagePage [class*="themeToggle"],
+[data-theme='dark'] .eventManagePage [class*="themeToggle"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .eventManagePage [class*="themeToggle"]:hover,
+[data-theme='dark'] .eventManagePage [class*="themeToggle"]:hover {
+  background: var(--color-primary-light) !important;
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+/* Stat Cards */
+.dark-mode .eventManagePage [class*="statCard"],
+[data-theme='dark'] .eventManagePage [class*="statCard"] {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 12px;
+}
+
+.dark-mode .eventManagePage [class*="statCard"]:hover,
+[data-theme='dark'] .eventManagePage [class*="statCard"]:hover {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 4px 16px rgba(226, 152, 30, 0.2) !important;
+  transform: translateY(-4px);
+}
+
+.dark-mode .eventManagePage [class*="statValue"],
+[data-theme='dark'] .eventManagePage [class*="statValue"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 700;
+}
+
+.dark-mode .eventManagePage [class*="statLabel"],
+[data-theme='dark'] .eventManagePage [class*="statLabel"] {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Filters */
+.dark-mode .eventManagePage [class*="filterSelect"],
+[data-theme='dark'] .eventManagePage [class*="filterSelect"] {
+  background: var(--color-bg-secondary) !important;
+  border: 2px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+  border-radius: 8px;
+}
+
+.dark-mode .eventManagePage [class*="filterSelect"]:focus,
+[data-theme='dark'] .eventManagePage [class*="filterSelect"]:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(226, 152, 30, 0.2) !important;
+}
+
+.dark-mode .eventManagePage [class*="searchInput"],
+[data-theme='dark'] .eventManagePage [class*="searchInput"] {
+  background: var(--color-bg-secondary) !important;
+  border: 2px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+  border-radius: 8px;
+}
+
+.dark-mode .eventManagePage [class*="searchInput"]:focus,
+[data-theme='dark'] .eventManagePage [class*="searchInput"]:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(226, 152, 30, 0.2) !important;
+}
+
+.dark-mode .eventManagePage [class*="searchInput"]::placeholder,
+[data-theme='dark'] .eventManagePage [class*="searchInput"]::placeholder {
+  color: var(--color-text-tertiary) !important;
+}
+
+/* Table */
+.dark-mode .eventManagePage [class*="tableWrapper"],
+[data-theme='dark'] .eventManagePage [class*="tableWrapper"] {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark-mode .eventManagePage [class*="table"] thead,
+[data-theme='dark'] .eventManagePage [class*="table"] thead {
+  background: var(--color-bg-elevated) !important;
+}
+
+.dark-mode .eventManagePage [class*="table"] th,
+[data-theme='dark'] .eventManagePage [class*="table"] th {
+  color: var(--color-text-primary) !important;
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-border) !important;
+}
+
+.dark-mode .eventManagePage [class*="table"] tbody tr,
+[data-theme='dark'] .eventManagePage [class*="table"] tbody tr {
+  border-bottom: 1px solid var(--color-border) !important;
+  transition: background-color 0.2s ease;
+}
+
+.dark-mode .eventManagePage [class*="table"] tbody tr:hover,
+[data-theme='dark'] .eventManagePage [class*="table"] tbody tr:hover {
+  background-color: var(--color-bg-elevated) !important;
+}
+
+.dark-mode .eventManagePage [class*="table"] td,
+[data-theme='dark'] .eventManagePage [class*="table"] td {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Action Buttons */
+.dark-mode .eventManagePage [class*="viewBtn"],
+[data-theme='dark'] .eventManagePage [class*="viewBtn"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+}
+
+.dark-mode .eventManagePage [class*="viewBtn"]:hover,
+[data-theme='dark'] .eventManagePage [class*="viewBtn"]:hover {
+  background: var(--color-primary-light) !important;
+  transform: scale(1.1);
+}
+
+.dark-mode .eventManagePage [class*="editBtn"],
+[data-theme='dark'] .eventManagePage [class*="editBtn"] {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.dark-mode .eventManagePage [class*="editBtn"]:hover,
+[data-theme='dark'] .eventManagePage [class*="editBtn"]:hover {
+  border-color: var(--color-primary) !important;
+  transform: scale(1.1);
+}
+
+.dark-mode .eventManagePage [class*="approveBtn"],
+[data-theme='dark'] .eventManagePage [class*="approveBtn"] {
+  background: var(--color-success) !important;
+  color: white !important;
+}
+
+.dark-mode .eventManagePage [class*="rejectBtn"],
+[data-theme='dark'] .eventManagePage [class*="rejectBtn"] {
+  background: var(--color-error) !important;
+  color: white !important;
+}
+
+.dark-mode .eventManagePage [class*="deleteBtn"],
+[data-theme='dark'] .eventManagePage [class*="deleteBtn"] {
+  background: var(--color-error) !important;
+  color: white !important;
+}
+
+/* Loading & Empty */
+.dark-mode .eventManagePage [class*="loading"],
+.dark-mode .eventManagePage [class*="empty"],
+[data-theme='dark'] .eventManagePage [class*="loading"],
+[data-theme='dark'] .eventManagePage [class*="empty"] {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px;
+  color: var(--color-text-secondary) !important;
+}
+
+.dark-mode .eventManagePage [class*="spinner"],
+[data-theme='dark'] .eventManagePage [class*="spinner"] {
+  border: 4px solid var(--color-bg-elevated) !important;
+  border-top: 4px solid var(--color-primary) !important;
+}
+
+/* Pagination */
+.dark-mode .eventManagePage [class*="pageBtn"],
+[data-theme='dark'] .eventManagePage [class*="pageBtn"] {
+  background: var(--color-bg-secondary) !important;
+  border: 2px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  border-radius: 8px;
+}
+
+.dark-mode .eventManagePage [class*="pageBtn"]:hover:not(:disabled),
+[data-theme='dark'] .eventManagePage [class*="pageBtn"]:hover:not(:disabled) {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .eventManagePage [class*="pageBtn"]:disabled,
+[data-theme='dark'] .eventManagePage [class*="pageBtn"]:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dark-mode .eventManagePage [class*="pageInfo"],
+[data-theme='dark'] .eventManagePage [class*="pageInfo"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 600;
+}
+
+/* Status Badges */
+.dark-mode .eventManagePage [class*="statusBadge"],
+[data-theme='dark'] .eventManagePage [class*="statusBadge"] {
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dark-mode .eventManagePage [class*="header"],
+  [data-theme='dark'] .eventManagePage [class*="header"] {
+    padding: 1rem;
+  }
+
+  .dark-mode .eventManagePage [class*="statCard"],
+  [data-theme='dark'] .eventManagePage [class*="statCard"] {
+    padding: 1rem;
+  }
+}

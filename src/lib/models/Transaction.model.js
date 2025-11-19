@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 /**
  * Transaction Model - تراکنش‌های مالی
@@ -9,7 +9,7 @@ const TransactionSchema = new mongoose.Schema(
     // کاربر
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
       index: true,
     },
@@ -17,7 +17,7 @@ const TransactionSchema = new mongoose.Schema(
     // کیف پول
     walletId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Wallet',
+      ref: "Wallet",
       required: true,
       index: true,
     },
@@ -26,15 +26,19 @@ const TransactionSchema = new mongoose.Schema(
     type: {
       type: String,
       enum: [
-        'deposit',          // واریز
-        'withdraw',         // برداشت
-        'payment',          // پرداخت (برای خرید چیزی)
-        'refund',           // بازگشت وجه
-        'transfer_in',      // انتقال دریافتی
-        'transfer_out',     // انتقال ارسالی
-        'commission',       // کمیسیون
-        'bonus',            // پاداش
-        'penalty',          // جریمه
+        "deposit", // واریز
+        "withdraw", // برداشت
+        "payment", // پرداخت (برای خرید چیزی)
+        "refund", // بازگشت وجه
+        "transfer_in", // انتقال دریافتی
+        "transfer_out", // انتقال ارسالی
+        "commission", // کمیسیون
+        "bonus", // پاداش
+        "penalty", // جریمه
+        "event_join_reserve", // رزرو برای پیوستن به رویداد
+        "event_join_complete", // تکمیل پیوستن به رویداد
+        "event_join_refund", // بازگشت وجه پیوستن به رویداد
+        "event_leave_refund", // بازگشت وجه ترک رویداد
       ],
       required: true,
       index: true,
@@ -62,14 +66,21 @@ const TransactionSchema = new mongoose.Schema(
     // ارز
     currency: {
       type: String,
-      default: 'IRR',
+      default: "IRR",
     },
 
     // وضعیت تراکنش
     status: {
       type: String,
-      enum: ['pending', 'processing', 'completed', 'failed', 'cancelled', 'refunded'],
-      default: 'pending',
+      enum: [
+        "pending",
+        "processing",
+        "completed",
+        "failed",
+        "cancelled",
+        "refunded",
+      ],
+      default: "pending",
       required: true,
       index: true,
     },
@@ -77,14 +88,21 @@ const TransactionSchema = new mongoose.Schema(
     // جهت تراکنش
     direction: {
       type: String,
-      enum: ['in', 'out'], // in = واریز، out = برداشت
+      enum: ["in", "out"], // in = واریز، out = برداشت
       required: true,
     },
 
     // روش پرداخت
     paymentMethod: {
       type: String,
-      enum: ['zarinpal', 'wallet', 'card_to_card', 'bank_transfer', 'manual', 'system'],
+      enum: [
+        "zarinpal",
+        "wallet",
+        "card_to_card",
+        "bank_transfer",
+        "manual",
+        "system",
+      ],
       default: null,
     },
 
@@ -120,14 +138,14 @@ const TransactionSchema = new mongoose.Schema(
     // توضیحات
     description: {
       type: String,
-      default: '',
+      default: "",
       maxlength: 500,
     },
 
     // یادداشت داخلی (فقط برای ادمین)
     internalNote: {
       type: String,
-      default: '',
+      default: "",
       maxlength: 1000,
     },
 
@@ -135,7 +153,7 @@ const TransactionSchema = new mongoose.Schema(
     relatedTo: {
       model: {
         type: String,
-        enum: ['Event', 'Ticket', 'Order', 'User', null],
+        enum: ["Event", "Ticket", "Order", "User", null],
         default: null,
       },
       id: {
@@ -201,16 +219,16 @@ TransactionSchema.index({ type: 1, status: 1 });
 TransactionSchema.index({ authority: 1 }, { sparse: true });
 TransactionSchema.index({ gatewayTransactionId: 1 }, { sparse: true });
 TransactionSchema.index({ status: 1, createdAt: -1 });
-TransactionSchema.index({ 'relatedTo.model': 1, 'relatedTo.id': 1 });
+TransactionSchema.index({ "relatedTo.model": 1, "relatedTo.id": 1 });
 
 // Virtual: آیا تراکنش موفق بوده؟
-TransactionSchema.virtual('isSuccessful').get(function () {
-  return this.status === 'completed';
+TransactionSchema.virtual("isSuccessful").get(function () {
+  return this.status === "completed";
 });
 
 // Virtual: آیا تراکنش در حال پردازش است؟
-TransactionSchema.virtual('isPending').get(function () {
-  return ['pending', 'processing'].includes(this.status);
+TransactionSchema.virtual("isPending").get(function () {
+  return ["pending", "processing"].includes(this.status);
 });
 
 // Static Methods
@@ -219,23 +237,30 @@ TransactionSchema.virtual('isPending').get(function () {
  * ایجاد تراکنش واریز
  */
 TransactionSchema.statics.createDeposit = async function (data) {
-  const { userId, walletId, amount, paymentMethod, description, metadata = {} } = data;
+  const {
+    userId,
+    walletId,
+    amount,
+    paymentMethod,
+    description,
+    metadata = {},
+  } = data;
 
-  const Wallet = mongoose.model('Wallet');
+  const Wallet = mongoose.model("Wallet");
   const wallet = await Wallet.findById(walletId);
 
   if (!wallet) {
-    throw new Error('Wallet not found');
+    throw new Error("Wallet not found");
   }
 
   const transaction = await this.create({
     userId,
     walletId,
-    type: 'deposit',
+    type: "deposit",
     amount,
     balanceBefore: wallet.balance,
     balanceAfter: wallet.balance + amount,
-    direction: 'in',
+    direction: "in",
     paymentMethod,
     description,
     metadata,
@@ -248,27 +273,34 @@ TransactionSchema.statics.createDeposit = async function (data) {
  * ایجاد تراکنش برداشت
  */
 TransactionSchema.statics.createWithdraw = async function (data) {
-  const { userId, walletId, amount, paymentMethod, description, metadata = {} } = data;
+  const {
+    userId,
+    walletId,
+    amount,
+    paymentMethod,
+    description,
+    metadata = {},
+  } = data;
 
-  const Wallet = mongoose.model('Wallet');
+  const Wallet = mongoose.model("Wallet");
   const wallet = await Wallet.findById(walletId);
 
   if (!wallet) {
-    throw new Error('Wallet not found');
+    throw new Error("Wallet not found");
   }
 
   if (wallet.availableBalance < amount) {
-    throw new Error('Insufficient balance');
+    throw new Error("Insufficient balance");
   }
 
   const transaction = await this.create({
     userId,
     walletId,
-    type: 'withdraw',
+    type: "withdraw",
     amount,
     balanceBefore: wallet.balance,
     balanceAfter: wallet.balance - amount,
-    direction: 'out',
+    direction: "out",
     paymentMethod,
     description,
     metadata,
@@ -281,11 +313,11 @@ TransactionSchema.statics.createWithdraw = async function (data) {
  * تکمیل تراکنش
  */
 TransactionSchema.methods.complete = async function (additionalData = {}) {
-  this.status = 'completed';
+  this.status = "completed";
   this.completedAt = new Date();
-  
+
   Object.assign(this, additionalData);
-  
+
   await this.save();
   return this;
 };
@@ -294,10 +326,10 @@ TransactionSchema.methods.complete = async function (additionalData = {}) {
  * شکست تراکنش
  */
 TransactionSchema.methods.fail = async function (reason) {
-  this.status = 'failed';
+  this.status = "failed";
   this.failedAt = new Date();
   this.failureReason = reason;
-  
+
   await this.save();
   return this;
 };
@@ -306,13 +338,13 @@ TransactionSchema.methods.fail = async function (reason) {
  * لغو تراکنش
  */
 TransactionSchema.methods.cancel = async function (reason) {
-  if (this.status === 'completed') {
-    throw new Error('Cannot cancel completed transaction');
+  if (this.status === "completed") {
+    throw new Error("Cannot cancel completed transaction");
   }
 
-  this.status = 'cancelled';
+  this.status = "cancelled";
   this.failureReason = reason;
-  
+
   await this.save();
   return this;
 };
@@ -321,32 +353,32 @@ TransactionSchema.methods.cancel = async function (reason) {
  * بازگشت وجه
  */
 TransactionSchema.methods.refund = async function () {
-  if (this.status !== 'completed') {
-    throw new Error('Can only refund completed transactions');
+  if (this.status !== "completed") {
+    throw new Error("Can only refund completed transactions");
   }
 
-  if (this.type === 'refund') {
-    throw new Error('Cannot refund a refund transaction');
+  if (this.type === "refund") {
+    throw new Error("Cannot refund a refund transaction");
   }
 
-  this.status = 'refunded';
+  this.status = "refunded";
   await this.save();
 
   // ایجاد تراکنش بازگشت وجه
   const refundTransaction = await this.constructor.create({
     userId: this.userId,
     walletId: this.walletId,
-    type: 'refund',
+    type: "refund",
     amount: this.amount,
     balanceBefore: this.balanceAfter,
     balanceAfter: this.balanceBefore,
-    direction: this.direction === 'in' ? 'out' : 'in',
+    direction: this.direction === "in" ? "out" : "in",
     paymentMethod: this.paymentMethod,
     description: `بازگشت وجه تراکنش ${this._id}`,
-    status: 'completed',
+    status: "completed",
     completedAt: new Date(),
     relatedTo: {
-      model: 'Transaction',
+      model: "Transaction",
       id: this._id,
     },
   });
@@ -374,7 +406,8 @@ TransactionSchema.methods.toPublicJSON = function () {
   };
 };
 
-const Transaction = mongoose.models.Transaction || mongoose.model('Transaction', TransactionSchema);
+const Transaction =
+  mongoose.models.Transaction ||
+  mongoose.model("Transaction", TransactionSchema);
 
 export default Transaction;
-

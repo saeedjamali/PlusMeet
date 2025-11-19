@@ -5,23 +5,13 @@
 
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/NewAuthContext";
+import FloatingThemeToggle from "@/components/FloatingThemeToggle";
+import "@/styles/fonts.css";
 import "@/styles/globals.css";
-import { Inter, Poppins } from "next/font/google";
+import "@/styles/datepicker.css";
 
-// بارگذاری فونت‌های انگلیسی
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "swap",
-});
+// فونت‌های فارسی از فایل‌های محلی بارگذاری می‌شوند
+// IRANSansXFaNum با اعداد فارسی در fonts.css تعریف شده است
 
 export const metadata = {
   title: "PlusMeet - با هم، بهتر",
@@ -90,28 +80,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl" suppressHydrationWarning>
-      <head>
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-
-        {/* فونت‌های فارسی از CDN */}
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/font-face.css"
-        />
-      </head>
-      <body className={`${inter.variable} ${poppins.variable}`}>
+      <body>
         <ThemeProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            {children}
+            
+            {/* دکمه شناور تغییر تم - فقط در موبایل */}
+            <FloatingThemeToggle />
+          </AuthProvider>
         </ThemeProvider>
 
         {/* Fallback for users with JavaScript disabled */}
@@ -133,3 +109,15 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+

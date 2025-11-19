@@ -1,0 +1,75 @@
+/**
+ * IRANSans X FaNum - فونت ایران سنس با اعداد فارسی
+ * برای نمایش خودکار اعداد فارسی در کل سایت
+ */
+
+/* Regular */
+@font-face {
+  font-family: 'IRANSansXFaNum';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff2/IRANSansXFaNum-Regular.woff2') format('woff2'),
+       url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff/IRANSansXFaNum-Regular.woff') format('woff');
+}
+
+/* Light */
+@font-face {
+  font-family: 'IRANSansXFaNum';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff2/IRANSansXFaNum-Light.woff2') format('woff2'),
+       url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff/IRANSansXFaNum-Light.woff') format('woff');
+}
+
+/* Medium */
+@font-face {
+  font-family: 'IRANSansXFaNum';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff2/IRANSansXFaNum-Medium.woff2') format('woff2'),
+       url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff/IRANSansXFaNum-Medium.woff') format('woff');
+}
+
+/* DemiBold */
+@font-face {
+  font-family: 'IRANSansXFaNum';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff2/IRANSansXFaNum-DemiBold.woff2') format('woff2'),
+       url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff/IRANSansXFaNum-DemiBold.woff') format('woff');
+}
+
+/* Bold */
+@font-face {
+  font-family: 'IRANSansXFaNum';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff2/IRANSansXFaNum-Bold.woff2') format('woff2'),
+       url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff/IRANSansXFaNum-Bold.woff') format('woff');
+}
+
+/* ExtraBold */
+@font-face {
+  font-family: 'IRANSansXFaNum';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff2/IRANSansXFaNum-ExtraBold.woff2') format('woff2'),
+       url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff/IRANSansXFaNum-ExtraBold.woff') format('woff');
+}
+
+/* Black */
+@font-face {
+  font-family: 'IRANSansXFaNum';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff2/IRANSansXFaNum-Black.woff2') format('woff2'),
+       url('/fonts/IRANSans/FarsiNumeral/Webfonts/fonts/Woff/IRANSansXFaNum-Black.woff') format('woff');
+}
+

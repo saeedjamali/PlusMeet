@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/NewAuthContext";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import ChangePasswordModal from "@/components/user/ChangePasswordModal";
+import iranProvinces from "@/lib/data/iranProvincesComplete.json";
 import styles from "./profile.module.css";
 
 export default function ProfilePage() {
@@ -31,6 +32,7 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const [cities, setCities] = useState([]);
 
   // Form data
   const [formData, setFormData] = useState({
@@ -105,6 +107,16 @@ export default function ProfilePage() {
             state: data.data.location?.state || "",
           },
         });
+        
+        // بارگذاری شهرهای استان انتخاب شده
+        if (data.data.location?.state) {
+          const province = iranProvinces.find(
+            (p) => p.province_name === data.data.location.state
+          );
+          if (province) {
+            setCities(province.cities || []);
+          }
+        }
       }
     } catch (err) {
       console.error("Error fetching profile:", err);
@@ -112,6 +124,36 @@ export default function ProfilePage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleProvinceChange = (e) => {
+    const provinceName = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      location: {
+        state: provinceName,
+        city: "", // reset city when province changes
+      },
+    }));
+
+    // بارگذاری شهرهای استان جدید
+    const province = iranProvinces.find((p) => p.province_name === provinceName);
+    if (province) {
+      setCities(province.cities || []);
+    } else {
+      setCities([]);
+    }
+  };
+
+  const handleCityChange = (e) => {
+    const cityName = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      location: {
+        ...prev.location,
+        city: cityName,
+      },
+    }));
   };
 
   const handleChange = (e) => {
@@ -198,17 +240,26 @@ export default function ProfilePage() {
     setSaving(true);
 
     try {
+      console.log("📤 Sending profile data:", formData);
+      
       const response = await fetchWithAuth("/api/user/profile", {
         method: "PUT",
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
+      console.log("📥 Profile update response:", data);
 
       if (data.success) {
         setSuccess("پروفایل با موفقیت به‌روزرسانی شد");
         setProfile(data.data);
         setIsEditing(false);
+        
+        // Refresh user data in context
+        if (refreshUser) {
+          await refreshUser();
+        }
+        
         setTimeout(() => setSuccess(""), 3000);
       } else {
         setError(data.error || "خطا در به‌روزرسانی پروفایل");
@@ -638,29 +689,48 @@ export default function ProfilePage() {
                   />
                 </div>
 
-                {/* لوکیشن */}
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>استان</label>
-                    <input
-                      type="text"
-                      name="location.state"
-                      className={styles.input}
-                      value={formData.location.state}
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>شهر</label>
-                    <input
-                      type="text"
-                      name="location.city"
-                      className={styles.input}
-                      value={formData.location.city}
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                    />
+                {/* لوکیشن - استان و شهر پیش‌فرض */}
+                <div className={styles.locationSection}>
+                  <h3>📍 موقعیت پیش‌فرض</h3>
+                  <p className={styles.locationHint}>
+                    استان و شهر انتخابی شما به عنوان موقعیت پیش‌فرض در جستجوی
+                    رویدادها استفاده می‌شود
+                  </p>
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>استان</label>
+                      <select
+                        name="location.state"
+                        className={styles.select}
+                        value={formData.location.state}
+                        onChange={handleProvinceChange}
+                        disabled={!isEditing}
+                      >
+                        <option value="">انتخاب استان</option>
+                        {iranProvinces.map((province) => (
+                          <option key={province.province_code} value={province.province_name}>
+                            {province.province_name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>شهر</label>
+                      <select
+                        name="location.city"
+                        className={styles.select}
+                        value={formData.location.city}
+                        onChange={handleCityChange}
+                        disabled={!isEditing || !formData.location.state}
+                      >
+                        <option value="">انتخاب شهر</option>
+                        {cities.map((city) => (
+                          <option key={city.city_code} value={city.city_name}>
+                            {city.city_name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
 

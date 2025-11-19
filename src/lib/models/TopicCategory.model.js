@@ -28,6 +28,12 @@ const TopicCategorySchema = new mongoose.Schema(
       trim: true,
       default: "",
     },
+    examples: [
+      {
+        type: String,
+        trim: true,
+      },
+    ],
 
     // سلسله مراتب
     parentId: {

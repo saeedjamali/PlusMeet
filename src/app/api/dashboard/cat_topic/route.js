@@ -6,25 +6,13 @@ import { protectAPI } from '@/lib/middleware/apiProtection';
 import { logActivity } from '@/lib/models/ActivityLog.model';
 import { checkPermission } from '@/lib/middleware/rbac';
 
-// GET - لیست دسته‌بندی‌ها
+// GET - لیست دسته‌بندی‌ها (عمومی - بدون نیاز به احراز هویت)
 export async function GET(request) {
   try {
-    // API Protection
-    const protection = await protectAPI(request);
-    if (!protection.success) {
-      return NextResponse.json(
-        { error: protection.error },
-        { status: protection.status }
-      );
-    }
-
+    // API Protection با isPublic = true (بدون نیاز به authentication)
+    const protection = await protectAPI(request, { isPublic: true });
+    
     await dbConnect();
-
-    // بررسی احراز هویت
-    const authResult = await authenticate(request, { requireCSRF: false });
-    if (!authResult.success) {
-      return NextResponse.json({ error: authResult.error || 'لطفا وارد شوید' }, { status: 401 });
-    }
 
     const { searchParams } = new URL(request.url);
     const view = searchParams.get('view') || 'tree'; // tree, flat, table
@@ -242,4 +230,14 @@ export async function POST(request) {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
 

@@ -1,0 +1,81 @@
+/* Dark Mode for EventMultiSelect */
+[data-theme="dark"] .EventMultiSelect_label__container {
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .EventMultiSelect_selectHeader__container {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+[data-theme="dark"] .EventMultiSelect_selectHeader__container:hover {
+  border-color: #f4a325;
+}
+
+[data-theme="dark"] .EventMultiSelect_selectValue__container {
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .EventMultiSelect_dropdown__container {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+[data-theme="dark"] .EventMultiSelect_searchBox__container {
+  border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .EventMultiSelect_searchInput__container {
+  background: #111827;
+  border-color: #374151;
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .EventMultiSelect_actions__container {
+  background: #111827;
+  border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .EventMultiSelect_actionBtn__container {
+  background: #1f2937;
+  border-color: #374151;
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .EventMultiSelect_actionBtn__container:hover {
+  background: #f4a325;
+  color: white;
+  border-color: #f4a325;
+}
+
+[data-theme="dark"] .EventMultiSelect_eventItem__container:hover {
+  background: #111827;
+}
+
+[data-theme="dark"] .EventMultiSelect_eventTitle__container {
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .EventMultiSelect_eventDate__container {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .EventMultiSelect_selectedList__container {
+  background: #111827;
+}
+
+[data-theme="dark"] .EventMultiSelect_selectedItem__container {
+  background: #1f2937;
+  border-color: #374151;
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .EventMultiSelect_hint__container {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .EventMultiSelect_badgeGray__container {
+  background: #374151;
+  color: #9ca3af;
+}
+

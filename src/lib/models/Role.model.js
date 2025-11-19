@@ -174,7 +174,32 @@ RoleSchema.methods.hasApiAccess = function (endpoint, method) {
     return false;
   }
 
+  // ✅ مرحله 1: ابتدا exact match را چک کن
+  const exactMatch = this.apiPermissions.find((p) => p.path === endpoint);
+  
+  if (exactMatch) {
+    console.log(`      ✅ [hasApiAccess] EXACT MATCH found: ${exactMatch.path}`);
+    console.log(`      🔍 [hasApiAccess] Available methods: [${exactMatch.methods.join(", ")}]`);
+    console.log(`      🔍 [hasApiAccess] Requested method: ${method.toUpperCase()}`);
+    
+    const hasMethod = exactMatch.methods.includes(method.toUpperCase());
+    
+    if (hasMethod) {
+      console.log(`      ✅✅ [hasApiAccess] GRANTED (exact match): ${method} ${endpoint}`);
+      return true;
+    } else {
+      console.log(`      ❌ [hasApiAccess] Method not allowed in exact match: ${method} (available: [${exactMatch.methods.join(", ")}])`);
+      // ادامه به pattern matching برای احتمال وجود pattern دیگری
+    }
+  }
+
+  // ✅ مرحله 2: اگر exact match نبود یا method نداشت، pattern matching را چک کن
   const permission = this.apiPermissions.find((p) => {
+    // Skip exact match که قبلاً چک شد
+    if (p.path === endpoint) {
+      return false;
+    }
+    
     // Support برای dynamic routes مثل /api/users/:id و wildcard مثل /api/uploads/*
     let regexPattern = p.path
       .replace(/\*/g, ".*")         // * را به .* تبدیل کن (wildcard - هر چیزی)
@@ -183,10 +208,10 @@ RoleSchema.methods.hasApiAccess = function (endpoint, method) {
     const regex = new RegExp(`^${regexPattern}$`);
     const isMatch = regex.test(endpoint);
     
-    console.log(`      🔍 [hasApiAccess] Testing: ${p.path} (regex: ^${regexPattern}$) against ${endpoint} = ${isMatch ? '✅ MATCH' : '❌ NO MATCH'}`);
+    console.log(`      🔍 [hasApiAccess] Testing pattern: ${p.path} (regex: ^${regexPattern}$) against ${endpoint} = ${isMatch ? '✅ MATCH' : '❌ NO MATCH'}`);
     
     if (isMatch) {
-      console.log(`      ✅ [hasApiAccess] Path matched: ${p.path} -> ${endpoint}`);
+      console.log(`      ✅ [hasApiAccess] Pattern matched: ${p.path} -> ${endpoint}`);
       console.log(`      🔍 [hasApiAccess] Available methods: [${p.methods.join(", ")}]`);
       console.log(`      🔍 [hasApiAccess] Requested method: ${method.toUpperCase()}`);
     }
@@ -202,7 +227,7 @@ RoleSchema.methods.hasApiAccess = function (endpoint, method) {
   const hasMethod = permission.methods.includes(method.toUpperCase());
   
   if (hasMethod) {
-    console.log(`      ✅✅ [hasApiAccess] GRANTED: ${method} ${endpoint}`);
+    console.log(`      ✅✅ [hasApiAccess] GRANTED (pattern match): ${method} ${endpoint}`);
   } else {
     console.log(`      ❌ [hasApiAccess] Method not allowed: ${method} (available: [${permission.methods.join(", ")}])`);
   }

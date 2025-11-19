@@ -1,0 +1,46 @@
+/* Global styles for react-multi-date-picker */
+
+.rmdp-container {
+  direction: rtl !important;
+}
+
+.rmdp-calendar {
+  direction: rtl !important;
+}
+
+.rmdp-header {
+  direction: rtl !important;
+}
+
+/* Yellow theme customization */
+.yellow .rmdp-day.rmdp-selected span:not(.highlight) {
+  background-color: #f4a325 !important;
+  box-shadow: 0 0 3px #f4a325 !important;
+}
+
+.yellow .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+  background-color: rgba(244, 163, 37, 0.4) !important;
+}
+
+.rmdp-wrapper {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.rmdp-calendar {
+  font-family: inherit;
+}
+
+/* RTL support */
+.rmdp-arrow-container.rmdp-right {
+  right: auto !important;
+  left: 5px !important;
+}
+
+.rmdp-arrow-container.rmdp-left {
+  left: auto !important;
+  right: 5px !important;
+}
+
+
+

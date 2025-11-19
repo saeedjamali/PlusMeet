@@ -1,0 +1,210 @@
+/* حالت تاریک - مدیریت نظرات */
+
+[data-theme="dark"] .header h1 {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .header p {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .loading {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .spinner {
+  border-color: #334155;
+  border-top-color: #60a5fa;
+}
+
+[data-theme="dark"] .emptyState {
+  background: #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .emptyState h3 {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .emptyState p {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .emptyNote {
+  background: #0f172a !important;
+  color: #64748b !important;
+  border: 1px solid #334155;
+}
+
+[data-theme="dark"] .emptyNote strong {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .eventSelector {
+  background: #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .infoNote {
+  background: #0c4a6e;
+  border-color: #075985;
+  color: #7dd3fc;
+}
+
+[data-theme="dark"] .filterNote {
+  background: #422006;
+  border-color: #f59e0b;
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .actionTitle,
+[data-theme="dark"] .replyActions .actionTitle {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .replyActions {
+  border-top-color: #334155;
+}
+
+[data-theme="dark"] .currentStatus {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .changeStatusBtn {
+  background: #334155;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .changeStatusBtn:hover {
+  background: #475569;
+  border-color: #64748b;
+}
+
+[data-theme="dark"] .eventSelector label {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .select {
+  background: #0f172a;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .select:focus {
+  border-color: #60a5fa;
+}
+
+[data-theme="dark"] .filterBtn {
+  background: #0f172a;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .filterBtn:hover {
+  border-color: #60a5fa;
+  color: #60a5fa;
+  background: #1e293b;
+}
+
+[data-theme="dark"] .filterBtn.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .emptyReviews {
+  background: #1e293b;
+  color: #64748b;
+}
+
+[data-theme="dark"] .reviewCard {
+  background: #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .reviewCard:hover {
+  border-color: #334155;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .userName {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .reviewDate {
+  color: #64748b;
+}
+
+[data-theme="dark"] .comment {
+  background: #0f172a;
+}
+
+[data-theme="dark"] .comment p {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .detailedRatings {
+  background: #0f172a;
+}
+
+[data-theme="dark"] .detailedRatings h4 {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .detailItem {
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .ownerResponse {
+  background: #1e3a5f;
+  border-left-color: #3b82f6;
+}
+
+[data-theme="dark"] .responseHeader {
+  color: #60a5fa;
+}
+
+[data-theme="dark"] .responseDate {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .ownerResponse p {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .actions {
+  border-top-color: #334155;
+}
+
+[data-theme="dark"] .replyInput {
+  background: #0f172a;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .replyInput:focus {
+  border-color: #60a5fa;
+}
+
+[data-theme="dark"] .editReplyBtn {
+  background: #0f172a;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .editReplyBtn:hover {
+  border-color: #60a5fa;
+  color: #60a5fa;
+}
+
+[data-theme="dark"] .backBtn button {
+  background: #0f172a;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .backBtn button:hover {
+  background: #1e293b;
+}
+

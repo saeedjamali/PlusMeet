@@ -1,0 +1,73 @@
+/* Dark Mode Styles for Invite Join Page */
+
+[data-theme="dark"] .inviteCard {
+  background: #1e2a35;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .loadingWrapper,
+[data-theme="dark"] .errorWrapper {
+  background: #1e2a35;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .errorWrapper h2 {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .errorWrapper p {
+  color: #b0b0b0;
+}
+
+[data-theme="dark"] .eventTitle {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .eventDescription {
+  color: #b0b0b0;
+}
+
+[data-theme="dark"] .detailItem {
+  background: #2c3e50;
+}
+
+[data-theme="dark"] .detailItem:hover {
+  background: #34495e;
+}
+
+[data-theme="dark"] .detailItem strong {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .detailItem p {
+  color: #b0b0b0;
+}
+
+[data-theme="dark"] .actions {
+  border-top-color: #34495e;
+}
+
+[data-theme="dark"] .viewButton {
+  color: #667eea;
+  border-color: #667eea;
+}
+
+[data-theme="dark"] .viewButton:hover {
+  background: #667eea;
+  color: white;
+}
+
+[data-theme="dark"] .footerNote {
+  background: #2c3e50;
+  border-top-color: #34495e;
+}
+
+[data-theme="dark"] .footerNote p {
+  color: #f39c12;
+}
+
+[data-theme="dark"] .themeToggle {
+  background: rgba(30, 42, 53, 0.9);
+  color: #e0e0e0;
+}
+

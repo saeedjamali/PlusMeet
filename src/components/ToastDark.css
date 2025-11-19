@@ -1,0 +1,67 @@
+/* Dark mode styles for Toast */
+.dark-mode .toast,
+[data-theme='dark'] .toast {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .toast .message,
+[data-theme='dark'] .toast .message {
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .toast .closeBtn,
+[data-theme='dark'] .toast .closeBtn {
+  color: #94a3b8 !important;
+}
+
+.dark-mode .toast .closeBtn:hover,
+[data-theme='dark'] .toast .closeBtn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .toast.success,
+[data-theme='dark'] .toast.success {
+  background: #064e3b !important;
+  border-color: #10b981 !important;
+}
+
+.dark-mode .toast.success .message,
+[data-theme='dark'] .toast.success .message {
+  color: #86efac !important;
+}
+
+.dark-mode .toast.error,
+[data-theme='dark'] .toast.error {
+  background: #7f1d1d !important;
+  border-color: #ef4444 !important;
+}
+
+.dark-mode .toast.error .message,
+[data-theme='dark'] .toast.error .message {
+  color: #fca5a5 !important;
+}
+
+.dark-mode .toast.warning,
+[data-theme='dark'] .toast.warning {
+  background: #78350f !important;
+  border-color: #f59e0b !important;
+}
+
+.dark-mode .toast.warning .message,
+[data-theme='dark'] .toast.warning .message {
+  color: #fde68a !important;
+}
+
+.dark-mode .toast.info,
+[data-theme='dark'] .toast.info {
+  background: #1e3a8a !important;
+  border-color: #3b82f6 !important;
+}
+
+.dark-mode .toast.info .message,
+[data-theme='dark'] .toast.info .message {
+  color: #93c5fd !important;
+}
+

@@ -485,7 +485,9 @@ export default function AdminLayout({ children }) {
       </aside>
 
       {/* Main Content */}
-      <main className={styles.mainContent}>
+      <main className={`${styles.mainContent} ${
+        !sidebarOpen ? styles.mainContentSidebarClosed : ""
+      }`}>
         <div className={styles.contentWrapper}>{children}</div>
       </main>
     </div>

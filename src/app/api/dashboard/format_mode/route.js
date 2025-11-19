@@ -6,17 +6,11 @@ import { protectAPI } from "@/lib/middleware/apiProtection";
 import { logActivity } from "@/lib/models/ActivityLog.model";
 import { checkPermission } from "@/lib/middleware/rbac";
 
-// GET - لیست نوع برگزاری
+// GET - لیست نوع برگزاری (عمومی - بدون نیاز به احراز هویت)
 export async function GET(request) {
   try {
-    // API Protection
-    const protection = await protectAPI(request);
-    if (!protection.success) {
-      return NextResponse.json(
-        { error: protection.error },
-        { status: protection.status }
-      );
-    }
+    // API Protection با isPublic = true (بدون نیاز به authentication)
+    const protection = await protectAPI(request, { isPublic: true });
 
     await dbConnect();
 
@@ -163,3 +157,13 @@ export async function POST(request) {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+

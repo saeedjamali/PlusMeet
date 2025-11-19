@@ -32,11 +32,20 @@ export default function UserLoginPage() {
   // Redirect if already logged in
   useEffect(() => {
     if (isAuthenticated) {
-      // چک کردن نقش کاربر برای redirect مناسب
-      if (user && user.roles && user.roles.includes("admin")) {
-        router.push("/dashboard");
+      // گرفتن redirect URL از query params
+      const searchParams = new URLSearchParams(window.location.search);
+      const redirectUrl = searchParams.get("redirect");
+
+      if (redirectUrl) {
+        // decode کردن و redirect
+        router.push(decodeURIComponent(redirectUrl));
       } else {
-        router.push("/dashboard");
+        // چک کردن نقش کاربر برای redirect مناسب
+        if (user && user.roles && user.roles.includes("admin")) {
+          router.push("/dashboard");
+        } else {
+          router.push("/dashboard");
+        }
       }
     }
   }, [isAuthenticated, user, router]);
@@ -102,9 +111,19 @@ export default function UserLoginPage() {
         console.log("👤 User data:", userData);
         console.log("🎭 User roles:", userData.roles);
 
-        // Redirect to dashboard
-        console.log("🎯 Redirecting to dashboard");
-        router.push("/dashboard");
+        // گرفتن redirect URL از query params
+        const searchParams = new URLSearchParams(window.location.search);
+        const redirectUrl = searchParams.get("redirect");
+
+        if (redirectUrl) {
+          // decode کردن و redirect
+          console.log("🎯 Redirecting to:", decodeURIComponent(redirectUrl));
+          router.push(decodeURIComponent(redirectUrl));
+        } else {
+          // Redirect to dashboard
+          console.log("🎯 Redirecting to dashboard");
+          router.push("/dashboard");
+        }
       } else {
         // خطا رخ داده، auto-submit رو مسدود کن
         setAutoSubmitBlocked(true);
@@ -129,9 +148,18 @@ export default function UserLoginPage() {
       const result = await loginWithPassword(phoneNumber, password);
 
       if (result.success) {
-        // چک کردن نقش کاربر برای redirect مناسب
-        // Redirect to dashboard
-        router.push("/dashboard");
+        // گرفتن redirect URL از query params
+        const searchParams = new URLSearchParams(window.location.search);
+        const redirectUrl = searchParams.get("redirect");
+
+        if (redirectUrl) {
+          // decode کردن و redirect
+          router.push(decodeURIComponent(redirectUrl));
+        } else {
+          // چک کردن نقش کاربر برای redirect مناسب
+          // Redirect to dashboard
+          router.push("/dashboard");
+        }
       } else {
         setError(result.error);
       }
@@ -497,3 +525,13 @@ export default function UserLoginPage() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+

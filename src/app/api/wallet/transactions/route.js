@@ -1,134 +1,190 @@
-import { NextResponse } from 'next/server';
-import dbConnect from '@/lib/db/mongodb';
-import Transaction from '@/lib/models/Transaction.model';
-import Wallet from '@/lib/models/Wallet.model';
-import { authenticate } from '@/lib/middleware/auth';
-import { protectAPI } from '@/lib/middleware/apiProtection';
+import { NextResponse } from "next/server";
+import dbConnect from "@/lib/db/mongodb";
+import { protectAPI } from "@/lib/middleware/apiProtection";
+import Wallet from "@/lib/models/Wallet.model";
+import Event from "@/lib/models/Event.model";
+import { logActivity } from "@/lib/models/ActivityLog.model";
 
 /**
  * GET /api/wallet/transactions
  * دریافت لیست تراکنش‌های کاربر
+ * 
+ * Query params:
+ * - type: all | income | expense (پیش‌فرض: all)
+ * - eventId: فیلتر بر اساس رویداد خاص
+ * - limit: تعداد تراکنش (پیش‌فرض: 50)
+ * - offset: شروع از کجا (پیش‌فرض: 0)
  */
 export async function GET(request) {
   try {
-    // API Protection
+    await dbConnect();
+
+    // احراز هویت الزامی
     const protection = await protectAPI(request);
     if (!protection.success) {
       return NextResponse.json(
-        { error: protection.error },
-        { status: protection.status }
-      );
-    }
-
-    await dbConnect();
-
-    // احراز هویت
-    const authResult = await authenticate(request, { requireCSRF: false });
-    if (!authResult.success) {
-      return NextResponse.json(
-        { error: authResult.error || 'لطفا وارد شوید' },
+        { 
+          error: "لطفاً وارد سیستم شوید",
+          requiresAuth: true
+        },
         { status: 401 }
       );
     }
 
-    const userId = authResult.user.id;
+    const userId = protection.user.id;
     const { searchParams } = new URL(request.url);
+    
+    const type = searchParams.get("type") || "all"; // all | income | expense
+    const eventId = searchParams.get("eventId");
+    const limit = parseInt(searchParams.get("limit")) || 50;
+    const offset = parseInt(searchParams.get("offset")) || 0;
 
-    // پارامترهای فیلتر و صفحه‌بندی
-    const page = parseInt(searchParams.get('page')) || 1;
-    const limit = parseInt(searchParams.get('limit')) || 20;
-    const type = searchParams.get('type'); // deposit, withdraw, payment, etc.
-    const status = searchParams.get('status'); // pending, completed, failed
-    const direction = searchParams.get('direction'); // in, out
-    const dateFrom = searchParams.get('dateFrom'); // YYYY-MM-DD
-    const dateTo = searchParams.get('dateTo'); // YYYY-MM-DD
+    // دریافت کیف پول کاربر
+    const wallet = await Wallet.findOne({ userId });
 
-    // ساخت query
-    const query = { userId };
-
-    if (type) {
-      query.type = type;
+    if (!wallet) {
+      return NextResponse.json(
+        { 
+          error: "کیف پول یافت نشد",
+          transactions: [],
+          summary: {
+            balance: 0,
+            availableBalance: 0,
+            frozenBalance: 0,
+            reservedBalance: 0,
+          },
+          counts: {
+            total: 0,
+            income: 0,
+            expense: 0,
+          }
+        },
+        { status: 404 }
+      );
     }
 
-    if (status) {
-      query.status = status;
+    // فیلتر کردن تراکنش‌ها
+    let transactions = [...wallet.transactions];
+
+    // فیلتر بر اساس نوع
+    if (type === "income") {
+      transactions = transactions.filter(t => 
+        ["payment", "refund", "event_ticket_income", "event_refund", "unfreeze"].includes(t.type)
+      );
+    } else if (type === "expense") {
+      transactions = transactions.filter(t => 
+        ["deduction", "event_ticket_purchase", "event_ticket_approved", "event_ticket_reserve", "freeze"].includes(t.type)
+      );
     }
 
-    if (direction) {
-      query.direction = direction;
+    // فیلتر بر اساس رویداد
+    if (eventId) {
+      transactions = transactions.filter(t => 
+        t.relatedTo && 
+        t.relatedTo.model === "Event" && 
+        t.relatedTo.id && 
+        t.relatedTo.id.toString() === eventId
+      );
     }
 
-    if (dateFrom || dateTo) {
-      query.createdAt = {};
-      if (dateFrom) {
-        query.createdAt.$gte = new Date(dateFrom);
-      }
-      if (dateTo) {
-        query.createdAt.$lte = new Date(dateTo + 'T23:59:59.999Z');
-      }
-    }
+    // مرتب‌سازی بر اساس تاریخ (جدیدترین اول)
+    transactions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    // دریافت تراکنش‌ها با pagination
-    const skip = (page - 1) * limit;
-    const transactions = await Transaction.find(query)
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit)
+    // محاسبه آمار
+    const totalCount = transactions.length;
+    const incomeTransactions = transactions.filter(t => 
+      ["payment", "refund", "event_ticket_income", "event_refund", "unfreeze"].includes(t.type)
+    );
+    const expenseTransactions = transactions.filter(t => 
+      ["deduction", "event_ticket_purchase", "event_ticket_approved", "event_ticket_reserve", "freeze"].includes(t.type)
+    );
+
+    // پیجینیشن
+    const paginatedTransactions = transactions.slice(offset, offset + limit);
+
+    // دریافت اطلاعات رویدادها
+    const eventIds = [...new Set(
+      paginatedTransactions
+        .filter(t => t.relatedTo && t.relatedTo.model === "Event" && t.relatedTo.id)
+        .map(t => t.relatedTo.id.toString())
+    )];
+
+    const events = await Event.find({ _id: { $in: eventIds } })
+      .select("title slug status")
       .lean();
 
-    // شمارش کل
-    const total = await Transaction.countDocuments(query);
+    const eventsMap = {};
+    events.forEach(e => {
+      eventsMap[e._id.toString()] = e;
+    });
 
-    // آمار
-    const stats = await Transaction.aggregate([
-      { $match: query },
-      {
-        $group: {
-          _id: '$direction',
-          total: { $sum: '$amount' },
-          count: { $sum: 1 },
-        },
-      },
-    ]);
+    // آماده‌سازی تراکنش‌ها برای ارسال
+    const enrichedTransactions = paginatedTransactions.map(t => {
+      const transaction = {
+        _id: t._id,
+        type: t.type,
+        amount: t.amount,
+        description: t.description,
+        balanceBefore: t.balanceBefore,
+        balanceAfter: t.balanceAfter,
+        createdAt: t.createdAt,
+      };
 
-    const statsFormatted = {
-      totalIn: 0,
-      totalOut: 0,
-      countIn: 0,
-      countOut: 0,
-    };
-
-    stats.forEach((stat) => {
-      if (stat._id === 'in') {
-        statsFormatted.totalIn = stat.total;
-        statsFormatted.countIn = stat.count;
-      } else if (stat._id === 'out') {
-        statsFormatted.totalOut = stat.total;
-        statsFormatted.countOut = stat.count;
+      // اگر مربوط به رویداد باشد
+      if (t.relatedTo && t.relatedTo.model === "Event" && t.relatedTo.id) {
+        const eventId = t.relatedTo.id.toString();
+        transaction.event = eventsMap[eventId] || null;
       }
+
+      return transaction;
+    });
+
+    // لاگ فعالیت
+    await logActivity(userId, "wallet.view_transactions", {
+      targetType: "Wallet",
+      targetId: wallet._id,
+      details: {
+        type,
+        eventId,
+        limit,
+        offset,
+        resultCount: paginatedTransactions.length,
+      },
+      ipAddress:
+        request.headers.get("x-forwarded-for") ||
+        request.headers.get("x-real-ip") ||
+        "unknown",
+      userAgent: request.headers.get("user-agent") || "unknown",
     });
 
     return NextResponse.json({
       success: true,
-      data: transactions,
+      transactions: enrichedTransactions,
+      summary: {
+        balance: wallet.balance,
+        availableBalance: wallet.availableBalance,
+        frozenBalance: wallet.frozenBalance,
+        reservedBalance: wallet.reservedBalance,
+        currency: wallet.currency,
+      },
+      counts: {
+        total: totalCount,
+        income: incomeTransactions.length,
+        expense: expenseTransactions.length,
+      },
       pagination: {
-        page,
         limit,
-        total,
-        pages: Math.ceil(total / limit),
+        offset,
+        hasMore: offset + limit < totalCount,
+        total: totalCount,
       },
-      stats: statsFormatted,
     });
+
   } catch (error) {
-    console.error('❌ Error fetching transactions:', error);
+    console.error("❌ Error fetching transactions:", error);
     return NextResponse.json(
-      {
-        success: false,
-        error: 'خطا در دریافت تراکنش‌ها',
-        details: error.message,
-      },
+      { error: "خطا در دریافت تراکنش‌ها", details: error.message },
       { status: 500 }
     );
   }
 }
-

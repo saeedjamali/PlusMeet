@@ -46,7 +46,7 @@
 }
 
 [data-theme="dark"] .header {
-    background: #1f1f1f;
+    background: linear-gradient(135deg, rgba(30, 64, 73, 0.95), rgba(30, 64, 73, 0.85));
 }
 
 .headerLeft h1 {
@@ -138,7 +138,7 @@
 }
 
 [data-theme="dark"] .avatarCard {
-    background: #1f1f1f;
+    background: rgba(30, 64, 73, 0.9);
 }
 
 .avatarWrapper {
@@ -215,7 +215,7 @@
 }
 
 [data-theme="dark"] .infoCard {
-    background: #1f1f1f;
+    background: rgba(30, 64, 73, 0.9);
 }
 
 .infoItem {
@@ -380,7 +380,7 @@
 }
 
 [data-theme="dark"] .card {
-    background: #1f1f1f;
+    background: rgba(30, 64, 73, 0.9);
 }
 
 .cardHeader {
@@ -466,7 +466,8 @@
 }
 
 .input,
-.textarea {
+.textarea,
+.select {
     width: 100%;
     padding: 0.875rem 1rem;
     border: 2px solid var(--color-border);
@@ -479,19 +480,22 @@
 }
 
 [data-theme="dark"] .input,
-[data-theme="dark"] .textarea {
+[data-theme="dark"] .textarea,
+[data-theme="dark"] .select {
     background: #2a2a2a;
 }
 
 .input:focus,
-.textarea:focus {
+.textarea:focus,
+.select:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(244, 163, 37, 0.1);
 }
 
 .input:disabled,
-.textarea:disabled {
+.textarea:disabled,
+.select:disabled {
     background: var(--color-bg-secondary);
     cursor: not-allowed;
     opacity: 0.7;
@@ -500,6 +504,41 @@
 .textarea {
     resize: vertical;
     min-height: 100px;
+}
+
+/* Location Section */
+.locationSection {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+    border-radius: 12px;
+    border: 2px solid #93c5fd;
+}
+
+[data-theme="dark"] .locationSection {
+    background: linear-gradient(135deg, rgba(30, 64, 73, 0.3) 0%, rgba(59, 130, 246, 0.1) 100%);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.locationSection h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: #1e40af;
+}
+
+[data-theme="dark"] .locationSection h3 {
+    color: #60a5fa;
+}
+
+.locationHint {
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    color: #1e40af;
+    line-height: 1.6;
+}
+
+[data-theme="dark"] .locationHint {
+    color: #93c5fd;
 }
 
 /* User Type Buttons */
@@ -685,5 +724,17 @@
         height: 140px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 

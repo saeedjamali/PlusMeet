@@ -235,6 +235,12 @@ const UserSchema = new Schema(
     city: String,
     personalAddress: String,
 
+    // موقعیت پیش‌فرض برای جستجوی رویدادها
+    location: {
+      state: String, // استان
+      city: String,  // شهر
+    },
+
     // ========================================
     // اطلاعات سازمانی
     // ========================================

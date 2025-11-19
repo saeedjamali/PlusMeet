@@ -1,0 +1,618 @@
+/* صفحه مدیریت نظرات */
+.commentPage {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* هدر */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.header p {
+  color: #64748b;
+  font-size: 1rem;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.emptyState h3 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.emptyState p {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.emptyNote {
+  font-size: 0.875rem !important;
+  color: #94a3b8 !important;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  line-height: 1.6;
+  margin-bottom: 2rem !important;
+}
+
+.emptyNote strong {
+  color: #475569;
+  font-weight: 600;
+}
+
+.emptyState button {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.emptyState button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(102, 126, 234, 0.4);
+}
+
+/* انتخاب رویداد */
+.eventSelector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.eventSelector label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.select {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* فیلترها */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterBtn:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.filterBtn.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+
+/* لیست نظرات */
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.emptyReviews {
+  text-align: center;
+  padding: 3rem;
+  background: #ffffff;
+  border-radius: 12px;
+  color: #94a3b8;
+}
+
+/* کارت نظر */
+.reviewCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.reviewCard:hover {
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.userName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.reviewDate {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.badge {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.badge[data-status="orange"] {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge[data-status="green"] {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge[data-status="red"] {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* امتیاز */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.stars {
+  display: flex;
+  gap: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.stars span.filled {
+  color: #fbbf24;
+}
+
+.ratingText {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* نظر */
+.comment {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.comment p {
+  margin: 0;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* امتیازات جزئی */
+.detailedRatings {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.detailedRatings h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.detailItem {
+  font-size: 0.875rem;
+  color: #475569;
+  padding: 0.5rem;
+  background: #ffffff;
+  border-radius: 6px;
+}
+
+/* پاسخ مالک */
+.ownerResponse {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+}
+
+.responseHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e40af;
+}
+
+.responseIcon {
+  font-size: 1rem;
+}
+
+.responseDate {
+  margin-right: auto;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.ownerResponse p {
+  margin: 0;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* اقدامات */
+.infoNote {
+  padding: 0.75rem 1rem;
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  border-radius: 8px;
+  color: #0369a1;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-top: 0.75rem;
+}
+
+.filterNote {
+  padding: 0.75rem 1rem;
+  background: #fef3c7;
+  border: 1px solid #fbbf24;
+  border-radius: 8px;
+  color: #92400e;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.reviewActions,
+.replyActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.replyActions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.actionTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+  margin: 0;
+}
+
+.replyActions .actionTitle {
+  font-size: 0.8125rem;
+}
+
+.currentStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.changeStatusBtn {
+  padding: 0.5rem 1rem;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.changeStatusBtn:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+.statusActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.approveBtn,
+.rejectBtn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.approveBtn {
+  background: #22c55e;
+  color: #ffffff;
+}
+
+.approveBtn:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+}
+
+.rejectBtn {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.rejectBtn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* فرم پاسخ */
+.replyForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.replyInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.replyInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.replyBtn {
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  background: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.replyBtn:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.replyBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.editReplyBtn {
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  background: #f1f5f9;
+  color: #475569;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.editReplyBtn:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+/* دکمه بازگشت */
+.backBtn {
+  text-align: center;
+}
+
+.backBtn button {
+  padding: 0.75rem 2rem;
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backBtn button:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .commentPage {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .eventSelector {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .select {
+    width: 100%;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .filterBtn {
+    width: 100%;
+  }
+
+  .reviewCard {
+    padding: 1rem;
+  }
+
+  .reviewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .statusActions {
+    flex-direction: column;
+  }
+
+  .detailsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+

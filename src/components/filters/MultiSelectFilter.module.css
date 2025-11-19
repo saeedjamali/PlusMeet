@@ -1,0 +1,252 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0D4C57;
+  margin-bottom: 0.5rem;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.selectButton {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 2px solid #E8DCC5;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  color: #18333C;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: right;
+}
+
+.selectButton:hover {
+  border-color: #F4A325;
+}
+
+.selectButton:focus {
+  outline: none;
+  border-color: #F4A325;
+  box-shadow: 0 0 0 3px rgba(244, 163, 37, 0.1);
+}
+
+.selectText {
+  flex: 1;
+  text-align: right;
+}
+
+.arrow {
+  font-size: 0.75rem;
+  color: #A39B8F;
+  transition: transform 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid #E8DCC5;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  max-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #E8DCC5;
+  background: #F5E6C8;
+}
+
+.dropdownTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0D4C57;
+}
+
+.clearButton {
+  font-size: 0.8125rem;
+  color: #C44536;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+}
+
+.clearButton:hover {
+  background: rgba(196, 69, 54, 0.1);
+}
+
+.optionsList {
+  overflow-y: auto;
+  max-height: 240px;
+  padding: 0.5rem;
+}
+
+.optionsList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.optionsList::-webkit-scrollbar-track {
+  background: #F5E6C8;
+  border-radius: 8px;
+}
+
+.optionsList::-webkit-scrollbar-thumb {
+  background: #F4A325;
+  border-radius: 8px;
+}
+
+.optionsList::-webkit-scrollbar-thumb:hover {
+  background: #E2981E;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.option:hover {
+  background: #F5E6C8;
+}
+
+.optionSelected {
+  background: rgba(244, 163, 37, 0.1);
+}
+
+.optionSelected:hover {
+  background: rgba(244, 163, 37, 0.15);
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #E8DCC5;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: white;
+  background: white;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.option:hover .checkmark {
+  border-color: #F4A325;
+}
+
+.optionSelected .checkmark {
+  background: #F4A325;
+  border-color: #F4A325;
+}
+
+.optionLabel {
+  flex: 1;
+  font-size: 0.9375rem;
+  color: #18333C;
+}
+
+.emptyMessage {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #A39B8F;
+  font-size: 0.875rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: transparent;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .label {
+  color: #F5E6C8;
+}
+
+[data-theme="dark"] .selectButton {
+  background: #1E4049;
+  border-color: rgba(244, 163, 37, 0.3);
+  color: #F5E6C8;
+}
+
+[data-theme="dark"] .selectButton:hover {
+  border-color: #F4A325;
+}
+
+[data-theme="dark"] .dropdown {
+  background: #1E4049;
+  border-color: rgba(244, 163, 37, 0.3);
+}
+
+[data-theme="dark"] .dropdownHeader {
+  background: rgba(30, 64, 73, 0.8);
+  border-bottom-color: rgba(244, 163, 37, 0.2);
+}
+
+[data-theme="dark"] .dropdownTitle {
+  color: #F5E6C8;
+}
+
+[data-theme="dark"] .option:hover {
+  background: rgba(244, 163, 37, 0.1);
+}
+
+[data-theme="dark"] .optionLabel {
+  color: #F5E6C8;
+}
+
+[data-theme="dark"] .checkmark {
+  background: #1E4049;
+  border-color: rgba(244, 163, 37, 0.3);
+}
+
+[data-theme="dark"] .option:hover .checkmark {
+  border-color: #F4A325;
+}
+
+[data-theme="dark"] .emptyMessage {
+  color: rgba(245, 230, 200, 0.6);
+}
+

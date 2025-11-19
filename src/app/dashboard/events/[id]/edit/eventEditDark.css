@@ -1,0 +1,252 @@
+/* ═══════════════════════════════════════════════════════════
+ * Event Edit Dark Mode Styles
+ * ══════════════════════════════════════════════════════════════ */
+
+/* Container & Background */
+.dark-mode .eventEditPage [class*="container"],
+[data-theme='dark'] .eventEditPage [class*="container"] {
+  background: transparent !important;
+}
+
+/* Header */
+.dark-mode .eventEditPage [class*="header"],
+[data-theme='dark'] .eventEditPage [class*="header"] {
+  border-bottom: 2px solid rgba(100, 116, 139, 0.3) !important;
+  padding-bottom: 1.5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.dark-mode .eventEditPage [class*="title"],
+[data-theme='dark'] .eventEditPage [class*="title"] {
+  color: #f8fafc !important;
+  font-weight: 700 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark-mode .eventEditPage [class*="subtitle"],
+[data-theme='dark'] .eventEditPage [class*="subtitle"] {
+  color: #cbd5e1 !important;
+}
+
+.dark-mode .eventEditPage [class*="backBtn"],
+[data-theme='dark'] .eventEditPage [class*="backBtn"] {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%) !important;
+  border: 2px solid #64748b !important;
+  color: #f8fafc !important;
+  transition: all 0.3s ease !important;
+}
+
+.dark-mode .eventEditPage [class*="backBtn"]:hover,
+[data-theme='dark'] .eventEditPage [class*="backBtn"]:hover {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+  border-color: #fbbf24 !important;
+  transform: translateX(-4px) !important;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2) !important;
+}
+
+/* Progress Steps */
+.dark-mode .eventEditPage [class*="progressSteps"],
+[data-theme='dark'] .eventEditPage [class*="progressSteps"] {
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%) !important;
+  border: 2px solid #475569 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .eventEditPage [class*="step"],
+[data-theme='dark'] .eventEditPage [class*="step"] {
+  transition: all 0.3s ease !important;
+}
+
+.dark-mode .eventEditPage [class*="step"]:hover,
+[data-theme='dark'] .eventEditPage [class*="step"]:hover {
+  background: rgba(71, 85, 105, 0.3) !important;
+}
+
+.dark-mode .eventEditPage [class*="stepNumber"],
+[data-theme='dark'] .eventEditPage [class*="stepNumber"] {
+  background: rgba(71, 85, 105, 0.5) !important;
+  color: #cbd5e1 !important;
+  border-color: #64748b !important;
+}
+
+.dark-mode .eventEditPage [class*="stepLabel"],
+[data-theme='dark'] .eventEditPage [class*="stepLabel"] {
+  color: #cbd5e1 !important;
+}
+
+.dark-mode .eventEditPage [class*="stepActive"] [class*="stepNumber"],
+[data-theme='dark'] .eventEditPage [class*="stepActive"] [class*="stepNumber"] {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+  color: #1e293b !important;
+  border-color: #fbbf24 !important;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4) !important;
+}
+
+.dark-mode .eventEditPage [class*="stepActive"] [class*="stepLabel"],
+[data-theme='dark'] .eventEditPage [class*="stepActive"] [class*="stepLabel"] {
+  color: #fbbf24 !important;
+}
+
+.dark-mode .eventEditPage [class*="stepCompleted"] [class*="stepNumber"],
+[data-theme='dark'] .eventEditPage [class*="stepCompleted"] [class*="stepNumber"] {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border-color: #10b981 !important;
+}
+
+.dark-mode .eventEditPage [class*="stepCompleted"] [class*="stepLabel"],
+[data-theme='dark'] .eventEditPage [class*="stepCompleted"] [class*="stepLabel"] {
+  color: #10b981 !important;
+}
+
+/* Form Content */
+.dark-mode .eventEditPage [class*="formContent"],
+[data-theme='dark'] .eventEditPage [class*="formContent"] {
+  background: linear-gradient(145deg, #334155 0%, #1e293b 100%) !important;
+  border: 2px solid #475569 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-mode .eventEditPage [class*="stepTitle"],
+[data-theme='dark'] .eventEditPage [class*="stepTitle"] {
+  color: #f8fafc !important;
+  border-bottom-color: rgba(100, 116, 139, 0.4) !important;
+}
+
+/* Form Groups */
+.dark-mode .eventEditPage [class*="label"],
+[data-theme='dark'] .eventEditPage [class*="label"] {
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .eventEditPage [class*="helperText"],
+[data-theme='dark'] .eventEditPage [class*="helperText"] {
+  color: #cbd5e1 !important;
+}
+
+.dark-mode .eventEditPage [class*="input"],
+.dark-mode .eventEditPage [class*="textarea"],
+[data-theme='dark'] .eventEditPage [class*="input"],
+[data-theme='dark'] .eventEditPage [class*="textarea"] {
+  background: rgba(71, 85, 105, 0.3) !important;
+  border: 2px solid #64748b !important;
+  color: #f8fafc !important;
+}
+
+.dark-mode .eventEditPage [class*="input"]:focus,
+.dark-mode .eventEditPage [class*="textarea"]:focus,
+[data-theme='dark'] .eventEditPage [class*="input"]:focus,
+[data-theme='dark'] .eventEditPage [class*="textarea"]:focus {
+  border-color: #fbbf24 !important;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2) !important;
+}
+
+.dark-mode .eventEditPage [class*="input"]::placeholder,
+.dark-mode .eventEditPage [class*="textarea"]::placeholder,
+[data-theme='dark'] .eventEditPage [class*="input"]::placeholder,
+[data-theme='dark'] .eventEditPage [class*="textarea"]::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Navigation */
+.dark-mode .eventEditPage [class*="navigation"],
+[data-theme='dark'] .eventEditPage [class*="navigation"] {
+  border-top-color: rgba(100, 116, 139, 0.4) !important;
+}
+
+.dark-mode .eventEditPage [class*="prevBtn"],
+[data-theme='dark'] .eventEditPage [class*="prevBtn"] {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%) !important;
+  border: 2px solid #64748b !important;
+  color: #f8fafc !important;
+}
+
+.dark-mode .eventEditPage [class*="prevBtn"]:hover,
+[data-theme='dark'] .eventEditPage [class*="prevBtn"]:hover {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+  border-color: #fbbf24 !important;
+  color: #fbbf24 !important;
+}
+
+.dark-mode .eventEditPage [class*="nextBtn"],
+[data-theme='dark'] .eventEditPage [class*="nextBtn"] {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+  color: #1e293b !important;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4) !important;
+}
+
+.dark-mode .eventEditPage [class*="nextBtn"]:hover:not(:disabled),
+[data-theme='dark'] .eventEditPage [class*="nextBtn"]:hover:not(:disabled) {
+  background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5) !important;
+}
+
+.dark-mode .eventEditPage [class*="nextBtn"]:disabled,
+[data-theme='dark'] .eventEditPage [class*="nextBtn"]:disabled {
+  background: #4b5563 !important;
+  color: #6b7280 !important;
+  box-shadow: none !important;
+}
+
+/* Loading State */
+.dark-mode .eventEditPage [class*="loading"],
+[data-theme='dark'] .eventEditPage [class*="loading"] {
+  color: #f8fafc !important;
+}
+
+.dark-mode .eventEditPage [class*="spinner"],
+[data-theme='dark'] .eventEditPage [class*="spinner"] {
+  border-color: #475569 !important;
+  border-top-color: #fbbf24 !important;
+}
+
+.dark-mode .eventEditPage [class*="loading"] p,
+[data-theme='dark'] .eventEditPage [class*="loading"] p {
+  color: #cbd5e1 !important;
+}
+
+/* Error State */
+.dark-mode .eventEditPage [class*="error"],
+[data-theme='dark'] .eventEditPage [class*="error"] {
+  color: #f8fafc !important;
+}
+
+.dark-mode .eventEditPage [class*="errorIcon"],
+[data-theme='dark'] .eventEditPage [class*="errorIcon"] {
+  filter: drop-shadow(0 4px 12px rgba(239, 68, 68, 0.3)) !important;
+}
+
+.dark-mode .eventEditPage [class*="error"] h3,
+[data-theme='dark'] .eventEditPage [class*="error"] h3 {
+  color: #fbbf24 !important;
+}
+
+.dark-mode .eventEditPage [class*="error"] p,
+[data-theme='dark'] .eventEditPage [class*="error"] p {
+  color: #cbd5e1 !important;
+}
+
+/* Responsive Dark Mode */
+@media (max-width: 768px) {
+  .dark-mode .eventEditPage [class*="container"],
+  [data-theme='dark'] .eventEditPage [class*="container"] {
+    padding: 1rem !important;
+  }
+
+  .dark-mode .eventEditPage [class*="title"],
+  [data-theme='dark'] .eventEditPage [class*="title"] {
+    font-size: 1.5rem !important;
+  }
+
+  .dark-mode .eventEditPage [class*="progressSteps"],
+  [data-theme='dark'] .eventEditPage [class*="progressSteps"] {
+    padding: 1rem !important;
+  }
+
+  .dark-mode .eventEditPage [class*="formContent"],
+  [data-theme='dark'] .eventEditPage [class*="formContent"] {
+    padding: 1.5rem !important;
+  }
+}
+
+

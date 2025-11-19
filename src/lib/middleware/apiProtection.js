@@ -59,6 +59,7 @@ export async function protectAPI(request, options = {}) {
     }
 
     const user = authResult.user;
+  console.log("user--------->", user);
     console.log(
       `✅ User authenticated: ${user.phoneNumber} | Roles: [${user.roles?.join(
         ", "

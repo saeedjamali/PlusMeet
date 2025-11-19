@@ -1,0 +1,502 @@
+/* حالت نمایش فقط امتیازات (برای ستون چپ) */
+.statsOnlySection {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.statsTitle {
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0D4C57;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* در موبایل، اولین استایل را حذف و استایل ساده‌تر بده */
+@media (max-width: 1024px) {
+  .statsOnlySection {
+    margin-top: 0;
+    padding: 1.25rem;
+  }
+
+  .statsTitle {
+    font-size: 1rem;
+  }
+}
+
+/* بخش نظرات */
+.reviewsSection {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+/* استایل موبایل برای نظرات */
+@media (max-width: 1024px) {
+  .reviewsSection {
+    margin-top: 0;
+  }
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading p {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.emptyState p {
+  color: #64748b;
+  font-size: 1rem;
+}
+
+/* آمار نظرات */
+.statsHeader {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.overallRating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-width: 180px;
+}
+
+.ratingNumber {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.totalReviews {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+/* توزیع امتیازات */
+.ratingDistribution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.distRow {
+  display: grid;
+  grid-template-columns: 80px 1fr 50px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.distLabel {
+  font-size: 0.875rem;
+  color: #64748b;
+  text-align: right;
+}
+
+.distBar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.distFill {
+  height: 100%;
+  background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
+  transition: width 0.3s ease;
+}
+
+.distCount {
+  font-size: 0.875rem;
+  color: #64748b;
+  text-align: left;
+}
+
+/* عنوان بخش */
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+}
+
+/* لیست نظرات */
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* کارت نظر */
+.reviewCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.reviewCard:hover {
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* هدر نظر */
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.userName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.reviewDate {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+/* ستاره‌ها */
+.stars {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.stars.large {
+  font-size: 1.75rem;
+}
+
+.stars.medium {
+  font-size: 1.25rem;
+}
+
+.stars.small {
+  font-size: 1rem;
+}
+
+.stars span {
+  color: #cbd5e1;
+}
+
+.stars span.filled {
+  color: #fbbf24;
+}
+
+/* متن نظر */
+.reviewText {
+  margin-bottom: 1rem;
+}
+
+.reviewText p {
+  margin: 0;
+  line-height: 1.6;
+  color: #475569;
+  font-size: 0.9375rem;
+}
+
+/* امتیازات جزئی */
+.detailedRatings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.detailBadge {
+  padding: 0.5rem 0.75rem;
+  background: #f1f5f9;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+/* پاسخ مالک */
+.ownerReply {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+}
+
+.replyHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e40af;
+}
+
+.replyIcon {
+  font-size: 1rem;
+}
+
+.replyDate {
+  margin-right: auto;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.ownerReply p {
+  margin: 0;
+  line-height: 1.6;
+  color: #475569;
+  font-size: 0.9375rem;
+}
+
+/* فرم پاسخ مالک */
+.replyForm {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.replyFormHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.replyInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: all 0.2s;
+}
+
+.replyInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.replyInput:disabled {
+  background: #f1f5f9;
+  cursor: not-allowed;
+}
+
+.replyFormFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.charCount {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.replyBtn {
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.replyBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.replyBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* پاسخ منتظر تایید */
+.pendingReply {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+}
+
+.pendingHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #92400e;
+}
+
+.pendingReply p {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.6;
+  color: #78350f;
+  font-size: 0.9375rem;
+}
+
+.pendingNote {
+  display: block;
+  font-size: 0.75rem;
+  color: #92400e;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reviewsSection {
+    margin-top: 1.5rem;
+  }
+
+  .statsHeader {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .overallRating {
+    min-width: auto;
+  }
+
+  .ratingNumber {
+    font-size: 2.5rem;
+  }
+
+  .distRow {
+    grid-template-columns: 70px 1fr 40px;
+    gap: 0.75rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+
+  .reviewCard {
+    padding: 1rem;
+  }
+
+  .reviewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .detailedRatings {
+    flex-direction: column;
+  }
+
+  .detailBadge {
+    width: 100%;
+  }
+}
+

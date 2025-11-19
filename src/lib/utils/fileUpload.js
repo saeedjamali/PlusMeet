@@ -17,6 +17,8 @@ export async function ensureUploadDirectories() {
     path.join(UPLOADS_DIR, "avatars"),
     path.join(UPLOADS_DIR, "logos"),
     path.join(UPLOADS_DIR, "tickets"),
+    path.join(UPLOADS_DIR, "events"),
+    path.join(UPLOADS_DIR, "reports"),
     path.join(UPLOADS_DIR, "temp"),
   ];
 
@@ -163,5 +165,58 @@ export function validateImageFile(base64String, maxSizeMB = 2) {
   }
 
   return true;
+}
+
+/**
+ * ذخیره فایل از FormData
+ * @param {File} file - فایل از FormData
+ * @param {string} folder - نام پوشه (events, reports, etc)
+ * @param {number} maxSizeMB - حداکثر حجم به مگابایت
+ * @returns {Promise<string>} URL نسبی فایل
+ */
+export async function saveFormDataFile(file, folder = "temp", maxSizeMB = 5) {
+  try {
+    // اعتبارسنجی نوع فایل
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp"];
+    if (!allowedTypes.includes(file.type)) {
+      throw new Error("فرمت فایل مجاز نیست. فقط JPG, PNG, GIF و WebP مجاز است");
+    }
+
+    // اعتبارسنجی حجم
+    const maxSize = maxSizeMB * 1024 * 1024;
+    if (file.size > maxSize) {
+      throw new Error(`حجم فایل نباید بیشتر از ${maxSizeMB} مگابایت باشد`);
+    }
+
+    // تولید نام یکتا
+    const timestamp = Date.now();
+    const randomString = Math.random().toString(36).substring(2, 15);
+    const fileExtension = path.extname(file.name);
+    const fileName = `${folder}_${timestamp}_${randomString}${fileExtension}`;
+    
+    // مسیر ذخیره
+    const folderPath = path.join(UPLOADS_DIR, folder);
+    const filePath = path.join(folderPath, fileName);
+
+    // تضمین وجود پوشه
+    try {
+      await fs.access(folderPath);
+    } catch {
+      await fs.mkdir(folderPath, { recursive: true });
+    }
+
+    // ذخیره فایل
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    await fs.writeFile(filePath, buffer);
+
+    console.log(`✅ File saved: ${folder}/${fileName}`);
+
+    // برگرداندن URL نسبی
+    return `/api/uploads/${folder}/${fileName}`;
+  } catch (error) {
+    console.error("Error saving FormData file:", error);
+    throw error;
+  }
 }
 

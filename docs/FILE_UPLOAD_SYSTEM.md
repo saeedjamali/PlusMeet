@@ -445,3 +445,6 @@ curl http://localhost:3000/api/uploads/avatars/uuid.png \
 - [UUID Package](https://www.npmjs.com/package/uuid)
 - [Image Optimization Best Practices](https://web.dev/fast/#optimize-your-images)
 
+
+
+

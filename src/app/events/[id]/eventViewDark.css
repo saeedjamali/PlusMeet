@@ -1,0 +1,813 @@
+/* ═══════════════════════════════════════════════════════════
+ * Event View Dark Mode Styles
+ * رنگ‌بندی مطابق با صفحه Create
+ * ══════════════════════════════════════════════════════════════ */
+
+/* Container & Background */
+.dark-mode .eventViewPage,
+[data-theme='dark'] .eventViewPage {
+  background: var(--color-bg-default) !important;
+  min-height: 100vh;
+}
+
+.dark-mode .eventViewPage [class*="container"],
+[data-theme='dark'] .eventViewPage [class*="container"] {
+  background: transparent !important;
+}
+
+/* Desktop - بالای 1024px */
+@media (min-width: 1025px) {
+  .dark-mode .eventViewPage [class*="content"],
+  [data-theme='dark'] .eventViewPage [class*="content"] {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dark-mode .eventViewPage [class*="container"],
+  [data-theme='dark'] .eventViewPage [class*="container"] {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .dark-mode .eventViewPage [class*="pageHeader"],
+  [data-theme='dark'] .eventViewPage [class*="pageHeader"] {
+    padding: 1.5rem 1rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dark-mode .eventViewPage [class*="container"],
+  [data-theme='dark'] .eventViewPage [class*="container"] {
+    padding: 1rem 0.75rem !important;
+  }
+  
+  .dark-mode .eventViewPage [class*="pageHeader"],
+  [data-theme='dark'] .eventViewPage [class*="pageHeader"] {
+    padding: 1rem 0.75rem !important;
+  }
+}
+
+/* Page Header */
+.dark-mode .eventViewPage [class*="pageHeader"],
+[data-theme='dark'] .eventViewPage [class*="pageHeader"] {
+  border-bottom: 2px solid var(--color-border) !important;
+  background: var(--color-bg-secondary) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  max-width: 1400px !important;
+  margin: 0 auto 2rem auto !important;
+  padding: 1.5rem !important;
+  box-sizing: border-box !important;
+}
+
+.dark-mode .eventViewPage [class*="eventTitle"],
+[data-theme='dark'] .eventViewPage [class*="eventTitle"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 700 !important;
+}
+
+.dark-mode .eventViewPage [class*="viewCount"],
+[data-theme='dark'] .eventViewPage [class*="viewCount"] {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+}
+
+.dark-mode .eventViewPage [class*="viewIcon"],
+[data-theme='dark'] .eventViewPage [class*="viewIcon"] {
+  color: var(--color-primary) !important;
+}
+
+/* Back to List Button */
+.dark-mode .eventViewPage [class*="backToListBtn"],
+[data-theme='dark'] .eventViewPage [class*="backToListBtn"] {
+  background: linear-gradient(135deg, #f4a325, #e09617) !important;
+  border-color: #f4a325 !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(244, 163, 37, 0.4) !important;
+}
+
+.dark-mode .eventViewPage [class*="backToListBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="backToListBtn"]:hover {
+  background: linear-gradient(135deg, #e09617, #d08510) !important;
+  box-shadow: 0 4px 12px rgba(244, 163, 37, 0.5) !important;
+}
+
+.dark-mode .eventViewPage [class*="inviteBadgeHeader"],
+[data-theme='dark'] .eventViewPage [class*="inviteBadgeHeader"] {
+  background: var(--color-success) !important;
+  color: white !important;
+  border-radius: 20px !important;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.4) !important;
+}
+
+/* Header Action Buttons */
+.dark-mode .eventViewPage [class*="shareBtn"],
+[data-theme='dark'] .eventViewPage [class*="shareBtn"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(226, 152, 30, 0.3) !important;
+  border-radius: 10px !important;
+}
+
+.dark-mode .eventViewPage [class*="shareBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="shareBtn"]:hover {
+  background: var(--color-primary-light) !important;
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+.dark-mode .eventViewPage [class*="bookmarkBtn"],
+[data-theme='dark'] .eventViewPage [class*="bookmarkBtn"] {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 10px !important;
+}
+
+.dark-mode .eventViewPage [class*="bookmarkBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="bookmarkBtn"]:hover {
+  border-color: var(--color-primary) !important;
+  background: var(--color-primary-bg) !important;
+  transform: translateY(-2px);
+}
+
+.dark-mode .eventViewPage [class*="bookmarkBtn"][class*="bookmarked"],
+[data-theme='dark'] .eventViewPage [class*="bookmarkBtn"][class*="bookmarked"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.dark-mode .eventViewPage [class*="reportBtn"],
+[data-theme='dark'] .eventViewPage [class*="reportBtn"] {
+  background: var(--color-error) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3) !important;
+  border-radius: 10px !important;
+}
+
+.dark-mode .eventViewPage [class*="reportBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="reportBtn"]:hover {
+  background: var(--color-error-dark) !important;
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+.dark-mode .eventViewPage [class*="themeToggle"],
+[data-theme='dark'] .eventViewPage [class*="themeToggle"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(226, 152, 30, 0.3) !important;
+  border-radius: 10px !important;
+}
+
+.dark-mode .eventViewPage [class*="themeToggle"]:hover,
+[data-theme='dark'] .eventViewPage [class*="themeToggle"]:hover {
+  background: var(--color-primary-light) !important;
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+/* Content */
+.dark-mode .eventViewPage [class*="content"],
+[data-theme='dark'] .eventViewPage [class*="content"] {
+  background: var(--color-bg-secondary) !important;
+  color: var(--color-text-secondary) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid var(--color-border) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Sections */
+.dark-mode .eventViewPage [class*="section"],
+[data-theme='dark'] .eventViewPage [class*="section"] {
+  border-bottom: 1px solid var(--color-border) !important;
+  padding: 0.5rem 0 !important;
+}
+
+.dark-mode .eventViewPage [class*="sectionTitle"],
+[data-theme='dark'] .eventViewPage [class*="sectionTitle"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid var(--color-border) !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.dark-mode .eventViewPage [class*="description"],
+[data-theme='dark'] .eventViewPage [class*="description"] {
+  color: var(--color-text-secondary) !important;
+  line-height: 1.8 !important;
+}
+
+/* Info Items */
+.dark-mode .eventViewPage [class*="infoItem"],
+[data-theme='dark'] .eventViewPage [class*="infoItem"] {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .eventViewPage [class*="infoItem"]:hover,
+[data-theme='dark'] .eventViewPage [class*="infoItem"]:hover {
+  border-color: var(--color-primary) !important;
+  background: var(--color-primary-bg) !important;
+}
+
+.dark-mode .eventViewPage [class*="infoLabel"],
+[data-theme='dark'] .eventViewPage [class*="infoLabel"] {
+  color: var(--color-text-tertiary) !important;
+  font-weight: 600 !important;
+}
+
+.dark-mode .eventViewPage [class*="infoValue"],
+[data-theme='dark'] .eventViewPage [class*="infoValue"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.dark-mode .eventViewPage [class*="infoIcon"],
+[data-theme='dark'] .eventViewPage [class*="infoIcon"] {
+  color: var(--color-primary) !important;
+  filter: brightness(1.2);
+}
+
+/* Carousel */
+.dark-mode .eventViewPage [class*="carousel"],
+[data-theme='dark'] .eventViewPage [class*="carousel"] {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px !important;
+}
+
+.dark-mode .eventViewPage [class*="carouselBtn"],
+[data-theme='dark'] .eventViewPage [class*="carouselBtn"] {
+  background: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.dark-mode .eventViewPage [class*="carouselBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="carouselBtn"]:hover {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.dark-mode .eventViewPage [class*="carouselIndicator"],
+[data-theme='dark'] .eventViewPage [class*="carouselIndicator"] {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.dark-mode .eventViewPage [class*="carouselIndicator"][class*="active"],
+[data-theme='dark'] .eventViewPage [class*="carouselIndicator"][class*="active"] {
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* Buttons */
+.dark-mode .eventViewPage [class*="joinBtn"],
+.dark-mode .eventViewPage [class*="manageBtn"],
+.dark-mode .eventViewPage [class*="editBtn"],
+[data-theme='dark'] .eventViewPage [class*="joinBtn"],
+[data-theme='dark'] .eventViewPage [class*="manageBtn"],
+[data-theme='dark'] .eventViewPage [class*="editBtn"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(226, 152, 30, 0.3) !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 600 !important;
+}
+
+.dark-mode .eventViewPage [class*="joinBtn"]:hover,
+.dark-mode .eventViewPage [class*="manageBtn"]:hover,
+.dark-mode .eventViewPage [class*="editBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="joinBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="manageBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="editBtn"]:hover {
+  background: var(--color-primary-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.4) !important;
+}
+
+.dark-mode .eventViewPage [class*="messageBtn"],
+[data-theme='dark'] .eventViewPage [class*="messageBtn"] {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 10px !important;
+}
+
+.dark-mode .eventViewPage [class*="messageBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="messageBtn"]:hover {
+  border-color: var(--color-primary) !important;
+  background: var(--color-primary-bg) !important;
+}
+
+/* Invite Link */
+.dark-mode .eventViewPage [class*="inviteLink"],
+[data-theme='dark'] .eventViewPage [class*="inviteLink"] {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+}
+
+.dark-mode .eventViewPage [class*="inviteCode"],
+[data-theme='dark'] .eventViewPage [class*="inviteCode"] {
+  background: var(--color-bg-secondary) !important;
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
+  font-family: monospace !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px !important;
+}
+
+.dark-mode .eventViewPage [class*="copyBtn"],
+[data-theme='dark'] .eventViewPage [class*="copyBtn"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+}
+
+.dark-mode .eventViewPage [class*="copyBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="copyBtn"]:hover {
+  background: var(--color-primary-light) !important;
+}
+
+/* Speakers */
+.dark-mode .eventViewPage [class*="speakerCard"],
+[data-theme='dark'] .eventViewPage [class*="speakerCard"] {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .eventViewPage [class*="speakerCard"]:hover,
+[data-theme='dark'] .eventViewPage [class*="speakerCard"]:hover {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.2) !important;
+}
+
+.dark-mode .eventViewPage [class*="speakerName"],
+[data-theme='dark'] .eventViewPage [class*="speakerName"] {
+  color: var(--color-text-primary) !important;
+  font-weight: 700 !important;
+}
+
+.dark-mode .eventViewPage [class*="speakerRole"],
+[data-theme='dark'] .eventViewPage [class*="speakerRole"] {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Tags */
+.dark-mode .eventViewPage [class*="tag"],
+[data-theme='dark'] .eventViewPage [class*="tag"] {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 20px !important;
+  padding: 0.4rem 1rem !important;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .eventViewPage [class*="tag"]:hover,
+[data-theme='dark'] .eventViewPage [class*="tag"]:hover {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* Status Badges */
+.dark-mode .eventViewPage [class*="statusBadge"],
+[data-theme='dark'] .eventViewPage [class*="statusBadge"] {
+  font-weight: 600 !important;
+  border-radius: 20px !important;
+  padding: 0.4rem 1rem !important;
+}
+
+/* Modals */
+.dark-mode .eventViewPage [class*="modalOverlay"],
+[data-theme='dark'] .eventViewPage [class*="modalOverlay"] {
+  background: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(6px) !important;
+}
+
+.dark-mode .eventViewPage [class*="modal"],
+[data-theme='dark'] .eventViewPage [class*="modal"] {
+  background: var(--color-bg-secondary) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 16px !important;
+}
+
+.dark-mode .eventViewPage [class*="modalHeader"],
+[data-theme='dark'] .eventViewPage [class*="modalHeader"] {
+  background: var(--color-bg-elevated) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  border-radius: 16px 16px 0 0 !important;
+}
+
+.dark-mode .eventViewPage [class*="modalHeader"] h3,
+[data-theme='dark'] .eventViewPage [class*="modalHeader"] h3 {
+  color: var(--color-text-primary) !important;
+  font-weight: 700 !important;
+}
+
+.dark-mode .eventViewPage [class*="modalClose"],
+[data-theme='dark'] .eventViewPage [class*="modalClose"] {
+  color: var(--color-text-secondary) !important;
+  background: transparent !important;
+}
+
+.dark-mode .eventViewPage [class*="modalClose"]:hover,
+[data-theme='dark'] .eventViewPage [class*="modalClose"]:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.dark-mode .eventViewPage [class*="modalBody"],
+[data-theme='dark'] .eventViewPage [class*="modalBody"] {
+  background: var(--color-bg-secondary) !important;
+}
+
+/* Share Modal */
+.dark-mode .eventViewPage [class*="shareOption"],
+[data-theme='dark'] .eventViewPage [class*="shareOption"] {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+  border-radius: 8px !important;
+}
+
+.dark-mode .eventViewPage [class*="shareOption"]:hover,
+[data-theme='dark'] .eventViewPage [class*="shareOption"]:hover {
+  border-color: var(--color-primary) !important;
+  background: var(--color-primary-bg) !important;
+}
+
+/* Report Modal */
+.dark-mode .eventViewPage [class*="formGroup"] label,
+[data-theme='dark'] .eventViewPage [class*="formGroup"] label {
+  color: var(--color-text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.dark-mode .eventViewPage [class*="select"],
+.dark-mode .eventViewPage [class*="input"],
+.dark-mode .eventViewPage [class*="textarea"],
+[data-theme='dark'] .eventViewPage [class*="select"],
+[data-theme='dark'] .eventViewPage [class*="input"],
+[data-theme='dark'] .eventViewPage [class*="textarea"] {
+  background: var(--color-bg-secondary) !important;
+  border: 2px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+  border-radius: 8px !important;
+}
+
+.dark-mode .eventViewPage [class*="select"]:focus,
+.dark-mode .eventViewPage [class*="input"]:focus,
+.dark-mode .eventViewPage [class*="textarea"]:focus,
+[data-theme='dark'] .eventViewPage [class*="select"]:focus,
+[data-theme='dark'] .eventViewPage [class*="input"]:focus,
+[data-theme='dark'] .eventViewPage [class*="textarea"]:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(226, 152, 30, 0.2) !important;
+}
+
+.dark-mode .eventViewPage [class*="fileInput"],
+[data-theme='dark'] .eventViewPage [class*="fileInput"] {
+  background: var(--color-bg-elevated) !important;
+  border: 2px dashed var(--color-border) !important;
+  color: var(--color-text-secondary) !important;
+  border-radius: 8px !important;
+}
+
+.dark-mode .eventViewPage [class*="imagePreviewItem"],
+[data-theme='dark'] .eventViewPage [class*="imagePreviewItem"] {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+}
+
+.dark-mode .eventViewPage [class*="removeImageBtn"],
+[data-theme='dark'] .eventViewPage [class*="removeImageBtn"] {
+  background: var(--color-error) !important;
+  color: white !important;
+}
+
+/* Modal Footer */
+.dark-mode .eventViewPage [class*="modalFooter"],
+[data-theme='dark'] .eventViewPage [class*="modalFooter"] {
+  background: var(--color-bg-elevated) !important;
+  border-top: 1px solid var(--color-border) !important;
+  border-radius: 0 0 16px 16px !important;
+}
+
+.dark-mode .eventViewPage [class*="cancelBtn"],
+[data-theme='dark'] .eventViewPage [class*="cancelBtn"] {
+  background: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+}
+
+.dark-mode .eventViewPage [class*="cancelBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="cancelBtn"]:hover {
+  background: var(--color-bg-elevated) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.dark-mode .eventViewPage [class*="confirmBtn"],
+[data-theme='dark'] .eventViewPage [class*="confirmBtn"] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-contrast) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(226, 152, 30, 0.3) !important;
+  border-radius: 8px !important;
+}
+
+.dark-mode .eventViewPage [class*="confirmBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="confirmBtn"]:hover {
+  background: var(--color-primary-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(226, 152, 30, 0.4) !important;
+}
+
+/* Loading & Error States */
+.dark-mode .eventViewPage [class*="loading"],
+[data-theme='dark'] .eventViewPage [class*="loading"],
+.dark-mode .eventViewPage [class*="error"],
+[data-theme='dark'] .eventViewPage [class*="error"] {
+  background: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px !important;
+}
+
+.dark-mode .eventViewPage [class*="error"] h3,
+[data-theme='dark'] .eventViewPage [class*="error"] h3 {
+  color: var(--color-text-primary) !important;
+}
+
+.dark-mode .eventViewPage [class*="errorMessage"],
+[data-theme='dark'] .eventViewPage [class*="errorMessage"] {
+  color: var(--color-error) !important;
+}
+
+.dark-mode .eventViewPage [class*="errorHelp"],
+[data-theme='dark'] .eventViewPage [class*="errorHelp"] {
+  color: var(--color-text-secondary) !important;
+}
+
+.dark-mode .eventViewPage [class*="secondaryBtn"],
+[data-theme='dark'] .eventViewPage [class*="secondaryBtn"] {
+  background: var(--color-bg-tertiary) !important;
+  color: var(--color-text-primary) !important;
+  border: 2px solid var(--color-border) !important;
+}
+
+.dark-mode .eventViewPage [class*="secondaryBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="secondaryBtn"]:hover {
+  background: var(--color-bg-hover) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.dark-mode .eventViewPage [class*="spinner"],
+[data-theme='dark'] .eventViewPage [class*="spinner"] {
+  border: 4px solid var(--color-bg-elevated) !important;
+  border-top: 4px solid var(--color-primary) !important;
+}
+
+/* Invite Link Container */
+.dark-mode .eventViewPage [class*="inviteLinkContainer"],
+[data-theme='dark'] .eventViewPage [class*="inviteLinkContainer"] {
+  background: linear-gradient(135deg, rgba(244, 163, 37, 0.15), rgba(244, 163, 37, 0.08)) !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .eventViewPage [class*="inviteLinkHeader"] h3,
+[data-theme='dark'] .eventViewPage [class*="inviteLinkHeader"] h3 {
+  color: var(--color-text-primary) !important;
+}
+
+.dark-mode .eventViewPage [class*="inviteLinkDescription"],
+[data-theme='dark'] .eventViewPage [class*="inviteLinkDescription"] {
+  color: var(--color-text-secondary) !important;
+}
+
+.dark-mode .eventViewPage [class*="inviteLinkBox"],
+[data-theme='dark'] .eventViewPage [class*="inviteLinkBox"] {
+  background: var(--color-bg-elevated) !important;
+  border-color: var(--color-border) !important;
+}
+
+.dark-mode .eventViewPage [class*="inviteLinkSection"] label,
+[data-theme='dark'] .eventViewPage [class*="inviteLinkSection"] label {
+  color: var(--color-text-primary) !important;
+}
+
+.dark-mode .eventViewPage [class*="linkInput"],
+[data-theme='dark'] .eventViewPage [class*="linkInput"] {
+  background: var(--color-bg-default) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.dark-mode .eventViewPage [class*="linkInput"]:focus,
+[data-theme='dark'] .eventViewPage [class*="linkInput"]:focus {
+  border-color: var(--color-primary) !important;
+  background: var(--color-bg-secondary) !important;
+  box-shadow: 0 0 0 3px rgba(244, 163, 37, 0.2) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  /* padding برای container و pageHeader در بالا تنظیم شده است */
+  
+  .dark-mode .eventViewPage [class*="headerLeft"],
+  [data-theme='dark'] .eventViewPage [class*="headerLeft"] {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: auto;
+  }
+  
+  .dark-mode .eventViewPage [class*="pageHeader"],
+  [data-theme='dark'] .eventViewPage [class*="pageHeader"] {
+    position: relative;
+    padding-top: 4.5rem !important;
+  }
+
+  .dark-mode .eventViewPage [class*="content"],
+  [data-theme='dark'] .eventViewPage [class*="content"] {
+    padding: 1.5rem !important;
+  }
+
+  .dark-mode .eventViewPage [class*="section"],
+  [data-theme='dark'] .eventViewPage [class*="section"] {
+    padding: 0.5rem 0 !important;
+  }
+
+  .dark-mode .eventViewPage [class*="modal"],
+  [data-theme='dark'] .eventViewPage [class*="modal"] {
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 12px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+ * Two Column Layout & New Components Dark Mode
+ * ══════════════════════════════════════════════════════════════ */
+
+.dark-mode .eventViewPage [class*="twoColumnLayout"],
+[data-theme='dark'] .eventViewPage [class*="twoColumnLayout"] {
+  background: transparent !important;
+  max-width: 1400px !important;
+  margin: 0 auto 2rem auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.dark-mode .eventViewPage [class*="leftColumn"],
+[data-theme='dark'] .eventViewPage [class*="leftColumn"] {
+  background: transparent !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.dark-mode .eventViewPage [class*="rightColumn"],
+[data-theme='dark'] .eventViewPage [class*="rightColumn"] {
+  background: transparent !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.dark-mode .eventViewPage [class*="sidebarMapContainer"],
+[data-theme='dark'] .eventViewPage [class*="sidebarMapContainer"] {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.dark-mode .eventViewPage [class*="sidebarMapTitle"],
+[data-theme='dark'] .eventViewPage [class*="sidebarMapTitle"] {
+  color: var(--color-text-primary) !important;
+}
+
+/* Actions Container */
+.dark-mode .eventViewPage [class*="actionsContainer"],
+[data-theme='dark'] .eventViewPage [class*="actionsContainer"] {
+  border-top: 2px solid var(--color-border) !important;
+}
+
+/* Character Count */
+.dark-mode .eventViewPage [class*="charCount"],
+[data-theme='dark'] .eventViewPage [class*="charCount"] {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Header Action Buttons */
+.dark-mode .eventViewPage [class*="headerJoinBtn"],
+[data-theme='dark'] .eventViewPage [class*="headerJoinBtn"] {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
+}
+
+.dark-mode .eventViewPage [class*="headerJoinBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="headerJoinBtn"]:hover {
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6) !important;
+}
+
+.dark-mode .eventViewPage [class*="headerCommentBtn"],
+[data-theme='dark'] .eventViewPage [class*="headerCommentBtn"] {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4) !important;
+}
+
+.dark-mode .eventViewPage [class*="headerCommentBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="headerCommentBtn"]:hover {
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6) !important;
+}
+
+.dark-mode .eventViewPage [class*="alreadyReviewedMessage"],
+[data-theme='dark'] .eventViewPage [class*="alreadyReviewedMessage"] {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+
+/* More Menu Dark Mode */
+.dark-mode .eventViewPage [class*="moreBtn"],
+[data-theme='dark'] .eventViewPage [class*="moreBtn"] {
+  background: linear-gradient(135deg, #4a5568, #3a4556) !important;
+  box-shadow: 0 4px 12px rgba(74, 85, 104, 0.5) !important;
+}
+
+.dark-mode .eventViewPage [class*="moreBtn"]:hover,
+[data-theme='dark'] .eventViewPage [class*="moreBtn"]:hover {
+  background: linear-gradient(135deg, #3a4556, #2d3748) !important;
+  box-shadow: 0 6px 20px rgba(74, 85, 104, 0.6) !important;
+}
+
+.dark-mode .eventViewPage [class*="moreMenuDropdown"],
+[data-theme='dark'] .eventViewPage [class*="moreMenuDropdown"] {
+  background: rgba(30, 64, 73, 0.98) !important;
+  border: 2px solid rgba(30, 64, 73, 0.9) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-mode .eventViewPage [class*="menuItem"],
+[data-theme='dark'] .eventViewPage [class*="menuItem"] {
+  background: transparent !important;
+  color: #F5E6C8 !important;
+  border-bottom-color: rgba(30, 64, 73, 0.6) !important;
+}
+
+.dark-mode .eventViewPage [class*="menuItem"]:hover,
+[data-theme='dark'] .eventViewPage [class*="menuItem"]:hover {
+  background: linear-gradient(135deg, rgba(13, 76, 87, 0.4), rgba(10, 61, 69, 0.4)) !important;
+}
+
+.dark-mode .eventViewPage [class*="menuDivider"],
+[data-theme='dark'] .eventViewPage [class*="menuDivider"] {
+  background: linear-gradient(90deg, transparent, rgba(30, 64, 73, 0.8), transparent) !important;
+}
+
+/* Wrapper امتیازات و نظرات - Dark Mode */
+.dark-mode [class*="reviewsWrapper"],
+[data-theme='dark'] [class*="reviewsWrapper"] {
+  background: transparent;
+}
+
+.dark-mode [class*="mobileReviewsSection"],
+[data-theme='dark'] [class*="mobileReviewsSection"] {
+  background: transparent;
+}
+
+
+
+
+
+
+
+
+
+
+

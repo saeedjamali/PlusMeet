@@ -1,0 +1,249 @@
+/* ═══════════════════════════════════════════════════════════
+ * Events Bookmark Dark Mode Styles
+ * رنگ‌بندی مطابق با صفحه Create
+ * ══════════════════════════════════════════════════════════════ */
+
+/* Container & Background */
+.dark-mode .eventsBookmarkPage,
+[data-theme='dark'] .eventsBookmarkPage {
+    background: var(--color-bg-default) !important;
+    min-height: 100vh;
+}
+
+.dark-mode .eventsBookmarkPage [class*="container"],
+[data-theme='dark'] .eventsBookmarkPage [class*="container"] {
+    background: transparent !important;
+}
+
+/* Header */
+.dark-mode .eventsBookmarkPage [class*="header"],
+[data-theme='dark'] .eventsBookmarkPage [class*="header"] {
+    border-bottom: 2px solid var(--color-border) !important;
+    background: var(--color-bg-secondary) !important;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.dark-mode .eventsBookmarkPage [class*="title"],
+[data-theme='dark'] .eventsBookmarkPage [class*="title"] {
+    color: var(--color-text-primary) !important;
+    font-weight: 700;
+}
+
+.dark-mode .eventsBookmarkPage [class*="subtitle"],
+[data-theme='dark'] .eventsBookmarkPage [class*="subtitle"] {
+    color: var(--color-text-secondary) !important;
+}
+
+/* Theme Toggle */
+.dark-mode .eventsBookmarkPage [class*="themeToggle"],
+[data-theme='dark'] .eventsBookmarkPage [class*="themeToggle"] {
+    background: var(--color-primary) !important;
+    color: var(--color-primary-contrast) !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="themeToggle"]:hover,
+[data-theme='dark'] .eventsBookmarkPage [class*="themeToggle"]:hover {
+    background: var(--color-primary-light) !important;
+    box-shadow: 0 4px 12px rgba(226, 152, 30, 0.4) !important;
+    transform: translateY(-2px);
+}
+
+/* Event Cards */
+.dark-mode .eventsBookmarkPage [class*="card"],
+[data-theme='dark'] .eventsBookmarkPage [class*="card"] {
+    background: var(--color-bg-secondary) !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s ease;
+    padding: 8px;
+}
+
+.dark-mode .eventsBookmarkPage [class*="card"]:hover,
+[data-theme='dark'] .eventsBookmarkPage [class*="card"]:hover {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 8px 24px rgba(226, 152, 30, 0.2) !important;
+    transform: translateY(-4px);
+}
+
+.dark-mode .eventsBookmarkPage [class*="cardImage"],
+[data-theme='dark'] .eventsBookmarkPage [class*="cardImage"] {
+    background: var(--color-bg-elevated) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="privateBadge"],
+[data-theme='dark'] .eventsBookmarkPage [class*="privateBadge"] {
+    background: rgba(226, 152, 30, 0.9) !important;
+    color: var(--color-primary-contrast) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="cardTitle"],
+[data-theme='dark'] .eventsBookmarkPage [class*="cardTitle"] {
+    color: var(--color-text-primary) !important;
+    font-weight: 700;
+}
+
+.dark-mode .eventsBookmarkPage [class*="metaItem"],
+[data-theme='dark'] .eventsBookmarkPage [class*="metaItem"] {
+    color: var(--color-text-secondary) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="metaIcon"],
+[data-theme='dark'] .eventsBookmarkPage [class*="metaIcon"] {
+    filter: brightness(1.2);
+}
+
+.dark-mode .eventsBookmarkPage [class*="cardFooter"],
+[data-theme='dark'] .eventsBookmarkPage [class*="cardFooter"] {
+    border-top: 1px solid var(--color-border) !important;
+    background: var(--color-bg-elevated) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="views"],
+[data-theme='dark'] .eventsBookmarkPage [class*="views"] {
+    color: var(--color-primary) !important;
+    font-weight: 600;
+}
+
+.dark-mode .eventsBookmarkPage [class*="bookmarkDate"],
+[data-theme='dark'] .eventsBookmarkPage [class*="bookmarkDate"] {
+    color: var(--color-text-tertiary) !important;
+}
+
+/* Action Buttons */
+.dark-mode .eventsBookmarkPage [class*="cardActions"],
+[data-theme='dark'] .eventsBookmarkPage [class*="cardActions"] {
+    background: var(--color-bg-elevated) !important;
+    border-top: 1px solid var(--color-border) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="viewBtn"],
+[data-theme='dark'] .eventsBookmarkPage [class*="viewBtn"] {
+    background: var(--color-primary) !important;
+    color: var(--color-primary-contrast) !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="viewBtn"]:hover,
+[data-theme='dark'] .eventsBookmarkPage [class*="viewBtn"]:hover {
+    background: var(--color-primary-light) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(226, 152, 30, 0.4) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="removeBtn"],
+[data-theme='dark'] .eventsBookmarkPage [class*="removeBtn"] {
+    background: var(--color-bg-secondary) !important;
+    color: var(--color-text-primary) !important;
+    border: 1px solid var(--color-border) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="removeBtn"]:hover,
+[data-theme='dark'] .eventsBookmarkPage [class*="removeBtn"]:hover {
+    background: var(--color-error) !important;
+    color: white !important;
+    border-color: var(--color-error) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3) !important;
+}
+
+/* Loading & Empty */
+.dark-mode .eventsBookmarkPage [class*="loading"],
+.dark-mode .eventsBookmarkPage [class*="empty"],
+[data-theme='dark'] .eventsBookmarkPage [class*="loading"],
+[data-theme='dark'] .eventsBookmarkPage [class*="empty"] {
+    background: var(--color-bg-secondary) !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 12px;
+    color: var(--color-text-secondary) !important;
+    padding: 3rem 2rem;
+}
+
+.dark-mode .eventsBookmarkPage [class*="empty"] h3,
+[data-theme='dark'] .eventsBookmarkPage [class*="empty"] h3 {
+    color: var(--color-text-primary) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="empty"] p,
+[data-theme='dark'] .eventsBookmarkPage [class*="empty"] p {
+    color: var(--color-text-secondary) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="spinner"],
+[data-theme='dark'] .eventsBookmarkPage [class*="spinner"] {
+    border: 4px solid var(--color-bg-elevated) !important;
+    border-top: 4px solid var(--color-primary) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="emptyIcon"],
+[data-theme='dark'] .eventsBookmarkPage [class*="emptyIcon"] {
+    opacity: 0.6;
+}
+
+.dark-mode .eventsBookmarkPage [class*="exploreBtn"],
+[data-theme='dark'] .eventsBookmarkPage [class*="exploreBtn"] {
+    background: var(--color-primary) !important;
+    color: var(--color-primary-contrast) !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="exploreBtn"]:hover,
+[data-theme='dark'] .eventsBookmarkPage [class*="exploreBtn"]:hover {
+    background: var(--color-primary-light) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(226, 152, 30, 0.4) !important;
+}
+
+/* Pagination */
+.dark-mode .eventsBookmarkPage [class*="pageBtn"],
+[data-theme='dark'] .eventsBookmarkPage [class*="pageBtn"] {
+    background: var(--color-bg-secondary) !important;
+    border: 2px solid var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    border-radius: 8px;
+}
+
+.dark-mode .eventsBookmarkPage [class*="pageBtn"]:hover:not(:disabled),
+[data-theme='dark'] .eventsBookmarkPage [class*="pageBtn"]:hover:not(:disabled) {
+    background: var(--color-primary) !important;
+    color: var(--color-primary-contrast) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(226, 152, 30, 0.3) !important;
+}
+
+.dark-mode .eventsBookmarkPage [class*="pageBtn"]:disabled,
+[data-theme='dark'] .eventsBookmarkPage [class*="pageBtn"]:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.dark-mode .eventsBookmarkPage [class*="pageInfo"],
+[data-theme='dark'] .eventsBookmarkPage [class*="pageInfo"] {
+    color: var(--color-text-primary) !important;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .dark-mode .eventsBookmarkPage [class*="header"],
+    [data-theme='dark'] .eventsBookmarkPage [class*="header"] {
+        padding: 1rem;
+    }
+
+    .dark-mode .eventsBookmarkPage [class*="card"],
+    [data-theme='dark'] .eventsBookmarkPage [class*="card"] {
+        margin-bottom: 1rem;
+    }
+
+    .dark-mode .eventsBookmarkPage [class*="cardActions"],
+    [data-theme='dark'] .eventsBookmarkPage [class*="cardActions"] {
+        flex-direction: column;
+    }
+}

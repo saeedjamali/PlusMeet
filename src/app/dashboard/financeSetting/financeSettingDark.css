@@ -1,0 +1,268 @@
+/* ═══════════════════════════════════════════════════════════
+   تنظیمات مالی - تم تاریک
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .container {
+  color: #e5e7eb;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Loading & Error
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .spinner {
+  border-color: #374151;
+  border-top-color: #22c55e;
+}
+
+[data-theme="dark"] .error {
+  background: #7f1d1d;
+  border-color: #dc2626;
+  color: #fecaca;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Header
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .header {
+  background: #1e4049;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .title {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .backBtn {
+  background: #374151;
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .backBtn:hover {
+  background: #4b5563;
+  color: #f9fafb;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Tabs
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .tabs {
+  border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .tab {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .tab:hover {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+[data-theme="dark"] .tabActive {
+  color: #22c55e;
+  border-bottom-color: #22c55e;
+}
+
+[data-theme="dark"] .badge {
+  background: #374151;
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .tabActive .badge {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Content
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .content {
+  background: #1e4049;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .contentHeader {
+  border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .contentTitle {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .addBtn {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+[data-theme="dark"] .addBtn:hover {
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Empty State
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .emptyState p {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .emptyBtn {
+  background: #22c55e;
+}
+
+[data-theme="dark"] .emptyBtn:hover {
+  background: #16a34a;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Grid (Payment Gateways)
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .card {
+  background: #2d5a66;
+  border-color: #374151;
+}
+
+[data-theme="dark"] .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .cardHeader {
+  background: #1e4049;
+  border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .cardTitle h3 {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .defaultBadge {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+[data-theme="dark"] .statusActive {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
+
+[data-theme="dark"] .statusInactive {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+[data-theme="dark"] .editBtn,
+[data-theme="dark"] .deleteBtn {
+  background: #374151;
+}
+
+[data-theme="dark"] .editBtn:hover {
+  background: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .deleteBtn:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .label {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .value {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .cardFooter {
+  background: #1e4049;
+  border-top-color: #374151;
+}
+
+[data-theme="dark"] .statLabel {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .statValue {
+  color: #f9fafb;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Table (Discount Codes)
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .table th {
+  background: #2d5a66;
+  color: #d1d5db;
+  border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .table td {
+  border-bottom-color: #374151;
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .table tr:hover {
+  background: #2d5a66;
+}
+
+[data-theme="dark"] .code {
+  background: #374151;
+  color: #4ade80;
+}
+
+[data-theme="dark"] .progressBar {
+  background: #374151;
+}
+
+[data-theme="dark"] .progressFill {
+  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Pagination
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .pagination {
+  border-top-color: #374151;
+}
+
+[data-theme="dark"] .pageBtn {
+  background: #374151;
+  border-color: #4b5563;
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .pageBtn:hover:not(:disabled) {
+  background: #4b5563;
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+[data-theme="dark"] .pageInfo {
+  color: #9ca3af;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Event Count Badges - Dark
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .eventCount {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+[data-theme="dark"] .eventCountAll {
+  background: #374151;
+  color: #9ca3af;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Responsive - Dark
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  [data-theme="dark"] .tabActive {
+    background: rgba(34, 197, 94, 0.1);
+  }
+}
+

@@ -109,14 +109,16 @@ export default function WalletPage() {
       const data = await response.json();
 
       if (data.success) {
-        setTransactions(data.data);
+        setTransactions(data.data || []);
         setPagination(data.pagination);
         setStats(data.stats);
       } else {
         setError(data.error);
+        setTransactions([]);
       }
     } catch (err) {
       setError("خطا در دریافت تراکنش‌ها");
+      setTransactions([]);
       // Error logged for debugging
     }
   };
@@ -498,7 +500,7 @@ export default function WalletPage() {
           </div>
         </div>
 
-        {transactions.length === 0 ? (
+        {!transactions || transactions.length === 0 ? (
           <div className={styles.emptyState}>
             <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
               <path
@@ -521,7 +523,7 @@ export default function WalletPage() {
         ) : (
           <>
             <div className={styles.transactionsList}>
-              {transactions.map((transaction) => (
+              {transactions && transactions.map((transaction) => (
                 <div key={transaction._id} className={styles.transactionItem}>
                   <div
                     className={styles.transactionIcon}
